@@ -1,0 +1,39 @@
+[debug] [2023-09-22T12:26:21.526Z] ----------------------------------------------------------------------
+[debug] [2023-09-22T12:26:21.529Z] Command:       /opt/homebrew/Cellar/node/20.3.0_1/bin/node /opt/homebrew/bin/firebase init
+[debug] [2023-09-22T12:26:21.530Z] CLI Version:   12.5.4
+[debug] [2023-09-22T12:26:21.530Z] Platform:      darwin
+[debug] [2023-09-22T12:26:21.530Z] Node Version:  v20.3.0
+[debug] [2023-09-22T12:26:21.530Z] Time:          Fri Sep 22 2023 14:26:21 GMT+0200 (Mitteleuropäische Sommerzeit)
+[debug] [2023-09-22T12:26:21.530Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-09-22T12:26:21.565Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-09-22T12:26:21.565Z] > authorizing via signed-in user (carlbettermann@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/carl/Documents/Repos/scheppersite
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2023-09-22T12:26:34.079Z] Using project from CLI flag: scheppersite
+[debug] [2023-09-22T12:26:34.080Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/scheppersite [none]
+[debug] [2023-09-22T12:26:34.550Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/scheppersite 200
+[debug] [2023-09-22T12:26:34.550Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/scheppersite {"projectId":"scheppersite","projectNumber":"106030566145","displayName":"Scheppersite","name":"projects/scheppersite","resources":{"hostingSite":"scheppersite"},"state":"ACTIVE","etag":"1_9ba97e75-8b26-4c04-9182-efa7eec907fd"}
+[info] i  Using project scheppersite (Scheppersite) 
+[info] 
+=== Emulators Setup
