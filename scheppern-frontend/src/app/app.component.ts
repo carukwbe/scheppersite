@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+// import { AngularFirestore } from 'angularfire2/firestore';
 
 
 @Component({
@@ -13,18 +13,18 @@ export class AppComponent {
   testCollectionRef: any;
   test$: any;
 
-  constructor(private afs: AngularFirestore) {}
+  // constructor(private afs: AngularFirestore) {}
 
   ngOnInit() {
-    this.testCollectionRef = this.afs.collection('ticket-orders');
-    this.test$ = this.testCollectionRef.valueChanges();
+    // this.testCollectionRef = this.afs.collection('ticket-orders');
+    // this.test$ = this.testCollectionRef.valueChanges();
 
 
-    console.log(this.testCollectionRef);
+    // console.log(this.testCollectionRef);
 
-    this.test$.subscribe((data: any) => {
-      console.log(data);
-    });
+    // this.test$.subscribe((data: any) => {
+    //   console.log(data);
+    // });
 
   
   
