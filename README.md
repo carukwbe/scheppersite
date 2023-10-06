@@ -3,20 +3,26 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.0.
 
 ## Install
-<!-- `npm install -g @angular/cli@latest` -->
 `npm install`
-
-oder, wenn das nicht geht, versucht das:
-
-## Development server
+`npm install -g @angular/cli@latest`
 
 dann sollte `ng serve` funktionieren
 und dann zu `http://localhost:4200/` navigieren
 
 
 
+ng add @angular/fire
 
 
+
+
+
+
+
+
+
+
+## nicht so wichtig
 
 ## init angular and firebase
 
@@ -29,12 +35,6 @@ brew install openjdk
 sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
 
 or -> go to point install java
-
-
-
-
-
-
 
 
 
