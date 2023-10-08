@@ -1,0 +1,22 @@
+:host {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: aquamarine;
+}
+
+.navItem {
+    display: grid;
+    cursor: pointer;
+    align-content: center;
+}
+
+.navItem:hover {
+    border: 5px dotted black;   
+}
+
+.logo:hover {
+    cursor: pointer;
+    /* transform-origin: 100px 100px; */
+    transform: rotate(360deg);
+    transition: transform 0.5s;
+}

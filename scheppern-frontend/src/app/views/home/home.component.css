@@ -1,0 +1,21 @@
+.titleContainer {
+    border: dotted 1px black;
+    display: grid;
+    height: 100%;
+    align-content: center;
+    justify-content: center;
+}
+
+.titleContainer {
+    background-color: green;
+}
+
+.test {
+    width: 100px;
+    height: 100px;
+}
+
+img {
+    width: 500px;
+    height: auto;
+}
