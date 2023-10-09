@@ -1,0 +1,27 @@
+.ticket-card {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ticket-card h2 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.ticket-card p {
+    font-size: 1rem;
+    margin: 5px 0;
+}
+
+
+form {
+    margin: 10px;
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    /* justify-content: space-around; */
+}

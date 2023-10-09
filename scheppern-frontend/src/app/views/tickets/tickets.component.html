@@ -1,1 +1,59 @@
-<p>tickets works!</p>
+
+
+<!-- model:
+export interface Ticket {
+id: string;
+name: string;
+surname: string;
+email: string;
+phone: string;
+payed: boolean;
+ticket_sent: boolean;
+price?: number;
+created?: Date;
+} -->
+
+<form [formGroup]="form">
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input type="text" id="name" matInput formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Surname</mat-label>
+        <input type="text" id="surname" matInput formControlName="surname">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input type="email" id="email" matInput formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Phone</mat-label>
+        <input type="tel" id="phone" matInput formControlName="phone">
+    </mat-form-field>
+
+    <!-- <mat-checkbox formControlName="payed">Payed</mat-checkbox>
+    <mat-checkbox formControlName="ticket_sent">Ticket Sent</mat-checkbox> -->
+
+    <mat-form-field>
+        <mat-label>Price</mat-label>
+        <input type="number" id="price" matInput formControlName="price">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="addTicket()">Add Ticket</button>
+</form>
+
+
+
+
+<div *ngFor="let ticket of tickets | async" class="ticket-card">
+    <h2>{{ ticket.name }} {{ ticket.surname }}</h2>
+    <p>Email: {{ ticket.email }}</p>
+    <p>Phone: {{ ticket.phone }}</p>
+    <p>Price: {{ ticket.price }}</p>
+    <p>Payed: {{ ticket.payed ? 'Yes' : 'No' }}</p>
+    <p>Ticket Sent: {{ ticket.ticket_sent ? 'Yes' : 'No' }}</p>
+    <p>Created: {{ ticket.created }}</p>
+</div>

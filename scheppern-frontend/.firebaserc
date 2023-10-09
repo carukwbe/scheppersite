@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "scheppersite"
+  },
+  "targets": {
+    "scheppersite": {
+      "hosting": {
+        "scheppern-frontend": [
+          "scheppersite"
+        ]
+      }
+    }
   }
 }

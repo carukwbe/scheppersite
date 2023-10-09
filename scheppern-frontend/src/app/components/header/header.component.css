@@ -6,7 +6,7 @@
 
 .navItem {
     display: grid;
-    cursor: pointer;
+    /* cursor: pointer; */
     align-content: center;
 }
 
@@ -15,7 +15,7 @@
 }
 
 .logo:hover {
-    cursor: pointer;
+    /* cursor: pointer; */
     /* transform-origin: 100px 100px; */
     transform: rotate(360deg);
     transition: transform 0.5s;

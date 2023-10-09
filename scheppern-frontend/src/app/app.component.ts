@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-// import { AngularFirestore } from 'angularfire2/firestore';
+import { Component, HostListener } from '@angular/core';
 
 
 @Component({
@@ -10,23 +9,15 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'scheppern-frontend';
 
-  testCollectionRef: any;
-  test$: any;
+  top: any;
+  left: any;
+  constructor() {
+    document.documentElement.style.cursor = "none";
+  }
 
-  // constructor(private afs: AngularFirestore) {}
-
-  ngOnInit() {
-    // this.testCollectionRef = this.afs.collection('ticket-orders');
-    // this.test$ = this.testCollectionRef.valueChanges();
-
-
-    // console.log(this.testCollectionRef);
-
-    // this.test$.subscribe((data: any) => {
-    //   console.log(data);
-    // });
-
-  
-  
+  @HostListener('document:mousemove', ['$event'])
+  onMousemove($event: any) {
+    this.top = ($event.pageY - 29) + "px";
+    this.left = ($event.pageX - 19) + "px";
   }
 }

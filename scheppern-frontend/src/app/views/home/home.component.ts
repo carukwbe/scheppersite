@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +10,23 @@ export class HomeComponent {
   public title = 'scheppern-frontend';
 
   bild: string = 'media/leon.jpg'
+
+
+
+  top: any;
+  left: any;
+  expand = false;
+
+
+
+
+  // @HostListener('document:click', ['$event'])
+  // onClick($event:any) {
+  //   this.expand = true;
+  //   setTimeout(() => {
+  //     this.expand = false;
+  //   }, 500)
+  // }
 
 
 }
