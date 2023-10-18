@@ -3,11 +3,19 @@
 # Deploy with `firebase deploy`
 
 from firebase_functions import https_fn
-from firebase_admin import initialize_app
+from firebase_admin import initialize_app, firestore
 
-# initialize_app()
-#
-#
-# @https_fn.on_request()
-# def on_request_example(req: https_fn.Request) -> https_fn.Response:
-#     return https_fn.Response("Hello world!")
+
+from firebase_functions.firestore_fn import (
+  on_document_updated,
+  on_document_created,
+  Event,
+  Change,
+  DocumentSnapshot,
+)
+
+initialize_app()
+
+@https_fn.on_call()
+def test_backend_communication(req: https_fn.CallableRequest):
+    return {"text": req.data["text"]}
