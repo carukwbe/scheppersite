@@ -5,7 +5,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Ticket } from 'src/models';
 import { initializeApp } from 'firebase/app';
-import { getFunctions, httpsCallable } from 'firebase/functions';
+import { connectFunctionsEmulator, getFunctions, httpsCallable } from 'firebase/functions';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-tickets',
@@ -21,8 +22,24 @@ export class TicketsComponent {
   form!: FormGroup;
   
   tickets = this.firestore.collection<Ticket>('ticket-orders').valueChanges();
-
+  
   ngOnInit(): void {
+    const app = initializeApp(environment["firebase"]);
+    const functions = getFunctions(app);
+    const useEmulator = true;
+    if(useEmulator) {
+      connectFunctionsEmulator(functions, "localhost", 5001);
+    }
+    alert("Before")
+    const test_function = httpsCallable<{input: string}, {output: string}>(functions, 'test_backend_communication');
+    test_function({ input: "Heyyyy Scheppern!" })
+      .then((result) => {
+        const output = result.data.output;
+        alert(output)
+      });
+   
+    alert("After")
+
     this.tickets.subscribe((data) => {
       console.log(data);
     });
@@ -40,16 +57,6 @@ export class TicketsComponent {
   }
   
   addTicket() {
-    const functions = getFunctions();
-    const myFunction = httpsCallable(functions, 'test_backend_communication');
-    myFunction({ text: 'Heeeeey Scheppernnnnn!' })
-      .then((result) => {
-        const data = result.data;
-      })
-      .catch((error) => {
-        console.error("Error calling function:", error);
-      });
-    
     //get ticket data from form
 
     const ticket: Ticket = {

@@ -2,6 +2,7 @@
 # To get started, simply uncomment the below code or create your own.
 # Deploy with `firebase deploy`
 
+from typing import Any
 from firebase_functions import https_fn
 from firebase_admin import initialize_app, firestore
 
@@ -17,5 +18,6 @@ from firebase_functions.firestore_fn import (
 initialize_app()
 
 @https_fn.on_call()
-def test_backend_communication(req: https_fn.CallableRequest):
-    return {"text": req.data["text"]}
+def test_backend_communication(req: https_fn.CallableRequest) -> Any:
+    input = req.data["input"]
+    return {"output": input}
