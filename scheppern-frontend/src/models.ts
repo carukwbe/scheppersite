@@ -3,9 +3,10 @@ export interface Ticket {
     name: string;
     surname: string;
     email: string;
-    phone: string;
-    payed: boolean;
-    ticket_sent: boolean;
+    hogwarts_house: string;
+    phone?: string;
+    payed?: boolean;
+    ticket_sent?: boolean;
     price?: number;
     created?: Date;
 }

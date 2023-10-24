@@ -1,10 +1,10 @@
 
 import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Ticket } from 'src/models';
 import { initializeApp } from 'firebase/app';
-import { Functions, HttpsCallable, connectFunctionsEmulator, getFunctions, httpsCallable } from 'firebase/functions';
+import { connectFunctionsEmulator, getFunctions, httpsCallable } from 'firebase/functions';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -14,6 +14,8 @@ import { environment } from '../../../environments/environment';
 })
 export class TicketsComponent {
   private functions: any;
+  isLoading = false;
+  statusMessage = '';
 
   constructor(
     private firestore: AngularFirestore,
@@ -35,27 +37,30 @@ export class TicketsComponent {
     }
 
     this.form = this.fb.group({
-      name: [''],
-      surname: [''],
-      email: [''],
+      name: ['', Validators.required],
+      surname: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       phone: [''],
-      payed: [false],
-      ticket_sent: [false],
-      price: [10, {disabled: true}],
-      created: [new Date()]
+      hogwarts_house: ['', Validators.required],
     });
   }
 
   addTicket() {
+    this.isLoading = true;
     let inputData = this.form.value;
-    console.log(inputData);
+    // console.log(inputData);
 
-    const test_function = httpsCallable<{ input: string }, { output: string }>(this.functions, 'my_callable_function');
+    const test_function = httpsCallable<{ input: string }, { output: string }>(this.functions, 'createOrUpdateTicket');
     test_function(inputData)
       .then((result) => {
-        console.log(result.data); // Handle the response from the Callable function
+        this.isLoading = false;
+        console.log(result.data);
+        this.statusMessage = "scheint geklappt zu haben";
+        // this.statusMessage = result.data; 
       })
       .catch((error) => {
+        this.isLoading = false;
+        this.statusMessage = error.data;
         console.error(error);
       });
   }
@@ -68,10 +73,7 @@ export class TicketsComponent {
       surname: this.form.value.surname,
       email: this.form.value.email,
       phone: this.form.value.phone,
-      payed: this.form.value.payed,
-      ticket_sent: this.form.value.ticket_sent,
-      price: this.form.value.price,
-      created: this.form.value.created
+      hogwarts_house: this.form.value.hogwarts_house,
     };
 
     console.log(ticket);
