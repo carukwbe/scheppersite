@@ -1,11 +1,10 @@
-import { NodeWithI18n } from '@angular/compiler';
+
 import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { Ticket } from 'src/models';
 import { initializeApp } from 'firebase/app';
-import { connectFunctionsEmulator, getFunctions, httpsCallable } from 'firebase/functions';
+import { Functions, HttpsCallable, connectFunctionsEmulator, getFunctions, httpsCallable } from 'firebase/functions';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -14,35 +13,26 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./tickets.component.css']
 })
 export class TicketsComponent {
+  private functions: any;
+
   constructor(
     private firestore: AngularFirestore,
     private fb: FormBuilder
     ) { }
 
   form!: FormGroup;
-  
-  tickets = this.firestore.collection<Ticket>('ticket-orders').valueChanges();
+
+
+  // tickets = this.firestore.collection<Ticket>('ticket-orders').valueChanges();
   
   ngOnInit(): void {
     const app = initializeApp(environment["firebase"]);
-    const functions = getFunctions(app);
+    this.functions = getFunctions(app);
     const useEmulator = true;
-    if(useEmulator) {
-      connectFunctionsEmulator(functions, "localhost", 5001);
-    }
-    alert("Before")
-    const test_function = httpsCallable<{input: string}, {output: string}>(functions, 'test_backend_communication');
-    test_function({ input: "Heyyyy Scheppern!" })
-      .then((result) => {
-        const output = result.data.output;
-        alert(output)
-      });
-   
-    alert("After")
 
-    this.tickets.subscribe((data) => {
-      console.log(data);
-    });
+    if(useEmulator) {
+      connectFunctionsEmulator(this.functions, "localhost", 5001);
+    }
 
     this.form = this.fb.group({
       name: [''],
@@ -55,8 +45,22 @@ export class TicketsComponent {
       created: [new Date()]
     });
   }
-  
+
   addTicket() {
+    let inputData = this.form.value;
+    console.log(inputData);
+
+    const test_function = httpsCallable<{ input: string }, { output: string }>(this.functions, 'my_callable_function');
+    test_function(inputData)
+      .then((result) => {
+        console.log(result.data); // Handle the response from the Callable function
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+  
+  addTicket_old() {
     //get ticket data from form
 
     const ticket: Ticket = {
@@ -72,7 +76,6 @@ export class TicketsComponent {
 
     console.log(ticket);
     
-
     this.firestore.collection('ticket-orders').add(ticket)
       .then((docRef) => {
         console.log('Datensatz erfolgreich hinzugefügt mit ID: ', docRef.id);
@@ -81,7 +84,4 @@ export class TicketsComponent {
         console.error('Fehler beim Hinzufügen des Datensatzes: ', error);
       });
   }
-
-
-
 }
