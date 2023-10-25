@@ -8,7 +8,6 @@ export const environment = {
     authDomain: 'scheppersite.firebaseapp.com',
     messagingSenderId: '106030566145',
   },
-    production: false,
     firebaseConfig: {
         apiKey: 'AIzaSyB0pKhxP6HD0bUM6a4fcHVyystaTa-VHFM',
         authDomain: 'scheppersite.firebaseapp.com',
@@ -22,4 +21,5 @@ export const environment = {
     useEmulators: true,
     emulatorHost: 'localhost',
     emulatorPort: 8080, // Firestore emulator port
+    production: false,
 };

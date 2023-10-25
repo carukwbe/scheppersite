@@ -4,7 +4,8 @@
 
 from firebase_functions import https_fn
 import firebase_admin
-from firebase_admin import credentials, firestore
+from firebase_admin import firestore
+from datetime import datetime
 
 # cred = credentials.application_default()
 # cred = credentials.Certificate("path/to/your/serviceAccountKey.json")
@@ -20,26 +21,26 @@ firebase_admin.initialize_app(
 db = firestore.client()
 
 @https_fn.on_call()
-def createOrUpdateTicket(data):
-    input_data = data.data
+def createOrUpdateTicket(ticket):
+    collection = db.collection('tickets')
 
-    if input_data is not None:
-        # Define the data you want to write to Firestore
-        ticket = {
-            'name': input_data.get('name'),
-            'message': input_data.get('message')
-        }
-
-        # Specify the Firestore collection and document ID
-        collection = db.collection('tickets')
-        document_id = 'your_document_id2'  # You can also use auto-generated document IDs by omitting this line
-
-        # Use set() to create a new document or update an existing one
-        doc = collection.document()
-        doc.set(input_data)
-
-        return "Data written to Firestore"
-    else:
+    input_data = ticket.data
+    if input_data is None:
         return {"error": "Invalid input"}
+
+    ticket = {
+        'name': input_data.get('name'),
+        'surname': input_data.get('surname'),
+        'email': input_data.get('email'),
+        'phone': input_data.get('phone'),
+        'hogwarts_house': input_data.get('hogwarts_house'),
+        'date_reservated': datetime.now()
+    }
+
+    doc = collection.document(input_data.get('id'))
+    doc.set(ticket)
+
+    return "Data written to Firestore"
+
 
 

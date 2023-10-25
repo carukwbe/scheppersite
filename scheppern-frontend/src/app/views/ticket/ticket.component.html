@@ -1,0 +1,56 @@
+
+<form [formGroup]="form">
+    <mat-form-field>
+        <mat-label>Vorname</mat-label>
+        <input type="text" id="name" matInput formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input type="text" id="surname" matInput formControlName="surname">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>E-Mail</mat-label>
+        <input type="email" id="email" matInput formControlName="email" email>
+        <mat-error *ngIf="form.get('email')?.hasError('email') && form.get('email')?.touched">Gib eine gültige E-Mail Adresse ein!</mat-error>
+
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Telefonnummer</mat-label>
+        <input type="tel" id="phone" matInput formControlName="phone">
+        <mat-hint>Lande in der WhatsApp Gruppe!</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Haus</mat-label>
+        <mat-select id="hogwarts_house" formControlName="hogwarts_house">
+            <mat-option value="Gryffindor">Gryffindor</mat-option>
+            <mat-option value="Hufflepuff">Hufflepuff</mat-option>
+            <mat-option value="Ravenclaw">Ravenclaw</mat-option>
+            <mat-option value="Slytherin">Slytherin</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="addTicket()" [disabled]="form.invalid">Reservierung abschicken</button>
+    
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <div *ngIf="statusMessage">{{ statusMessage }}</div>
+</form>
+
+
+<div class="ticketContainer">
+    <div *ngFor="let ticket of tickets" class="ticket-card" (click)="routeToTicketEdit(ticket)">
+        <h2>{{ ticket.name }} {{ ticket.surname }}</h2>
+        <p>TicketID: {{ ticket.id }}</p>
+        <p>Email: {{ ticket.email }}</p>
+        <p>Phone: {{ ticket.phone }}</p>
+        <p>Price: {{ ticket.price }}</p>
+        <p>Payed: {{ ticket.payed ? 'Yes' : 'No' }}</p>
+        <p>Ticket Sent: {{ ticket.ticket_sent ? 'Yes' : 'No' }}</p>
+        <p>Created: {{ ticket.created }}</p>
+
+    </div>
+</div>
+

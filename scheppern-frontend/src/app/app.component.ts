@@ -12,12 +12,12 @@ export class AppComponent {
   top: any;
   left: any;
   constructor() {
-    document.documentElement.style.cursor = "none";
+    // document.documentElement.style.cursor = "none";
   }
 
-  @HostListener('document:mousemove', ['$event'])
-  onMousemove($event: any) {
-    this.top = ($event.pageY - 29) + "px";
-    this.left = ($event.pageX - 19) + "px";
-  }
+  // @HostListener('document:mousemove', ['$event'])
+  // onMousemove($event: any) {
+  //   this.top = ($event.pageY - 29) + "px";
+  //   this.left = ($event.pageX - 19) + "px";
+  // }
 }

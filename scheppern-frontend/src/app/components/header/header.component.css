@@ -2,12 +2,15 @@
     display: flex;
     justify-content: space-evenly;
     background-color: aquamarine;
+    height: 50px;
+    margin-top: 15px;
 }
 
 .navItem {
     display: grid;
     /* cursor: pointer; */
     align-content: center;
+
 }
 
 .navItem:hover {

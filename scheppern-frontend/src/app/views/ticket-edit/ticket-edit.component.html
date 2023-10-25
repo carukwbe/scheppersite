@@ -1,5 +1,5 @@
 
-<form [formGroup]="form">
+<form *ngIf="ticket" [formGroup]="form">
     <mat-form-field>
         <mat-label>Vorname</mat-label>
         <input type="text" id="name" matInput formControlName="name">
@@ -13,7 +13,8 @@
     <mat-form-field>
         <mat-label>E-Mail</mat-label>
         <input type="email" id="email" matInput formControlName="email" email>
-        <mat-error *ngIf="form.get('email')?.hasError('email') && form.get('email')?.touched">Gib eine gültige E-Mail Adresse ein!</mat-error>
+        <mat-error *ngIf="form.get('email')?.hasError('email') && form.get('email')?.touched">Gib eine gültige
+            E-Mail Adresse ein!</mat-error>
 
     </mat-form-field>
 
@@ -33,21 +34,12 @@
         </mat-select>
     </mat-form-field>
 
-    <button mat-raised-button color="primary" (click)="addTicket()" [disabled]="form.invalid">Reservierung abschicken</button>
-    
+    <button mat-raised-button color="primary" (click)="submit()" [disabled]="form.invalid">Ändere dein Ticket</button>
+
     <mat-spinner *ngIf="isLoading"></mat-spinner>
     <div *ngIf="statusMessage">{{ statusMessage }}</div>
 </form>
 
-
-
-
-<!-- <div *ngFor="let ticket of tickets | async" class="ticket-card">
-    <h2>{{ ticket.name }} {{ ticket.surname }}</h2>
-    <p>Email: {{ ticket.email }}</p>
-    <p>Phone: {{ ticket.phone }}</p>
-    <p>Price: {{ ticket.price }}</p>
-    <p>Payed: {{ ticket.payed ? 'Yes' : 'No' }}</p>
-    <p>Ticket Sent: {{ ticket.ticket_sent ? 'Yes' : 'No' }}</p>
-    <p>Created: {{ ticket.created }}</p>
-</div> -->
+<div *ngIf="!ticket">
+    <h1>Kein Ticket gefunden</h1>
+</div>
