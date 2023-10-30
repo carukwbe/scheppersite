@@ -1,22 +1,100 @@
-.titleContainer {
-    border: dotted 1px black;
-    display: grid;
-    height: 100%;
-    align-content: center;
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
 
-.titleContainer {
-    background-color: green;
+.windradContainer {
+    /* position: relative; */
+    display: flex;
+    margin: 0 0 180px 0;
+    width: 90%;
+    /* overflow: hidden; */
+    /* padding: 30px; */
+    margin-top: 160px;
+
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /* max-width: 1400px; */
 }
 
-.test {
-    width: 100px;
-    height: 100px;
+.windradAnimation {
+    /* top: -250px; */
+    left: 0;
+    height: 100%;
+    width: 30%;
+
+    display: flex;
+    align-items: center;
+
+    /* for safari */
+    backface-visibility: hidden;
 }
 
-img {
-    width: 500px;
-    height: auto;
+.windradStamm {
+    position: relative;
+    height: 400px;
+    top: 180px;
+    left: 40px;
 }
 
+.windradFluegel {
+    transform-origin: 41% 58%;
+    transform:
+        rotate(calc(var(--scroll) * 20deg))
+        scale(6);
+}
+
+.baumring {
+
+    position: relative;
+    left: calc(-20px + -3px * var(--order));
+    transform:
+        scale(calc(0.8 + var(--scroll)));
+
+    /* zoom: calc(0.8 + var(--scroll)); */
+
+}
+
+.citation {
+    position: relative;
+    font-size: 1.5em;
+    z-index: 2;
+    line-height: 1.4em;
+
+    font-family: 'Bitter', serif;
+
+    padding: 20px 10px 0 ;
+    border-radius: 12px;
+    border: 1px solid rgba(88, 88, 88, 0.125);
+
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    
+    
+    box-shadow: 0 0 50px 0px rgba(0, 0, 0, 0.8);
+    background-color: rgba(20, 54, 105, 0.6);
+    border: 1px solid rgba(88, 88, 88, 0.125);
+}
+
+.author {
+    /* position: relative; */
+    position: absolute;
+    top: -15px;
+    right: 15px;
+
+
+
+
+}
+
+.contentDummy {
+    height: 100vh;
+}
+
+.bg {
+
+    background-image: url("../../../assets/hintergrund/meer.jpg");
+}

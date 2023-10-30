@@ -7,15 +7,11 @@ import { Component, HostListener } from '@angular/core';
 })
 export class HomeComponent {
 
-  public title = 'scheppern-frontend';
-
-  bild: string = 'media/leon.jpg'
-
-
-
-  top: any;
-  left: any;
-  expand = false;
+  bezier_fast = {
+    scroll: { start: 0.3, end: 2.5 },
+    mapTo: { start: 0, end: 10 },
+    bezier: [1,1,0,0]
+  }
 
 
 

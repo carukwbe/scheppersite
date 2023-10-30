@@ -16,30 +16,12 @@ app-cursor {
     -ms-user-select: none;
 }
 
-/* img {
-    cursor: url('../../../assets/windrad.png'), auto;
-} */
-
-
 .cursor {
     z-index: 1;
     position: absolute;
     top: 100px;
     pointer-events: none;
 }
-
-/* .cursor::after {
-    content: "";
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    border: 8px solid gray;
-    border-radius: 50%;
-    opacity: .5;
-    top: -8px;
-    left: -8px;
-    animation: cursorAnim2 .5s infinite alternate;
-} */
 
 @keyframes cursorAnim {
     from {

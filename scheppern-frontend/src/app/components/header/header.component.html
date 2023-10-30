@@ -1,10 +1,19 @@
+<img class="homeImage"  src="../../../assets/windpark_stilisiert.png" alt="">
+<img class="homeImage windradFront" src="../../../assets/windpark_front.png" alt="">
 
-<div class="navItem" [routerLink]="['/']">
-    <img class="logo" src="assets/logo.jpeg" alt="" style="width: 100px;">
-</div>
-<div class="navItem" [routerLink]="['/tickets'] ">
-    <h1>Tickets</h1>
-</div>
-<div class="navItem" [routerLink]="['/infos']">
-    <h1>alle sonstigen Infos</h1>
+<div class="navbar" [appScrollObserver]="bezier_fast" [ngClass]="isHomePage ? 'fullscreen' : 'normalHeight'">
+    <div class="logo" [routerLink]="['/']" [ngClass]="{'logo-animated': isHomePage}">
+        <p style="margin: 0;">Scheppern</p>
+    </div>
+    <div class="navigationSection" [ngClass]="{'fade-in': isHomePage}">
+        <div class="navItem" [routerLink]="['/tickets']">
+            <p>Tickets</p>
+        </div>
+        <div class="navItem" [routerLink]="['/infos']">
+            <p>Infos</p>
+        </div>
+        <div class="navItem" [routerLink]="['/galery']">
+            <p>Galerie</p>
+        </div>
+    </div>
 </div>

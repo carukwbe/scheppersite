@@ -1,4 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { 
+    height: 100%;
+    background-color: rgb(50, 50, 50);
+}
+body { 
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    color: rgb(255, 255, 255);
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    /* margin: 0; */
+}   
+
+:root {
+    --main-bg-color: #323232;
+    --main-text-color: rgb(255, 255, 255);
+    --main-text-color-light: rgb(200, 200, 200);
+    --main-text-color-dark: rgb(100, 100, 100);
+
+    --button1-color: #8593c8;
+    --button1-color-hover: rgb(143, 157, 210);
+
+    --button2-color: #ed824c;
+    --button2-color-hover: rgb(247, 117, 54);
+    --scroll: 0;
+}

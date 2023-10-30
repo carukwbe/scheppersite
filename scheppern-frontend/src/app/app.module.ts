@@ -23,6 +23,8 @@ import { KontaktComponent } from './views/kontakt/kontakt.component';
 import { ImpressumComponent } from './views/impressum/impressum.component';
 import { HeaderComponent } from './components/header/header.component';
 import { TicketEditComponent } from './views/ticket-edit/ticket-edit.component';
+import { ScrollObserverDirective } from './scroll-observer.directive';
+import { GaleryComponent } from './views/galery/galery.component';
 
 
 
@@ -36,7 +38,9 @@ import { TicketEditComponent } from './views/ticket-edit/ticket-edit.component';
     KontaktComponent,
     ImpressumComponent,
     HeaderComponent,
-    TicketEditComponent
+    TicketEditComponent,
+    ScrollObserverDirective,
+    GaleryComponent
   ],
   imports: [
     BrowserModule,
