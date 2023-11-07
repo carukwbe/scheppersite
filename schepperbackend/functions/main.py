@@ -1,6 +1,5 @@
-# Welcome to Cloud Functions for Firebase for Python!
-# To get started, simply uncomment the below code or create your own.
-# Deploy with `firebase deploy`
+# The Cloud Functions for Firebase SDK to create Cloud Functions and set up triggers.
+from firebase_functions import firestore_fn, https_fn
 
 import base64
 import json
@@ -50,6 +49,17 @@ def tickets_available(req: https_fn.CallableRequest): #req: https_fn.Request) ->
         return "no"
     else:
         return "yes"
+
+
+app = initialize_app()
+
+# for local emulator
+# app = initialize_app(
+#     options = {
+#         'projectId': 'scheppersite',
+#         'databaseURL': 'http://127.0.0.1:4000'  # Firestore emulator runs on this URL
+#     }
+# )
 
 
 @https_fn.on_call()
@@ -144,6 +154,25 @@ def monitor_project_cost(event: pubsub_fn.CloudEvent[pubsub_fn.MessagePublishedD
     }
 
     doc = collection.document(str(uuid.uuid4()))
+@https_fn.on_call() 
+def writeTicket(form_data):
+    db = firestore.client()
+    collection = db.collection('tickets')
+
+    input_data = form_data.data
+    if input_data is None:
+        return {"error": "Invalid input"}
+
+    ticket = {
+        'name': input_data.get('name'),
+        'surname': input_data.get('surname'),
+        'email': input_data.get('email'),
+        'phone': input_data.get('phone'),
+        'hogwarts_house': input_data.get('hogwarts_house'),
+        'date_reservated': datetime.now()
+    }
+
+    doc = collection.document(input_data.get('id'))
     doc.set(ticket)
 
 

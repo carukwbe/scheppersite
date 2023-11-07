@@ -18,8 +18,12 @@ export const environment = {
         appId: '1:106030566145:web:cc4aec14e4d2167b5c2900',
     },
     // Add emulator settings
-    useEmulators: true,
+    useEmulators: false,
     emulatorHost: 'localhost',
     emulatorPort: 8080, // Firestore emulator port
     production: false,
+};
+
+export const Global = {
+  darkMode: false
 };

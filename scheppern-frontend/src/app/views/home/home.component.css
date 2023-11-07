@@ -1,30 +1,71 @@
-:host {
+/* :host {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+    background-image: url("/assets/jungle2.jpg");
+
+    background-size: 100% 100%;
+    background-size: cover;
+    height: 100%;
+} */
+
+.wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: visible;
+    z-index: 0;
+
+
+    margin-top: -450px;
+    padding-top: 420px;
+    /* background-color: var(--bg-color);  */
 }
 
-.windradContainer {
+.jungleImage {
+    /* position: absolute; */
+    /* top: 500px; */
+    top: 0;
+    width: 100%;
+    height: 300vh;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+    /* margin-top: -500px; */
+}
+
+.content {
+    position: absolute;
     /* position: relative; */
     display: flex;
-    margin: 0 0 180px 0;
-    width: 90%;
-    /* overflow: hidden; */
-    /* padding: 30px; */
-    margin-top: 160px;
-
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    /* max-width: 1400px; */
+    /* justify-content: center; */
+    overflow: visible;
+    gap: 100px;
 }
 
-.windradAnimation {
-    /* top: -250px; */
-    left: 0;
-    height: 100%;
-    width: 30%;
+
+app-info-card {
+    margin: 10vh 30px 30px;
+    z-index: 2;
+    overflow: visible;
+    max-width: 800px;
+    color: var(--text-color);
+}
+strong {
+    font-weight: 700;
+    font-size: 29px;
+}
+
+
+
+
+.windradAnimation { 
+    /* margin: 270px 0 370px 0; */
 
     display: flex;
     align-items: center;
@@ -33,68 +74,56 @@
     backface-visibility: hidden;
 }
 
-.windradStamm {
-    position: relative;
-    height: 400px;
-    top: 180px;
-    left: 40px;
-}
-
 .windradFluegel {
     transform-origin: 41% 58%;
     transform:
-        rotate(calc(var(--scroll) * 20deg))
+        rotate(calc(var(--scroll) * 10deg))
         scale(6);
 }
 
 .baumring {
-
+    z-index: 0;
     position: relative;
     left: calc(-20px + -3px * var(--order));
     transform:
-        scale(calc(0.8 + var(--scroll)));
+        scale(calc(1 + var(--scroll)))
+        rotate(calc(var(--scroll) * var(--order) * 1deg));
 
+        /* translate(calc(3px * var(--order)), calc(3px * var(--order))); */
     /* zoom: calc(0.8 + var(--scroll)); */
 
 }
 
-.citation {
-    position: relative;
-    font-size: 1.5em;
-    z-index: 2;
-    line-height: 1.4em;
-
-    font-family: 'Bitter', serif;
-
-    padding: 20px 10px 0 ;
-    border-radius: 12px;
-    border: 1px solid rgba(88, 88, 88, 0.125);
-
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
-    
-    
-    box-shadow: 0 0 50px 0px rgba(0, 0, 0, 0.8);
-    background-color: rgba(20, 54, 105, 0.6);
-    border: 1px solid rgba(88, 88, 88, 0.125);
+.baum1 {
+    background: red;
+    width: 100px;
+    height: 100px;
+    /* -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 129 129'%3E%3Cpath d='m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z' /%3E%3C/svg%3E"); */
+    mask-image: url("../../../assets/logo-animation/baum1.svg");
 }
 
-.author {
-    /* position: relative; */
-    position: absolute;
-    top: -15px;
-    right: 15px;
 
 
 
 
+
+mat-slider {
+    width: 300px;
 }
 
-.contentDummy {
-    height: 100vh;
+.slider-wrapper {
+    display: grid;
+    grid-gap: 50px;
 }
 
-.bg {
 
-    background-image: url("../../../assets/hintergrund/meer.jpg");
+.date {
+    /* font-family: 'Bebas Neue', sans-serif; */
+    font-family: 'Rubik', sans-serif;
+    margin-top: 400px;
+    font-size: 6em;
+    line-height: 1em;
+    text-align: center;
+    /* font-family: "fit-extra-condensed", sans-serif; */
 }
+

@@ -56,7 +56,7 @@ export class TicketEditComponent {
     const inputData = this.form.value;
     inputData.id = this.id;
 
-    this.ticketService.createOrUpdateTicket(inputData).subscribe(
+    this.ticketService.writeTicket(inputData).subscribe(
       (result) => {
         this.isLoading = false;
         this.statusMessage = 'Ticket saved successfully.';

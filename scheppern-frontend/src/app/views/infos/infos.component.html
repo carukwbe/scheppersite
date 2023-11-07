@@ -1,1 +1,13 @@
-<p>infos works</p>
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let faq of faqItems">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{ faq.question }}
+            </mat-panel-title>
+            <!-- <mat-panel-description>
+                This is a summary of the content
+            </mat-panel-description> -->
+        </mat-expansion-panel-header>
+        {{ faq.answer }}
+    </mat-expansion-panel>
+</mat-accordion>

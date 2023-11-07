@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, ElementRef, Renderer2 } from '@angular/core';
 
 
 @Component({
@@ -9,11 +9,20 @@ import { Component, HostListener } from '@angular/core';
 export class AppComponent {
   title = 'scheppern-frontend';
 
-  top: any;
-  left: any;
-  constructor() {
+  constructor(private renderer: Renderer2, private elementRef: ElementRef) {
     // document.documentElement.style.cursor = "none";
+
+    // Set the default theme when the component is initialized
+    // toggleDarkMode(this.renderer, this.elementRef, true);
   }
+
+
+
+
+
+
+
+  // cursor stuff
 
   // @HostListener('document:mousemove', ['$event'])
   // onMousemove($event: any) {
