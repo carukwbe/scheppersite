@@ -1,13 +1,46 @@
 :host {
     position: relative;
-    display: flex;
-    height: 200px;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    justify-items: center;
     background-color: var(--accent-color1);
-    gap: 100px;
+    height: 200px;
+    padding: 0 100px;
+}
+
+.footerElements {
+    position: absolute;
+    display: grid;
+    grid-template-columns: 0.7fr 1fr 1fr;
+    grid-template-areas: 
+        "windrad iconsMiddle links";
+    grid-gap: 20px;
+
+    height: 100%;
+    width: min(100%, 950px);
+
+    /* justify-content: space-around; */
+    justify-items: center;
+    align-items: center;
+
+    /* gap: 100px; */
     flex-wrap: wrap;
+}
+
+
+@media (max-width: 500px) {
+    .footerElements {
+        grid-gap: 0;
+        grid-template-columns: 0.5fr 1fr;
+        grid-template-areas: 
+            "windrad iconsMiddle"
+             "windrad links";
+        text-align: center;
+        height: 100px;
+    }
+
+    :host {
+        height: 250px;
+    }
 }
 
 @keyframes rotating {
@@ -16,26 +49,44 @@
 }
 
 .windrad {
-    position: relative;
-    bottom: 0;
-    height: 70%;
-    transform: translateY(10px);
+    
     /* position: relative; */
-    /* align-self: bottom; */
-    /* overflow: hidden; */
+    width: max(150px, 100%);
+    height: 120px;
+
+    transform: 
+        translateY(80px);
+
+    pointer-events: none;
+    align-self: flex-start;
 }
 
 .stamm {
     position: absolute;
-    height: 80%;
-    top: 34%;
-    left: 42.5%;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50.1%);
+    height: 100%;
+    width: 100%;
+    object-fit: contain;    
 }
 
 .fluegel {
-    /* position: relative; */
-    height: 80%;
+
+    position: absolute;
+    top: -43%;
+    left: 3px;
+
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+
+    /* position: absolute;
+    height: 100%;
     width: auto;
+    transform: translateY(500px); */
+
+
     transition: all 2s ease-in-out;
     animation: rotating 12s linear infinite;
 }
@@ -48,6 +99,7 @@
     justify-content: center;
     align-items: center;
     gap: 20px;
+    height: fit-content;
 }
 
 .instagram {
@@ -71,6 +123,7 @@ ul {
     margin: 0;
     padding: 0;
     gap: 10px;
+    height: fit-content;
 }
 li:hover {
     color: var(--accent-color2);
