@@ -1,10 +1,11 @@
 :host {
     position: relative;
     display: grid;
-    justify-items: center;
+    
     background-color: var(--accent-color1);
     height: 200px;
-    padding: 0 100px;
+    justify-items: center;
+    align-items: center;
 }
 
 .footerElements {
@@ -15,32 +16,47 @@
         "windrad iconsMiddle links";
     grid-gap: 20px;
 
-    height: 100%;
+    /* height: 100%; */
     width: min(100%, 950px);
 
-    /* justify-content: space-around; */
-    justify-items: center;
     align-items: center;
-
-    /* gap: 100px; */
-    flex-wrap: wrap;
+    margin-right: 20px;
 }
 
 
-@media (max-width: 500px) {
+@media (max-width: 550px) {
     .footerElements {
-        grid-gap: 0;
-        grid-template-columns: 0.5fr 1fr;
-        grid-template-areas: 
+        /* vertical gap */
+        /* grid-gap: 10px; */
+
+        grid-template-columns: 1fr 2fr;
+        /* grid-template-rows: 1fr 0fr; */
+        grid-template-areas:    
+            "windrad ."
             "windrad iconsMiddle"
-             "windrad links";
+            "windrad links";
+
         text-align: center;
-        height: 100px;
+        max-width: 400px;
     }
 
     :host {
-        height: 250px;
+        height: 230px;
+        padding-right: 20px!important;
     }
+
+    .windrad {
+        height: 140px!important;
+        transform: translateY(20px);
+    }
+    /* .iconsMiddle {
+        justify-self: right !important;
+    } */
+    .links {
+        line-height: 1.8em!important;
+        padding-right: 20px;
+    }
+
 }
 
 @keyframes rotating {
@@ -49,13 +65,11 @@
 }
 
 .windrad {
-    
-    /* position: relative; */
+    max-width: 150px;
+    position: relative;
     width: max(150px, 100%);
     height: 120px;
-
-    transform: 
-        translateY(80px);
+    bottom: -40px;
 
     pointer-events: none;
     align-self: flex-start;
@@ -72,7 +86,6 @@
 }
 
 .fluegel {
-
     position: absolute;
     top: -43%;
     left: 3px;
@@ -81,31 +94,29 @@
     height: 100%;
     object-fit: contain;
 
-    /* position: absolute;
-    height: 100%;
-    width: auto;
-    transform: translateY(500px); */
-
-
     transition: all 2s ease-in-out;
     animation: rotating 12s linear infinite;
 }
 
-
-
 .iconsMiddle {
-    /* background-color: var(--bg-color); */
+    justify-self: center;
     display: flex;
-    justify-content: center;
+    width: fit-content;
     align-items: center;
     gap: 20px;
     height: fit-content;
 }
 
-.instagram {
+.button {
     transition: all 0.3s ease-in-out;
     height: 50px;
     width: 50px;
+    background-size: 50px 50px;
+    cursor: pointer;
+}
+
+
+.instagram {
     background-image: url("../../../assets/instagram_white.svg");
 }
 .instagram:hover {
@@ -113,17 +124,25 @@
     background-image: url("../../../assets/instagram.svg");
 }
 
-
-ul {
+.whiteOutlineButton {
+    background-image: url("../../../assets/instagram_outline.svg");
+    
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    align-items: left;
+}
+.whiteOutlineButton:hover {
+    transition: all 0.3s ease-in-out;
+    background-image: url("../../../assets/instagram_outline_color.svg");
+    background-size: 50px 50px;
+}
+
+.links {
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 10px;
-    height: fit-content;
+    line-height: 40px;
+    white-space: nowrap;
 }
 li:hover {
     color: var(--accent-color2);

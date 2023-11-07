@@ -1,46 +1,48 @@
 
 <!-- <app-cursor class="cursor" [style.top]="top" [style.left]="left"></app-cursor> -->
-<div class="wrapper">
-    <img class="jungleImage" src="/assets/jungle4.png" alt="">
-    <div class="content">
-        <app-info-card [citation]="'ChatGPT'">
-            "Beim <strong>Scheppern auf Brettern</strong> des Klangkollektiv Braunschweig e.V. verschmelzen elektronische Klänge mit der rauen Naturkulisse eines gewaltigen Windparks.
-            Ein atemberaubendes Festival, das Musik und Natur vereint, um dich in ein audiovisuelles Abenteuer zu entführen."
-        </app-info-card>
-    
-        <!-- <div class="windradAnimation" [appScrollObserver]="bezier_fast">
-            <img class="windradFluegel" style="--order: 0" src="/assets/logo-animation/windrad.svg" alt="">
-            <img class="baumring" style="--order: 1" src="/assets/logo-animation/baum1.svg" alt="">
-            <img class="baumring" style="--order: 2" src="/assets/logo-animation/baum2.svg" alt="">
-            <img class="baumring" style="--order: 3" src="/assets/logo-animation/baum3.svg" alt="">
-            <img class="baumring" style="--order: 4" src="/assets/logo-animation/baum4.svg" alt="">
-            <img class="baumring" style="--order: 5" src="/assets/logo-animation/baum5.svg" alt="">
-            <img class="baumring" style="--order: 6" src="/assets/logo-animation/baum6.svg" alt="">
-        </div> -->
+<img class="jungleImage" src="/assets/jungle4.png" alt="">
+<div class="content">
 
-
-        <div class="slider-wrapper">
-            <mat-slider min="0" max="255">
-                <input matSliderThumb [(ngModel)]="red" (input)="updateBackgroundColor()">
-            </mat-slider>
-            <mat-slider min="0" max="255">
-                <input matSliderThumb [(ngModel)]="green" (input)="updateBackgroundColor()">
-            </mat-slider>
-            <mat-slider min="0" max="255">
-                <input matSliderThumb [(ngModel)]="blue" (input)="updateBackgroundColor()">
-            </mat-slider>
-        </div>
-
-
-
-        <p class="date">
-            23. - 26.05.2024 <br>
-            Windpark Druiberg
-        </p>
-        <h1 class="date"></h1>
-        <h1 class="date"></h1>
+    <div class="slider-wrapper">
+        <mat-slider min="0" max="255">
+            <input matSliderThumb [(ngModel)]="red" (input)="updateBackgroundColor()">
+        </mat-slider>
+        <mat-slider min="0" max="255">
+            <input matSliderThumb [(ngModel)]="green" (input)="updateBackgroundColor()">
+        </mat-slider>
+        <mat-slider min="0" max="255">
+            <input matSliderThumb [(ngModel)]="blue" (input)="updateBackgroundColor()">
+        </mat-slider>
     </div>
+
+
+    <app-info-card [citation]="'ChatGPT'">
+        "Beim <strong>Scheppern auf Brettern</strong> des Klangkollektiv Braunschweig e.V. verschmelzen elektronische Klänge mit der rauen Naturkulisse eines gewaltigen Windparks.
+        Ein atemberaubendes Festival, das Musik und Natur vereint, um dich in ein audiovisuelles Abenteuer zu entführen."
+    </app-info-card>
+
+    <!-- <div class="windradAnimation" [appScrollObserver]="bezier_fast">
+        <img class="windradFluegel" style="--order: 0" src="/assets/logo-animation/windrad.svg" alt="">
+        <img class="baumring" style="--order: 1" src="/assets/logo-animation/baum1.svg" alt="">
+        <img class="baumring" style="--order: 2" src="/assets/logo-animation/baum2.svg" alt="">
+        <img class="baumring" style="--order: 3" src="/assets/logo-animation/baum3.svg" alt="">
+        <img class="baumring" style="--order: 4" src="/assets/logo-animation/baum4.svg" alt="">
+        <img class="baumring" style="--order: 5" src="/assets/logo-animation/baum5.svg" alt="">
+        <img class="baumring" style="--order: 6" src="/assets/logo-animation/baum6.svg" alt="">
+    </div> -->
+
+
+
+
+
+
+    <p class="date" [appWidthObserver]>
+        23. - 26.05.2024 <br>
+        Windpark Druiberg
+    </p>
 </div>
+<!-- <div class="wrapper">
+</div> -->
 
 
 <!-- <div class="baum1"></div> -->

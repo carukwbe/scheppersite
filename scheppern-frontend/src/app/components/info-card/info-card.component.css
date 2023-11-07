@@ -6,17 +6,32 @@
 
     font-family: 'Bitter', serif;
 
-    padding: 20px 10px 0;
-    border-radius: 12px;
+    padding: 20px 20px 20px 20px;
+
+    text-align: justify;
+    /* border-radius: 12px;
     border: 1px solid rgba(88, 88, 88, 0.125);
 
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
 
     box-shadow: 0 0 50px 0px rgba(0, 0, 0, 0.8);
-    /* background-color: rgba(20, 54, 105, 0.6); */
     background-color: var(--accent-color1);
-    border: 1px solid rgba(88, 88, 88, 0.125);
+    border: 1px solid rgba(88, 88, 88, 0.125); */
+
+
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.52);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3.2px);
+    -webkit-backdrop-filter: blur(3.2px);
+    border: 1px solid rgba(255, 255, 255, 0.72);
+
+}
+
+p {
+    margin: 0;  
 }
 
 .author {
@@ -24,6 +39,15 @@
     position: absolute;
     top: -15px;
     right: 15px;
+    padding: 1px 5  px;
+
+    background: rgba(255, 255, 255, 1);
+    border-radius: 4px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3.2px);
+    -webkit-backdrop-filter: blur(3.2px);
+    border: 1px solid rgba(255, 255, 255, 0.72);
+
 }
 
 /* p {
