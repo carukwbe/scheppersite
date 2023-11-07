@@ -58,11 +58,11 @@ export class TicketService {
     });
   }
 
-  createOrUpdateTicket(ticket: Ticket): Observable<string> {
-    const createOrUpdateTicket = httpsCallable<Ticket, string>(this.functions, 'createOrUpdateTicket');
+  writeTicket(ticket: Ticket): Observable<string> {
+    const writeTicketTrigger = httpsCallable<Ticket, string>(this.functions, 'writeTicket');
 
     return new Observable((observer) => {
-      createOrUpdateTicket(ticket)
+      writeTicketTrigger(ticket)
         .then((result: HttpsCallableResult<string>) => {
           observer.next(result.data);
         })

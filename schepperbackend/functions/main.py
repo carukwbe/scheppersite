@@ -1,30 +1,28 @@
-# Welcome to Cloud Functions for Firebase for Python!
-# To get started, simply uncomment the below code or create your own.
-# Deploy with `firebase deploy`
+# The Cloud Functions for Firebase SDK to create Cloud Functions and set up triggers.
+from firebase_functions import firestore_fn, https_fn
 
-from firebase_functions import https_fn
-import firebase_admin
-from firebase_admin import firestore
+# The Firebase Admin SDK to access Cloud Firestore.
+from firebase_admin import initialize_app, firestore
 from datetime import datetime
 
-# cred = credentials.application_default()
-# cred = credentials.Certificate("path/to/your/serviceAccountKey.json")
-# firebase_admin.initialize_app(cred)
 
-firebase_admin.initialize_app(
-    options={
-        'projectId': 'scheppersite',
-        'databaseURL': 'http://127.0.0.1:4000'  # Firestore emulator runs on this URL
-    }
-)
+app = initialize_app()
 
-db = firestore.client()
+# for local emulator
+# app = initialize_app(
+#     options = {
+#         'projectId': 'scheppersite',
+#         'databaseURL': 'http://127.0.0.1:4000'  # Firestore emulator runs on this URL
+#     }
+# )
 
-@https_fn.on_call()
-def createOrUpdateTicket(ticket):
+
+@https_fn.on_call() 
+def writeTicket(form_data):
+    db = firestore.client()
     collection = db.collection('tickets')
 
-    input_data = ticket.data
+    input_data = form_data.data
     if input_data is None:
         return {"error": "Invalid input"}
 
@@ -41,6 +39,3 @@ def createOrUpdateTicket(ticket):
     doc.set(ticket)
 
     return "Data written to Firestore"
-
-
-

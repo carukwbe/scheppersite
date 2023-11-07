@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Renderer2 } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -23,10 +23,17 @@ import { KontaktComponent } from './views/kontakt/kontakt.component';
 import { ImpressumComponent } from './views/impressum/impressum.component';
 import { HeaderComponent } from './components/header/header.component';
 import { TicketEditComponent } from './views/ticket-edit/ticket-edit.component';
-import { ScrollObserverDirective } from './scroll-observer.directive';
 import { GaleryComponent } from './views/galery/galery.component';
-
-
+import { ScrollObserverDirective } from './directives/scroll-observer.directive';
+import { WidthObserverDirective } from './directives/width-observer.directive';
+import { InfoCardComponent } from './components/info-card/info-card.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { MatTabsModule } from '@angular/material/tabs';  
+import { MatSliderModule } from '@angular/material/slider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -40,7 +47,10 @@ import { GaleryComponent } from './views/galery/galery.component';
     HeaderComponent,
     TicketEditComponent,
     ScrollObserverDirective,
-    GaleryComponent
+    GaleryComponent,
+    WidthObserverDirective,
+    InfoCardComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -54,10 +64,16 @@ import { GaleryComponent } from './views/galery/galery.component';
     MatInputModule,
     MatSelectModule, 
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTabsModule,
+    MatSliderModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatExpansionModule,
+    MatCheckboxModule
   ],
   providers: [
-    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }
   ],
   bootstrap: [AppComponent]
 })

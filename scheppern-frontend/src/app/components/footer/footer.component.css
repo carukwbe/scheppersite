@@ -1,0 +1,78 @@
+:host {
+    position: relative;
+    display: flex;
+    height: 200px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--accent-color1);
+    gap: 100px;
+    flex-wrap: wrap;
+}
+
+@keyframes rotating {
+    from { transform: rotate(0deg);   }
+    to {   transform: rotate(360deg); }
+}
+
+.windrad {
+    position: relative;
+    bottom: 0;
+    height: 70%;
+    transform: translateY(10px);
+    /* position: relative; */
+    /* align-self: bottom; */
+    /* overflow: hidden; */
+}
+
+.stamm {
+    position: absolute;
+    height: 80%;
+    top: 34%;
+    left: 42.5%;
+}
+
+.fluegel {
+    /* position: relative; */
+    height: 80%;
+    width: auto;
+    transition: all 2s ease-in-out;
+    animation: rotating 12s linear infinite;
+}
+
+
+
+.iconsMiddle {
+    /* background-color: var(--bg-color); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.instagram {
+    transition: all 0.3s ease-in-out;
+    height: 50px;
+    width: 50px;
+    background-image: url("../../../assets/instagram_white.svg");
+}
+.instagram:hover {
+    transition: all 0.3s ease-in-out;
+    background-image: url("../../../assets/instagram.svg");
+}
+
+
+ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 10px;
+}
+li:hover {
+    color: var(--accent-color2);
+    cursor: pointer;
+}

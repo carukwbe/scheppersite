@@ -1,0 +1,17 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /* background-image: url("/assets/jungle2.jpg");
+
+    background-size: 100% 100%;
+    background-size: cover; */
+    padding: 100px 0;
+}
+
+mat-accordion {
+
+    max-width: 1000px;
+}

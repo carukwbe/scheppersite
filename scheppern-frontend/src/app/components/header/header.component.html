@@ -1,8 +1,12 @@
-<img class="homeImage"  src="../../../assets/windpark_stilisiert.png" alt="">
-<img class="homeImage windradFront" src="../../../assets/windpark_front.png" alt="">
+<div class="imageStack">
+    <img class="homeImage"  src="../../../assets/header/windpark_stilisiert.png" alt="">
+    <img class="homeImage windradFront windrad" src="../../../assets/header/windpark_front.png" alt="" [appScrollObserver]="bezier_fast">
+    <img class="homeImage windradFront" src="../../../assets/header/windpark_front_wurzeln.png" alt="">
+</div>
 
-<div class="navbar" [appScrollObserver]="bezier_fast" [ngClass]="isHomePage ? 'fullscreen' : 'normalHeight'">
-    <div class="logo" [routerLink]="['/']" [ngClass]="{'logo-animated': isHomePage}">
+
+<div class="navbar" [appScrollObserver]="bezier_fast" [appWidthObserver]>
+    <div class="logo" [routerLink]="['/']">
         <p style="margin: 0;">Scheppern</p>
     </div>
     <div class="navigationSection" [ngClass]="{'fade-in': isHomePage}">
@@ -12,8 +16,9 @@
         <div class="navItem" [routerLink]="['/infos']">
             <p>Infos</p>
         </div>
-        <div class="navItem" [routerLink]="['/galery']">
+        <!-- <div class="navItem" [routerLink]="['/galery']">
             <p>Galerie</p>
-        </div>
+        </div> -->
     </div>
 </div>
+

@@ -1,3 +1,28 @@
+:host {
+    /* background-color: red; */
+}
+
+app-header {
+    /* position: relative; */
+    z-index: 2;
+}
+
+router-outlet {
+    z-index: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* cursor stuff */
 app-cursor {
     z-index: 0;
     position: absolute;
