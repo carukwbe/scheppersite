@@ -11,7 +11,7 @@
     height: 100%;
 } */
 
-.wrapper {
+:host {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -33,7 +33,8 @@
     height: 300vh;
     object-fit: cover;
     object-position: center;
-    z-index: 0;
+    z-index: -2;
+    overflow: visible;
     /* margin-top: -500px; */
 }
 
@@ -102,28 +103,43 @@ strong {
     mask-image: url("../../../assets/logo-animation/baum1.svg");
 }
 
-
-
-
-
-
-mat-slider {
-    width: 300px;
-}
-
 .slider-wrapper {
+    margin: 200px 0;
     display: grid;
     grid-gap: 50px;
+    justify-items: center;
 }
+
+mat-slider {
+    width: max(300px, 100%);
+}
+
 
 
 .date {
     /* font-family: 'Bebas Neue', sans-serif; */
     font-family: 'Rubik', sans-serif;
-    margin-top: 400px;
+    margin-top: 200px;
     font-size: 6em;
+
+    
     line-height: 1em;
     text-align: center;
     /* font-family: "fit-extra-condensed", sans-serif; */
-}
+}   
 
+@media (max-width: 850px) { 
+    .date {
+        font-size: 4em;
+    }
+}
+@media (max-width: 550px) {
+    .date {
+        font-size: 3em;
+    }
+}
+@media (max-width: 430px) {
+    .date {
+        font-size: 2em;
+    }
+}
