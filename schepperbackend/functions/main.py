@@ -50,7 +50,7 @@ def tickets_available(req: https_fn.CallableRequest): #req: https_fn.Request) ->
 
 @https_fn.on_call()
 def writeTicket(input_data):
-    input_data = "not none"
+    input_data = input_data.data
     if input_data is not None:
         try:
             ticket_data = {
@@ -60,10 +60,12 @@ def writeTicket(input_data):
                 'phone': input_data.get('phone'),
                 'hogwarts_house': input_data.get('hogwarts_house'),
                 'helper': input_data.get("helper"),
-                'helper_job_preference': input_data.get('helper_job_preference'),
-                'helper_time_preference': input_data.get('helper_time_preference'),
-                'ticket_id': input_data.get('ticket_id'),
+                #'helper_job_preference': input_data.get('helper_job_preference'),
+                'helper_time_preference': input_data.get('timePreferences'),
+                #'ticket_id': input_data.get('ticket_id'),
             }
+            ticket_data["ticket_id"] = ""
+            ticket_data["helper_job_preference"] = ""
             
         except Exception:
             return {"error": "Input could not be parsed."}
@@ -110,7 +112,6 @@ def writeTicket(input_data):
                     return "Ticket repersonalized successfully."
                 else:
                     # repersonailzation for new person, new ticket needs to created in pending
-                    collection_name = "tickets_pending"
                     pending_ticket_id = str(uuid.uuid4())
                     pending_ticket_ref = db.collection("tickets_pending").document(pending_ticket_id)
                     pending_ticket_ref.set(ticket_data)
