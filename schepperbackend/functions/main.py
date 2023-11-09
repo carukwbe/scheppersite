@@ -78,7 +78,7 @@ def writeTicket(input_data):
                 'helper_time_preference': input_data.get('timePreferences'),
                 #'ticket_id': input_data.get('ticket_id'),
             }
-            ticket_data["ticket_id"] = ""
+            ticket_data["ticket_id"] = "b4db642e-9d8d-4d59-89f8-7a41f29280ce"
             ticket_data["helper_job_preference"] = ""
             
         except Exception:
@@ -102,13 +102,14 @@ def writeTicket(input_data):
             ticket_data["price"] = ticket_price
             ticket_data.pop("ticket_id")
 
-            new_ticket_ref = db.collection("tickets_ordered").document(ticket_id)
+            new_ticket_ref = db.collection("tickets_payed").document(ticket_id)
             new_ticket_ref.set(ticket_data)
 
             return "New ticket order created successfully."
 
         else:
-            # get data of existing ticket in "payed" collection (where it needs to be as otherwise there cannot be a repersonalization)
+            # get data of existing ticket in "payed" collection (where it needs to be as otherwise there cannot be a
+            # repersonalization)
             existing_ticket_ref = db.collection("tickets_payed").document(ticket_data["ticket_id"])
             existing_ticket_doc = existing_ticket_ref.get()
             # remove the ticket id so that it is not written into the document in firestore
@@ -125,10 +126,17 @@ def writeTicket(input_data):
                     existing_ticket_ref.set(ticket_data)
                     return "Ticket repersonalized successfully."
                 else:
-                    # repersonailzation for new person, new ticket needs to created in pending
+                    # repersonailzation for new person, new ticket needs to created in pending, different one in pending
+                    # with same order id must be removed
+                    other_pending_repersonalizations = db.collection("tickets_pending").where(filter=FieldFilter(
+                        "order_id", "==", ticket_data["order_id"])).stream()
+                    for doc in other_pending_repersonalizations:
+                        db.collection("tickets_pending").document(doc.id).delete()
+
                     pending_ticket_id = str(uuid.uuid4())
                     pending_ticket_ref = db.collection("tickets_pending").document(pending_ticket_id)
                     pending_ticket_ref.set(ticket_data)
+
                     return "New pending ticket created successfully."
             else:
                 return {"error": "Ticket with ticket ID does not exist!"}
