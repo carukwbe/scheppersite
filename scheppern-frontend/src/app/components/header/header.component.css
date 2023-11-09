@@ -1,31 +1,33 @@
-:host {
-    overflow: visible;
+w.imageStack {
+    position: relative;
 }
-
-.navbar {
-    position: sticky;
-    top: 0;
-}
-
+    
 .homeImage {
-    width: 99vw;
+    position: relative;
+    top: 0px;   
+    width: 100%;
     height: 100vh;
     object-fit: cover;
     object-position: center;
+
     overflow: visible;
-    /* position: absolute; */
     pointer-events: none;
+    z-index: 0;
 }
 .windradFront {
-    position: absolute; 
+    position: absolute;
     z-index: 2;
     top: 0;
-    left: 0
-    /* position: fixed; */
-    /* transform: translate(calc(100px * var(--scroll)), 0); */
+    left: 0;
 }
 
-.logo {
+.windrad {
+    filter: drop-shadow(-20px -20px 23px rgb(57, 11, 11));
+}
+
+
+
+.scheppern {
     position: fixed;
     z-index: 1;
     cursor: pointer;
@@ -35,50 +37,62 @@
     font-style: normal;
 
     --sizeStartDesktop: 320px;
-    --sizeStartMobile: 100px;
-    --sizeEnd: 150px;
+    --sizeStartMobile:  140px;
+    --sizeEndDesktop:   150px;
+    --sizeEndMobile:    100px;
 
     --spacingStartDesktop: 80px;
-    --spacingStartMobile: 20px;
-    --spacingEnd: 10px;
+    --spacingStartMobile:  25px;
+    --spacingEndDesktop:   10px;
+    --spacingEndMobile:     0px;
 
-    --topStart: 40%;
-    --topEnd: 5%;
+    --topStartDesktop: 40%;
+    --topStartMobile:  40%;
+    --topEndDesktop:    8%;
+    --topEndMobile:     5%;
     
-    --leftStart: 14%; /*  last letter has letter spacing apllied aswell */
-    --leftEnd: 5%;
+    --leftStartDesktop: 14.5%; /*  last letter has letter spacing apllied aswell */
+    --leftStartMobile:   8%;
+    --leftEndDesktop:    5%;
+    --leftEndMobile:     3%;
 
     /* map text size to desktop-mobile range */
     --sizeStart:    calc( var(--sizeStartMobile)    + var(--clientMobilePercentage) * (var(--sizeStartDesktop)    - var(--sizeStartMobile))    );
+    --sizeEnd:      calc( var(--sizeEndMobile)      + var(--clientMobilePercentage) * (var(--sizeEndDesktop)      - var(--sizeEndMobile))      );
     --spacingStart: calc( var(--spacingStartMobile) + var(--clientMobilePercentage) * (var(--spacingStartDesktop) - var(--spacingStartMobile)) );
+    --spacingEnd:   calc( var(--spacingEndMobile)   + var(--clientMobilePercentage) * (var(--spacingEndDesktop)   - var(--spacingEndMobile))   );
 
-    /* map everything to the animation */
+    --topStart:     calc( var(--topStartMobile)     + var(--clientMobilePercentage) * (var(--topStartDesktop)     - var(--topStartMobile))     );
+    --topEnd:       calc( var(--topEndMobile)       + var(--clientMobilePercentage) * (var(--topEndDesktop)       - var(--topEndMobile))       );
+    --leftStart:    calc( var(--leftStartMobile)    + var(--clientMobilePercentage) * (var(--leftStartDesktop)    - var(--leftStartMobile))    );
+    --leftEnd:      calc( var(--leftEndMobile)      + var(--clientMobilePercentage) * (var(--leftEndDesktop)      - var(--leftEndMobile))      );
+
+    /* map every calculated value to the position styling elements to create the animation */
     font-size:      calc( var(--sizeStart)    + var(--scroll) * (var(--sizeEnd)    - var(--sizeStart))    );
     letter-spacing: calc( var(--spacingStart) + var(--scroll) * (var(--spacingEnd) - var(--spacingStart)) );
     top:            calc( var(--topStart)     + var(--scroll) * (var(--topEnd)     - var(--topStart))     );
     left:           calc( var(--leftStart)    + var(--scroll) * (var(--leftEnd)    - var(--leftStart))    );
 
-    /* center it */
-    /* transform: translate(calc(-50% * var(--scrollNegated)), calc(-50% * var(--scrollNegated))); */
-
+    /* for other browsers */
     -webkit-font-smoothing: antialiased;
+
+
+    /* shadow */
+    text-shadow: 30px 50px 60px rgb(0, 0, 0, 1);
 }
 
 
 
 .navigationSection {
-    color: var(--main-bg-color);
     position: fixed;
-    width: calc(100% - 330px);
-    /* margin-left: auto; */
-
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
-    margin-left: 330px;
-    gap: 10px;
-
-    right: 0;
+    justify-content: right;
+    column-gap: 40px;
+    z-index: 1;
+    
+    right: 3%;
+    margin-left: 380px;
     top: 3%;
 
 
@@ -97,24 +111,16 @@
     text-fill-color: transparent;
 }
 
-@media (max-width: 1200px) {
-    /* .navigationSection {
-        width: 100%;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-    } */
-}
-
 .fade-in {
     opacity: var(--scroll);
 }
 
 .navItem {
-    font-size: 20px;
-    cursor: pointer;
+    --fontSizeDesktop: 20px;
+    --fontSizeMobile:  15px;
+    font-size: calc( var(--fontSizeMobile) + var(--clientMobilePercentage) * (var(--fontSizeDesktop) - var(--fontSizeMobile)) );
 
+    cursor: pointer;
     .p {
         font-size: 1.5em;
         text-outline: 3px 3px #ccc;

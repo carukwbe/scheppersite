@@ -1,8 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
+/* @import '~@angular/material/theming'; */
+
 html, body { 
     height: 100%;
-    background-color: rgb(50, 50, 50);
+    background-color: var(--bg-color);
 }
 body { 
     margin: 0;
@@ -11,19 +13,37 @@ body {
 }
 
 p, h1, h2, h3, h4, h5, h6 {
-    /* margin: 0; */
+    /* margin: 0!important; */
 }   
 
 :root {
-    --main-bg-color: #323232;
-    --main-text-color: rgb(255, 255, 255);
+    /* --bg-color: #323232; */
+    /* --bg-color: rgb(80, 55, 53); */
+    --bg-color: #8f7258;
+    
+    /* --accent-color1: #8593c8; */
+    /* --accent-color1-hover: rgb(143, 157, 210); */
+
+    --accent-color1: rgba(118, 141, 176, 0.6);
+
+    --accent-color2: #f7a0a0;
+    --accent-color2-hover: rgb(247, 117, 117);
+
+    --scroll: 0;
+
+    --main-text-color: rgb(255, var(--scroll), 255);
     --main-text-color-light: rgb(200, 200, 200);
     --main-text-color-dark: rgb(100, 100, 100);
 
-    --button1-color: #8593c8;
-    --button1-color-hover: rgb(143, 157, 210);
+}
 
-    --button2-color: #ed824c;
-    --button2-color-hover: rgb(247, 117, 54);
-    --scroll: 0;
+
+.light-mode {
+    --text-color: black;
+    /* --borderColor: var(--borderColor_light); */
+}
+
+.dark-mode {
+    --text-color: white;
+    /* --borderColor: var(--borderColor_dark); */
 }

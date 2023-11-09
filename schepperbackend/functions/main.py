@@ -1,6 +1,5 @@
-# Welcome to Cloud Functions for Firebase for Python!
-# To get started, simply uncomment the below code or create your own.
-# Deploy with `firebase deploy`
+# The Cloud Functions for Firebase SDK to create Cloud Functions and set up triggers.
+from firebase_functions import firestore_fn, https_fn
 
 import base64
 import json
@@ -24,9 +23,6 @@ import ticket_validator
 
 import os
 
-# cred = credentials.application_default()
-# cred = credentials.Certificate("path/to/your/serviceAccountKey.json")
-# firebase_admin.initialize_app(cred)
 
 initialize_app(
     options={

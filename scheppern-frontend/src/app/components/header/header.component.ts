@@ -20,8 +20,6 @@ export class HeaderComponent {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.isHomePage = event.url === '/';
-        console.log(event.url);
-        console.log(this.isHomePage);
       }
     });
   }
