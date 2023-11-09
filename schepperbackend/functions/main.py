@@ -78,7 +78,7 @@ def writeTicket(input_data):
                 'helper_time_preference': input_data.get('timePreferences'),
                 #'ticket_id': input_data.get('ticket_id'),
             }
-            ticket_data["ticket_id"] = "b4db642e-9d8d-4d59-89f8-7a41f29280ce"
+            ticket_data["ticket_id"] = ""
             ticket_data["helper_job_preference"] = ""
             
         except Exception:
