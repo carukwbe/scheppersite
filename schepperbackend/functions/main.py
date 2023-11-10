@@ -65,7 +65,7 @@ def writeTicket(input_data):
                 'helper_time_preference': input_data.get('timePreferences'),
                 #'ticket_id': input_data.get('ticket_id'),
             }
-            ticket_data["ticket_id"] = ""
+            ticket_data["ticket_id"] = "c46006ba-69af-43d5-af3f-5a312ee6c203"
             ticket_data["helper_job_preference"] = ""
             
         except Exception:
@@ -130,6 +130,40 @@ def writeTicket(input_data):
     else:
         return {"error": "Invalid input"}
 
+
+@https_fn.on_call()
+def newTicketConfirmed(input_data):
+
+    db = firestore.client()
+
+    ticket_data = input_data.data
+    ticket_id = ticket_data["ticket_id"]
+
+    pending_ticket_ref = db.collection("tickets_pending").document(ticket_id)
+    pending_ticket_doc = pending_ticket_ref.get()
+
+    if pending_ticket_doc.exists:
+        # Delete the existing ticket with the same order id from tickets_payed
+        pending_ticket = pending_ticket_doc.to_dict()
+        payed_tickets_with_same_order_id = list(db.collection("tickets_pending").where(filter=FieldFilter(
+            "order_id", "==", pending_ticket["order_id"])).stream())
+        
+        amount_of_payed_tickets_with_same_order_id = len(payed_tickets_with_same_order_id)
+        if amount_of_payed_tickets_with_same_order_id == 0:
+            return {"error": "Payed ticket with order ID of pending ticket does not exist!"}
+        elif amount_of_payed_tickets_with_same_order_id > 1:
+            return {"error": "More than one payed ticket with order ID of pending ticket exists!"}
+        else:
+            # If there is exactly one ticket with the order ID of the pending one, delete it.
+            db.collection("tickets_payed").document(payed_tickets_with_same_order_id[0].id).delete()
+            # Create new ticket in tickets_payed from the one in tickets_pending
+            db.collection("tickets_payed").document(ticket_id).set(pending_ticket)
+            # Delete the ticket from pending tickets
+            db.collection("tickets_pending").document(ticket_id).delete()
+
+            return "New ticket created from pending ticket successfully."
+    else:
+        return {"error": "Pending ticket with ticket ID does not exist!"}
 
 
 
