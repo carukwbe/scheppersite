@@ -38,7 +38,7 @@ os.environ["PROJECT_ID"] = params.PROJECT_ID.value
 @https_fn.on_call()
 def tickets_available(req: https_fn.CallableRequest): #req: https_fn.Request) -> https_fn.Response:
     db = firestore.client()
-    ticket_orders_collection = db.collection('ticket_orders')
+    ticket_orders_collection = db.collection('tickets_ordered')
     count_orders_query = ticket_orders_collection.count()
     query_result = count_orders_query.get()
     amount_of_ticket_orders = query_result[0][0].value
@@ -89,7 +89,7 @@ def writeTicket(input_data):
             ticket_data["price"] = ticket_price
             ticket_data.pop("ticket_id")
 
-            new_ticket_ref = db.collection("tickets_payed").document(ticket_id)
+            new_ticket_ref = db.collection("tickets_ordered").document(ticket_id)
             new_ticket_ref.set(ticket_data)
 
             return "New ticket order created successfully."
