@@ -1,0 +1,12 @@
+"valid amount" here means the price of the first or second preisstufe or the helper price. These prices are considered in
+the transaction processor. Each transaction where the transferred amount is one of these prices and the order id is
+correct is marked as correct, and only in a second step it is checked whether the price is actually the one in the
+ticket. The "valid amount and false amount" can happen if someone transfers the helper price despite not having booked
+a helper ticket.
+
+"correct amount" means the price that is present in the ticket order.
+
+- transaction with valid amount, correct amount and correct id
+- transaction with valid amount, false amount and correct id
+- transaction with valid amoung and incorrect id
+- transaction with invalid amount and correct id
