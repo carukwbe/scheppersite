@@ -6,7 +6,7 @@ import json
 import uuid
 import random
 
-from firebase_functions import https_fn, pubsub_fn, params
+from firebase_functions import https_fn, pubsub_fn, scheduler_fn, params
 from firebase_admin import firestore, initialize_app
 from datetime import datetime
 from firebase_functions.firestore_fn import (
@@ -18,8 +18,7 @@ from firebase_functions.firestore_fn import (
 )
 
 from cost_controller import review_billing_event, stop_billing
-import ticket_manager
-import ticket_validator
+import transaction_processor
 
 import os
 
@@ -65,7 +64,7 @@ def writeTicket(input_data):
                 'helper_time_preference': input_data.get('timePreferences'),
                 #'ticket_id': input_data.get('ticket_id'),
             }
-            ticket_data["ticket_id"] = "c46006ba-69af-43d5-af3f-5a312ee6c203"
+            ticket_data["ticket_id"] = ""
             ticket_data["helper_job_preference"] = ""
             
         except Exception:
@@ -85,7 +84,7 @@ def writeTicket(input_data):
             else:
                 return {"error": "Ticket price could not be determined."}
             
-            ticket_data["order_id"] = random.randint(100000,999999) # perhaps check if ticket id already in database
+            ticket_data["order_id"] = str(random.randint(100000,999999)) # perhaps check if ticket id already in database
             ticket_data["price"] = ticket_price
             ticket_data.pop("ticket_id")
 
@@ -165,6 +164,26 @@ def newTicketConfirmed(input_data):
     else:
         return {"error": "Pending ticket with ticket ID does not exist!"}
 
+
+
+@scheduler_fn.on_schedule(schedule="0 18 * * *")
+def daily_trigger_test(event: scheduler_fn.ScheduledEvent) -> None:
+    print("Executed successfully")
+
+
+@https_fn.on_call()
+def process_transactions(req: https_fn.CallableRequest):
+    transactions = transaction_processor.get_transactions()
+    (
+        transactions_correct_amount_correct_id,
+        transactions_correct_amount_false_id,
+        transactions_false_amount_correct_id
+    ) = transaction_processor.filter_relevant_transactions(transactions)
+
+    transaction_processor.process_relevant_transactions(transactions_correct_amount_correct_id, 
+        transactions_correct_amount_false_id, transactions_false_amount_correct_id)
+    
+    print("Processing transactions finished")
 
 
 @pubsub_fn.on_message_published(topic="project_cost")
