@@ -16,9 +16,11 @@ export class HomeComponent {
     mapTo: { start: 0, end: 15 },
     bezier: [1,1,0,0]
   }
-  red = 128;
-  green = 128;
-  blue = 128;
+
+
+  red = 0;
+  green = 55;
+  blue = 109;
   
   updateBackgroundColor() {
     const backgroundColor = `rgb(${this.red}, ${this.green}, ${this.blue})`;
@@ -33,7 +35,7 @@ export class HomeComponent {
 
 
   ngOnInit(): void {
-    this.updateBackgroundColor();
+    // this.updateBackgroundColor();
   }
 
   // cursor stuff

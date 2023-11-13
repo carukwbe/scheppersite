@@ -1,72 +1,152 @@
-    :host {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        gap: 20px;
-        /* padding: 0 100px; */
-
-        flex-wrap: wrap-reverse;
-    }
 
 
-    form {
-        width: 500px;
-        display: grid;
-        /* margin: 10px; */
-        overflow: visible;
-        max-width: 1000px;
-        color: var(--text-color);
-    }
+:host {
+    /* background: radial-gradient(circle at center, red 0, blue, green 100%);
+    radial-gradient(circle at center, red 0, blue, green 100%); */
+    /* background: radial-gradient(#e66465, #9198e5);
+    background-color: red; */
+    display: grid;
+    justify-items: center;
+    width: 100vw;
+}
+
+.content {
+
+    max-width: 1000px;
+
+    display: grid;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    /* padding: 0 100px; */
+
+    flex-wrap: wrap;
+    padding: 100px 0;
+    /* background-color: var(--accent-color2); */
+
+}
+
+.stats {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+strong {
+    font-size: 28px;
+    margin: 0 10px
+}
+
+.priceBoxes {
+    justify-self: center;
+    display: grid;
+    max-width: 400px;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+}
+
+.box {
+    border: 1px solid #ccc;
+    margin: 5px;
+    padding: 10px;
+    text-align: center;
+    opacity: 0.3;
+}
+
+.priceLabel {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.active {
+    opacity: 1;
+    padding: 20px 10px;
+}
 
 
-    app-info-card {
-        /* margin: 10vh 30px 30px; */
-        z-index: 2;
-        overflow: visible;
-        max-width: 600px;
-        width: 200px;
+
+.info {
+    width: 100%;
+    /* border-top: var(--text-color) 1px solid; */
+    /* border-bottom: var(--text-color) 1px solid; */
+    padding: 15px 0;
+    margin: 20px 0;
+}
+
+.info p {
+    margin: 0;
+}
+
+form {
+
+    background: rgba(0, 0, 0, 0.48);
+    border-radius: 5px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+
+    border: 1px solid rgba(0, 0, 0, 0.3);
 
 
-    }
+    padding: 30px;
 
-    .custom {
-        border: 1px solid black;
-    }
+    width: 500px;
+    display: grid;
+    /* margin: 10px; */
+    overflow: visible;
+    max-width: 1000px;
+    color: var(--text-color);
+}
+
+
+app-info-card {
+    /* margin: 10vh 30px 30px; */
+    z-index: 2;
+    overflow: visible;
+    max-width: 600px;
+    width: 200px;
+
+
+}
+
+.custom {
+    border: 1px solid black;
+}
 
 
 
 
 
-    /* Ticket Anzeige */
-    .ticketContainer {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-    }
+/* Ticket Anzeige */
+.ticketContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
 
-    .ticket-card {
-        background-color: var(--button1-color);
-        border: 1px solid #ccc;
-        padding: 10px;
-        margin: 10px;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        cursor: pointer;
-    }
+.ticket-card {
+    background-color: var(--button1-color);
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
 
-    .ticket-card:hover {
-        background-color: #e0e0e0;
-    }
+.ticket-card:hover {
+    background-color: #e0e0e0;
+}
 
-    .ticket-card h2 {
-        font-size: 1.2rem;
-        margin-bottom: 5px;
-    }
+.ticket-card h2 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
 
-    .ticket-card p {
-        font-size: 1rem;
-        margin: 5px 0;
-    }
+.ticket-card p {
+    font-size: 1rem;
+    margin: 5px 0;
+}

@@ -21,18 +21,28 @@ export class WidthObserverDirective {
   onResize(event: Event) {
     const htmlElement = document.documentElement;
 
-    //calculate Percentage of a client to be desktop
+    // calculate Percentage of a client to be desktop
     // 0% -> mobile
     // 100% -> desktop
-    const mobileMinWidth = 420;
+    const mobileMinWidth = 320;
     const desktopMaxWidth = 1440;
     const gesamt = desktopMaxWidth - mobileMinWidth;
-    const clientMobilePercentage = (htmlElement.clientWidth - mobileMinWidth) / gesamt;
+    const isDesktopPercentage = Math.min((htmlElement.clientWidth - mobileMinWidth) / gesamt,1);
+
+
+    // console.log('isDesktopPercentage', isDesktopPercentage);
+    // console.log('isMobilePercentage', 1 - isDesktopPercentage);
+
+    console.log('clientWidth', htmlElement.clientWidth);
+    console.log('clientHeight', htmlElement.clientHeight);
+    console.log('widthHeightRatio', htmlElement.clientWidth / htmlElement.clientHeight);
 
     const properties = {
       '--clientWidth': htmlElement.clientWidth,
       '--clientHeight': htmlElement.clientHeight,
-      '--clientMobilePercentage': clientMobilePercentage
+      '--widthHeightRatio': htmlElement.clientWidth / htmlElement.clientHeight,
+      '--isDesktopPercentage': isDesktopPercentage,
+      '--isMobilePercentage': 1 - isDesktopPercentage,
     };
 
     for (const [property, value] of Object.entries(properties)) {

@@ -1,133 +1,128 @@
-w.imageStack {
-    position: relative;
-}
-    
-.homeImage {
-    position: relative;
-    top: 0px;   
-    width: 100%;
-    height: 100vh;
-    object-fit: cover;
-    object-position: center;
-
-    overflow: visible;
-    pointer-events: none;
-    z-index: 0;
-}
-.windradFront {
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    left: 0;
-}
-
-.windrad {
-    filter: drop-shadow(-20px -20px 23px rgb(57, 11, 11));
-}
-
-
-
-.scheppern {
-    position: fixed;
-    z-index: 1;
-    cursor: pointer;
-    
-    font-family: "fit-extra-condensed", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-
-    --sizeStartDesktop: 320px;
-    --sizeStartMobile:  140px;
-    --sizeEndDesktop:   150px;
-    --sizeEndMobile:    100px;
-
-    --spacingStartDesktop: 80px;
-    --spacingStartMobile:  25px;
-    --spacingEndDesktop:   10px;
-    --spacingEndMobile:     0px;
-
-    --topStartDesktop: 40%;
-    --topStartMobile:  40%;
-    --topEndDesktop:    8%;
-    --topEndMobile:     5%;
-    
-    --leftStartDesktop: 14.5%; /*  last letter has letter spacing apllied aswell */
-    --leftStartMobile:   8%;
-    --leftEndDesktop:    5%;
-    --leftEndMobile:     3%;
-
-    /* map text size to desktop-mobile range */
-    --sizeStart:    calc( var(--sizeStartMobile)    + var(--clientMobilePercentage) * (var(--sizeStartDesktop)    - var(--sizeStartMobile))    );
-    --sizeEnd:      calc( var(--sizeEndMobile)      + var(--clientMobilePercentage) * (var(--sizeEndDesktop)      - var(--sizeEndMobile))      );
-    --spacingStart: calc( var(--spacingStartMobile) + var(--clientMobilePercentage) * (var(--spacingStartDesktop) - var(--spacingStartMobile)) );
-    --spacingEnd:   calc( var(--spacingEndMobile)   + var(--clientMobilePercentage) * (var(--spacingEndDesktop)   - var(--spacingEndMobile))   );
-
-    --topStart:     calc( var(--topStartMobile)     + var(--clientMobilePercentage) * (var(--topStartDesktop)     - var(--topStartMobile))     );
-    --topEnd:       calc( var(--topEndMobile)       + var(--clientMobilePercentage) * (var(--topEndDesktop)       - var(--topEndMobile))       );
-    --leftStart:    calc( var(--leftStartMobile)    + var(--clientMobilePercentage) * (var(--leftStartDesktop)    - var(--leftStartMobile))    );
-    --leftEnd:      calc( var(--leftEndMobile)      + var(--clientMobilePercentage) * (var(--leftEndDesktop)      - var(--leftEndMobile))      );
-
-    /* map every calculated value to the position styling elements to create the animation */
-    font-size:      calc( var(--sizeStart)    + var(--scroll) * (var(--sizeEnd)    - var(--sizeStart))    );
-    letter-spacing: calc( var(--spacingStart) + var(--scroll) * (var(--spacingEnd) - var(--spacingStart)) );
-    top:            calc( var(--topStart)     + var(--scroll) * (var(--topEnd)     - var(--topStart))     );
-    left:           calc( var(--leftStart)    + var(--scroll) * (var(--leftEnd)    - var(--leftStart))    );
-
-    /* for other browsers */
-    -webkit-font-smoothing: antialiased;
-
-
-    /* shadow */
-    text-shadow: 30px 50px 60px rgb(0, 0, 0, 1);
-}
-
-
-
-.navigationSection {
-    position: fixed;
+.navbar {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: right;
-    column-gap: 40px;
-    z-index: 1;
-    
-    right: 3%;
-    margin-left: 380px;
-    top: 3%;
-
+    background-color: var(--accent-color1);
+    background-color: var;
+    height: fit-content;
+    padding: 10px 30px 20px 30px;
+    text-align: right;
 
     /* font-family: "fit-extra-condensed", sans-serif; */
-    font-family: "fit-extended", sans-serif;
+    /* font-family: "fit-extended", sans-serif;
     font-weight: 400;
-    font-style: normal;
-    /* text-shadow: 0 0 5px white, 0 0 5px white, 0 0 5px white, 0 0 5px white; */
+    font-style: normal; */
 
-    color: transparent;
+    font-family: 'Rubik', sans-serif;
+    font-size: 6em;
 
-    /* for other browsers */
-    -webkit-text-stroke: 3px #ffffff;
-    text-stroke: 2px #ffffff;
-    -webkit-text-fill-color: transparent;
-    text-fill-color: transparent;
+
+    font-size: 50px;
+
+    opacity: calc(2 * var(--scroll) - 4.5 + 0 * var(--isMobilePercentage));
+    
+
+    /* for outline effect */
+    /* -webkit-text-stroke: 3px #fff;
+    -webkit-text-fill-color: transparent; */
 }
 
-.fade-in {
-    opacity: var(--scroll);
-}
-
-.navItem {
-    --fontSizeDesktop: 20px;
-    --fontSizeMobile:  15px;
-    font-size: calc( var(--fontSizeMobile) + var(--clientMobilePercentage) * (var(--fontSizeDesktop) - var(--fontSizeMobile)) );
-
-    cursor: pointer;
-    .p {
-        font-size: 1.5em;
-        text-outline: 3px 3px #ccc;
+@media (max-width: 1050px) {
+    .navbar { 
+        font-size: 40px;
+        padding: 7px 30px 17px 30px;
     }
 }
+@media (max-width: 900px) {
+    .navbar { 
+        font-size: 35px;
+        /* -webkit-text-stroke: 2.5px #fff; */
+        padding: 5px 30px 15px 30px;
+    }
+}
+@media (max-width: 820px) {
+    .navbar { 
+        font-size: 30px; 
+        /* -webkit-text-stroke: 2px #fff; */
+        column-gap: 25px;
+        padding: 0px 30px 10px 30px;
+    }
+}
+@media (max-width: 700px) {
+    /* .navbar */
+}
 
-.navItem p {
-    font-size: 1.5em;
-    text-outline: 3px 3px #ccc;
+
+.platzhalter {
+    width: 120px;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+
+
+
+.logo {
+    position: absolute;
+    margin-right: auto;
+    height: 120px;
+
+    cursor: pointer;
+
+
+    /* margin: 270px 0 370px 0; */
+
+    display: flex;
+    align-items: center;
+
+    /* for safari */
+    backface-visibility: hidden;
+}
+
+.windradFluegel {
+    position: absolute;
+    transform-origin: 41% 58%;
+    transform:
+        rotate(calc(var(--scroll) * 10deg)) 
+        scale(3)
+
+}
+
+.baumring {
+    z-index: 0;
+    position: relative;
+    left: calc(20px + -6px * var(--order) * var(--order));
+    top: 3px;
+    transform:
+        scale(calc(-1 + var(--scroll))) 
+        rotate(calc(var(--scroll) * var(--order) * 1deg));
+
+    /* translate(calc(3px * var(--order)), calc(3px * var(--order))); */
+    /* zoom: calc(0.8 + var(--scroll)); */
+
+}
+
+
+
+
+
+.links {
+    display: flex;
+    justify-items: right;
+    flex-wrap: wrap;
+    padding-top: 20px;
+    column-gap: 40px;
+    cursor: pointer;
+    justify-content: right;
+    margin-left: auto;
+    /* margin-left: minmax(140px, auto); */
+    /* line-height: 0px; */
+
+}
+
+.links p {
+    margin-left: auto;
+    pointer-events: auto;
+}
+
+.turnier {
+    color: rgba(255, 255, 255, 0.3);
 }

@@ -1,0 +1,219 @@
+:host {
+    position: relative;
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: flex-start; */
+    align-items: start;
+    height: 100%;
+    top: 0;
+
+    transform-style: preserve-3d;
+
+
+    --z-distance-scheppern: 35;
+
+    --z-distance0: 15;
+    --z-distance1: 20;
+    --z-distance2: 25;
+    --z-distance3: 29;
+    --z-distance4: 32;
+    --z-distance5: 35;
+    --z-distance6: 37;
+    --z-distance-background: 40;
+
+}
+
+.imgStack {
+    position: absolute;
+    width: 100vw;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+
+    overflow: visible;
+    pointer-events: none;
+}
+
+
+.e0 {
+    transform: 
+        translateZ(calc(
+            var(--z-distance0) * -1px
+        )) 
+        scale(calc(
+            (var(--z-distance0) / 10) + 1
+        ));
+
+    filter: drop-shadow(-15px -2px 18px rgb(57, 11, 11));
+}
+.e1 {
+    transform: 
+        translateZ(calc(
+            var(--z-distance1) * -1px
+        )) 
+        scale(calc(
+            (var(--z-distance1) / 10) + 1
+        ));
+    /* filter: drop-shadow(-10px 0px 22px rgb(57, 11, 11)); */
+}
+.e2 {
+    transform: 
+        translateZ(calc(
+            var(--z-distance2) * -1px
+        )) 
+        scale(calc(
+            (var(--z-distance2) / 10) + 1
+        ));
+}
+.e3 {
+    transform: 
+        translateZ(calc(
+            var(--z-distance3) * -1px
+        )) 
+        scale(calc(
+            (var(--z-distance3) / 10) + 1
+        ));
+}
+.e4 {
+    transform: 
+        translateZ(calc(
+            var(--z-distance4) * -1px
+        )) 
+        scale(calc(
+            (var(--z-distance4) / 10) + 1
+        ));
+}
+.e5 {
+    transform: 
+        translateZ(calc(
+            var(--z-distance5) * -1px
+        )) 
+        scale(calc(
+            (var(--z-distance5) / 10) + 1
+        ));
+}
+.e6 {
+    transform: 
+        translateZ(calc(
+            var(--z-distance6) * -1px
+        )) 
+        scale(calc(
+            (var(--z-distance6) / 10) + 1
+        ));
+}
+.background {
+    transform:
+        translateZ(calc(var(--z-distance-background) * -1px)) scale(calc((var(--z-distance-background) / 10) + 1));
+
+}
+
+.scheppern {
+    /* center Text */
+    position: absolute;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    /* text-shadow: 30px 50px 60px rgb(0, 0, 0, 1); */
+
+
+    top: 10vh;
+
+    /* position: fixed;
+    z-index: 1; */
+    
+    font-family: "fit-extra-condensed", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+    --sizeDesktop: 1000px;
+    --sizeMobile:  600px;
+
+    --spacingDesktop: 300px;
+    --spacingMobile:  120px;
+
+
+
+    --topStartDesktop: 40%;
+    --topStartMobile:  40%;
+    --topEndDesktop:    8%;
+    --topEndMobile:     5%;
+    
+    --leftStartDesktop: 14.5%; /*  last letter has letter spacing apllied aswell */
+    --leftStartMobile:   8%;
+    --leftEndDesktop:    5%;
+    --leftEndMobile:     3%;
+
+    /* map text size to desktop-mobile range */
+    --size:    calc( var(--sizeMobile)    + var(--isDesktopPercentage) * (var(--sizeDesktop)    - var(--sizeMobile))    );
+    --spacing: calc( var(--spacingMobile) + var(--isDesktopPercentage) * (var(--spacingDesktop) - var(--spacingMobile)) );
+
+    /* map every calculated value to the position styling elements to create the animation */
+    font-size: var(--size);
+    letter-spacing: var(--spacing);
+    
+    /* letter spacing also applies space on last letter */
+    left: calc(var(--spacing) / 2);
+
+    /* top:            calc( var(--topStart)     + var(--scroll) * (var(--topEnd)     - var(--topStart))     );
+    left:           calc( var(--leftStart)    + var(--scroll) * (var(--leftEnd)    - var(--leftStart))    ); */
+
+    /* opacity: calc(0.4 * (var(--scroll) - 0.5)); */
+    /* transform: 
+        translateZ(calc(max(-20px * var(--scroll), var(--z-distance-scheppern) * -1px))); */
+
+    transform:
+            translateZ(calc(var(--z-distance-scheppern) * -1px));
+
+    /* for other browsers */
+    -webkit-font-smoothing: antialiased;  
+}
+
+
+
+
+
+
+.scheppern_old {
+    --sizeStartDesktop: 1000px;
+    --sizeStartMobile:  400px;
+    --sizeEndDesktop:   1000px;
+    --sizeEndMobile:    400px;
+
+    --spacingStartDesktop: 300px;
+    --spacingStartMobile:  100px;
+    --spacingEndDesktop:   300px;
+    --spacingEndMobile:    100px;
+
+    --topStartDesktop: 40%;
+    --topStartMobile:  40%;
+    --topEndDesktop:    8%;
+    --topEndMobile:     5%;
+    
+    --leftStartDesktop: 14.5%; /*  last letter has letter spacing apllied aswell */
+    --leftStartMobile:   8%;
+    --leftEndDesktop:    5%;
+    --leftEndMobile:     3%;
+
+    /* map text size to desktop-mobile range */
+    --sizeStart:    calc( var(--sizeStartMobile)    + var(--isDesktopPercentage) * (var(--sizeStartDesktop)    - var(--sizeStartMobile))    );
+    --sizeEnd:      calc( var(--sizeEndMobile)      + var(--isDesktopPercentage) * (var(--sizeEndDesktop)      - var(--sizeEndMobile))      );
+    --spacingStart: calc( var(--spacingStartMobile) + var(--isDesktopPercentage) * (var(--spacingStartDesktop) - var(--spacingStartMobile)) );
+    --spacingEnd:   calc( var(--spacingEndMobile)   + var(--isDesktopPercentage) * (var(--spacingEndDesktop)   - var(--spacingEndMobile))   );
+
+    --topStart:     calc( var(--topStartMobile)     + var(--isDesktopPercentage) * (var(--topStartDesktop)     - var(--topStartMobile))     );
+    --topEnd:       calc( var(--topEndMobile)       + var(--isDesktopPercentage) * (var(--topEndDesktop)       - var(--topEndMobile))       );
+    --leftStart:    calc( var(--leftStartMobile)    + var(--isDesktopPercentage) * (var(--leftStartDesktop)    - var(--leftStartMobile))    );
+    --leftEnd:      calc( var(--leftEndMobile)      + var(--isDesktopPercentage) * (var(--leftEndDesktop)      - var(--leftEndMobile))      );
+
+    /* map every calculated value to the position styling elements to create the animation */
+    font-size:      calc( var(--sizeStart)    + min(var(--scroll), 1) * (var(--sizeEnd)    - var(--sizeStart))    );
+    letter-spacing: calc( var(--spacingStart) + min(var(--scroll), 1) * (var(--spacingEnd) - var(--spacingStart)) );
+    /* top:            calc( var(--topStart)     + var(--scroll) * (var(--topEnd)     - var(--topStart))     );
+    left:           calc( var(--leftStart)    + var(--scroll) * (var(--leftEnd)    - var(--leftStart))    ); */
+
+    opacity: calc(0.4 * (var(--scroll) - 0.5));
+    transform: 
+        translateZ(calc(max(-20px * var(--scroll), var(--z-distance-scheppern) * -1px)));
+}

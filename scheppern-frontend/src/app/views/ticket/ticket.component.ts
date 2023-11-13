@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Ticket } from 'src/models';
 import { TicketService } from 'src/app/ticket-service.service';
 import { Router } from '@angular/router';
@@ -11,17 +11,30 @@ import { Router } from '@angular/router';
 })
 export class TicketComponent {
   form!: FormGroup;
-  helperCategory = new FormControl('');
-  helperCategories: string[] = [
-    'Einlass',
-    'Bar',
-    'Awareness',
-    'Food Truck (evtl.)'
-  ];
-
   isLoading = false;
   statusMessage = '';
 
+
+  ticketsAvailable = 50;
+  ticketLevels = [
+    { price: 45,
+      active: false,
+      name: 'Early Robin',
+      activationDate: '01.11.2023',
+    },
+    { price: 50,
+      active: true,
+      name: 'Mid Eagle',
+      activationDate: '01.12.2023',
+    },
+    { price: 55,
+      active: false,
+      name: 'Late Owl',
+      activationDate: '01.01.2024',
+    }
+  ];
+
+  // debug
   tickets: Ticket[] = [];
 
   constructor(private fb: FormBuilder, private ticketService: TicketService, private router: Router) { }

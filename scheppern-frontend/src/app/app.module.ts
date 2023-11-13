@@ -21,7 +21,7 @@ import { TicketComponent } from './views/ticket/ticket.component';
 import { InfosComponent } from './views/infos/infos.component';
 import { KontaktComponent } from './views/kontakt/kontakt.component';
 import { ImpressumComponent } from './views/impressum/impressum.component';
-import { HeaderComponent } from './components/header/header.component';
+import { ParallaxComponent } from './parallax/parallax.component';
 import { TicketEditComponent } from './views/ticket-edit/ticket-edit.component';
 import { GaleryComponent } from './views/galery/galery.component';
 import { ScrollObserverDirective } from './directives/scroll-observer.directive';
@@ -34,6 +34,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { HeaderComponent } from './components/header/header.component';
+import { HelperComponent } from './views/helper/helper.component';
 
 @NgModule({
   declarations: [
@@ -44,13 +46,15 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     InfosComponent,
     KontaktComponent,
     ImpressumComponent,
-    HeaderComponent,
+    ParallaxComponent,
     TicketEditComponent,
     ScrollObserverDirective,
     GaleryComponent,
     WidthObserverDirective,
     InfoCardComponent,
-    FooterComponent
+    FooterComponent,
+    HeaderComponent,
+    HelperComponent
   ],
   imports: [
     BrowserModule,

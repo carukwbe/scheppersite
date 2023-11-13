@@ -17,18 +17,17 @@
             <div class="button instagram"></div>
         </a>
 
-        <div class="button whiteOutlineButton">
+        <div class="button whiteOutlineButton" matTooltip="Der Verein">
             <mat-icon>groups</mat-icon>
         </div>
-        <div class="button whiteOutlineButton">
-            <mat-icon>accessibility_new</mat-icon>
+        
+        <div class="button whiteOutlineButton" matTooltip="Kontakt">
+            <mat-icon>email</mat-icon>
         </div>
-    
-        <!-- <button mat-fab aria-label="Helfer werden Button" matTooltip="Der Verein">
-            <mat-icon>groups</mat-icon>
-        </button>
-        <button mat-fab aria-label="Helfer werden Button" matTooltip="Helfer werden!">
-            <mat-icon>accessibility_new</mat-icon>
+
+        <!-- alter Button -->
+        <!-- <button mat-fab aria-label="Kontakt" matTooltip="Kontakt">
+            <mat-icon>email</mat-icon>
         </button> -->
     </div>
     
@@ -38,4 +37,25 @@
         <li>AGBs</li>
         <li>Datenschutzhinweise</li>
     </ul>
-</div>    
+
+    <div class="slider-wrapper">
+        R
+        <mat-slider min="0" max="255">
+            <input matSliderThumb [(ngModel)]="red" (input)="updateBackgroundColor()">
+        </mat-slider>
+        G
+        <mat-slider min="0" max="255">
+            <input matSliderThumb [(ngModel)]="green" (input)="updateBackgroundColor()">
+        </mat-slider>
+        B
+        <mat-slider min="0" max="255">
+            <input matSliderThumb [(ngModel)]="blue" (input)="updateBackgroundColor()">
+        </mat-slider>
+        Alpha
+        <mat-slider min="0" max="100">
+            <input matSliderThumb [(ngModel)]="alpha" (input)="updateBackgroundColor()">
+        </mat-slider>
+    </div>
+
+
+</div>

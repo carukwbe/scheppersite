@@ -1,4 +1,4 @@
-:host {
+.card {
     position: relative;
     font-size: 1.5em;
     z-index: 2;
@@ -39,7 +39,7 @@ p {
     position: absolute;
     top: -15px;
     right: 15px;
-    padding: 1px 5  px;
+    padding: 1px 5px;
 
     background: rgba(255, 255, 255, 1);
     border-radius: 4px;
