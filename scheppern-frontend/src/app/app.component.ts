@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 
 
 @Component({
@@ -7,7 +7,8 @@ import { Component, ElementRef, Renderer2 } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'scheppern-frontend';
+  @ViewChild('scrollContainer') scrollContainer: ElementRef | undefined;
+
 
   constructor(private renderer: Renderer2, private elementRef: ElementRef) {
     // document.documentElement.style.cursor = "none";
@@ -17,7 +18,18 @@ export class AppComponent {
   }
 
 
+  ngAfterViewInit() {
+    this.scrollContainer!.nativeElement.addEventListener('scroll', (event: any) => {
+      let scroll = this.scrollContainer!.nativeElement.scrollTop / this.scrollContainer!.nativeElement.clientHeight;
 
+      this.scrollContainer!.nativeElement.style.setProperty('--scroll', scroll);
+      this.elementRef.nativeElement.style.setProperty('--scroll', scroll);
+      this.renderer.setStyle(document.documentElement, '--scroll', scroll);
+
+      console.log(scroll);
+      
+    });
+  }
 
 
 

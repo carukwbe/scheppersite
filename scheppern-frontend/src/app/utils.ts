@@ -19,7 +19,6 @@ export const mapStartRangeToEndRange = (value: number, startRange: number[], end
     return normalizedValueInStartRange * endRangeSize + endRange[0]; 
 }
 
-
 export const mapToBezier = (value: number, bezier: number[]): number => {
     if (bezier.length != 4) { console.error("Bezier Array don't match dimensions of 4"); return value; }
 

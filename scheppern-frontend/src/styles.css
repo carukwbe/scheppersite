@@ -17,23 +17,26 @@ p, h1, h2, h3, h4, h5, h6 {
 }   
 
 :root {
-    /* --bg-color: #323232; */
-    /* --bg-color: rgb(80, 55, 53); */
-    --bg-color: #8f7258;
+    --bg-color: #323232;
+    --bg-color: rgb(80, 55, 53);
+    --bg-color: rgb(0, 55, 109);
     
-    /* --accent-color1: #8593c8; */
-    /* --accent-color1-hover: rgb(143, 157, 210); */
 
-    --accent-color1: rgba(118, 141, 176, 0.6);
+    --accent-color1: #8593c8;
+    --accent-color1: rgb(143, 157, 210);
+    --accent-color1: rgba(118, 141, 176, 0.8);
+    --accent-color1: hsla(180, 30%, 50%, 0.8);
 
-    --accent-color2: #f7a0a0;
+
+
+    --accent-color2: #3c17179b;
     --accent-color2-hover: rgb(247, 117, 117);
 
     --scroll: 0;
 
-    --main-text-color: rgb(255, var(--scroll), 255);
-    --main-text-color-light: rgb(200, 200, 200);
-    --main-text-color-dark: rgb(100, 100, 100);
+    --text-color: white;
+    --text-color-light: rgb(200, 200, 200);
+    --text-color-dark: rgb(100, 100, 100);
 
 }
 

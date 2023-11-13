@@ -1,84 +1,75 @@
 
-<form [formGroup]="form">
-    <mat-form-field>
-        <mat-label>Vorname</mat-label>
-        <input type="text" id="name" matInput formControlName="name">
-    </mat-form-field>
+<div class="content">
 
-    <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input type="text" id="surname" matInput formControlName="surname">
-    </mat-form-field>
 
-    <mat-form-field>
-        <mat-label>E-Mail</mat-label>
-        <input type="email" id="email" matInput formControlName="email" email>
-        <mat-error *ngIf="form.get('email')?.hasError('email') && form.get('email')?.touched">Gib eine gültige E-Mail
-            Adresse ein!</mat-error>
+    <div class="stats">
+        <p>
+            Noch <strong>{{ ticketsAvailable }}</strong> Tickets verfügbar! <br>
+        </p>
+        <div class="priceBoxes">
+            <div class="box" *ngFor="let ticketLevel of ticketLevels" [ngClass]="{ 'active': ticketLevel.active }" [matTooltip]="'ab ' + ticketLevel.activationDate">
+                <div class="name">{{ ticketLevel.name }}</div>
+                <div class="priceLabel">{{ ticketLevel.price }}€</div>
+            </div>
+        </div>
+    </div>
 
-    </mat-form-field>
 
-    <mat-form-field  matTooltip="Damit wir dich kontaktieren können, falls was schief geht. Zusätzlich landest du in der WhatsApp Gruppe!">
-        <mat-label>Telefonnummer</mat-label>
-        <input type="tel" id="phone" matInput formControlName="phone">
-    </mat-form-field>
 
-    <mat-form-field matTooltip="Lass dich überraschen!">
-        <mat-label>Haus</mat-label>
-        <mat-select id="hogwarts_house" formControlName="hogwarts_house">
-            <mat-option value="Gryffindor">Gryffindor</mat-option>
-            <mat-option value="Hufflepuff">Hufflepuff</mat-option>
-            <mat-option value="Ravenclaw">Ravenclaw</mat-option>
-            <mat-option value="Slytherin">Slytherin</mat-option>
-        </mat-select>
-    </mat-form-field>
 
-    <mat-checkbox formControlName="helper">Ich möchte Helfer werden!</mat-checkbox>
-
-    <ng-container *ngIf="form.get('helper')?.value">
-
+    <form [formGroup]="form">
         <mat-form-field>
-            <mat-label>Bereiche in denen du dir vorstellen könntest zu arbeiten</mat-label>
-            <mat-select [formControl]="helperCategory" multiple>
-                <mat-option *ngFor="let cat of helperCategories" [value]="cat">{{cat}}</mat-option>
+            <mat-label>Vorname</mat-label>
+            <input type="text" id="name" matInput formControlName="name">
+        </mat-form-field>
+    
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input type="text" id="surname" matInput formControlName="surname">
+        </mat-form-field>
+    
+        <mat-form-field>
+            <mat-label>E-Mail</mat-label>
+            <input type="email" id="email" matInput formControlName="email" email>
+            <mat-error *ngIf="form.get('email')?.hasError('email') && form.get('email')?.touched">Gib eine gültige E-Mail
+                Adresse ein!</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field  matTooltip="Damit wir dich kontaktieren können, falls was schief geht. Zusätzlich landest du in der WhatsApp Gruppe!">
+            <mat-label>Telefonnummer</mat-label>
+            <input type="tel" id="phone" matInput formControlName="phone">
+        </mat-form-field>
+    
+        <mat-form-field matTooltip="Lass dich überraschen!">
+            <mat-label>Haus</mat-label>
+            <mat-select id="hogwarts_house" formControlName="hogwarts_house">
+                <mat-option value="Gryffindor">Gryffindor</mat-option>
+                <mat-option value="Hufflepuff">Hufflepuff</mat-option>
+                <mat-option value="Ravenclaw">Ravenclaw</mat-option>
+                <mat-option value="Slytherin">Slytherin</mat-option>
             </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Gib uns grobe Zeitpräferenzen</mat-label>
-            <!-- <input type="text" matInput formControlName="timePreferences"> -->
-            <textarea type="text" matInput formControlName="timePreferences">
-            </textarea>
-        </mat-form-field>
-    </ng-container>
-
+        </mat-form-field>    
+        
+        <mat-checkbox>Ich stimme den AGBs auf jeden Fall zu!</mat-checkbox>
+        <mat-checkbox>Bei Datenschutzhinweisen setz ich auch ein Häkchen!</mat-checkbox>
     
-    <mat-checkbox>Ich stimme den AGBs auf jeden Fall zu!</mat-checkbox>
-    <mat-checkbox>Bei Datenschutzhinweisen setz ich auch ein Häkchen!</mat-checkbox>
+        <div class="info">
+            <p>
+                Du erhältst eine E-Mail mit Bankdaten für die Überweisung.
+                Unser System checkt einkommende Überweisungen täglich und sendet dann die entsprechenden Tickets heraus.
+            </p>
+        </div>
 
-
-    <button mat-raised-button color="primary" (click)="addTicket()" [disabled]="form.invalid">
-        Kauf bestätigen
-    </button>
-
-    <mat-spinner *ngIf="isLoading"></mat-spinner>
-    <div *ngIf="statusMessage">{{ statusMessage }}</div>
-</form>
-
-
-<app-info-card>
-    Nach abgeschickter Reservierung bekommst du eine Mail mit Bankdaten für die Überweisung. Unser System checkt täglich einkommende Überweisungen und sendet anschließend die entsprechenden Tickets heraus. 
-</app-info-card>
-<app-info-card>
-    Mit einem Helferticket kannst du den Preis halbieren, dafür musst du auch 4 Stunden Schichten übernehmen.
-</app-info-card>
-
-<!-- <div class="infos">
+        <button mat-raised-button color="primary" (click)="addTicket()" [disabled]="form.invalid">
+            Kauf bestätigen
+        </button>
     
-    <app-info-card>
-        Nach abgeschickter Reservierung bekommst du eine Mail Bankdaten für die Überweisung. Unser System checkt täglich
-        einkommende Überweisungen und sendet dann die entsprechenden Tickets raus.
-    </app-info-card>
-</div> -->
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
+        <div *ngIf="statusMessage">{{ statusMessage }}</div>
+    </form>
+    
+
+</div>
 
 
 <!-- debug -->
