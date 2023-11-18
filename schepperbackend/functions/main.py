@@ -27,7 +27,7 @@ import os
 # firebase_admin.initialize_app(cred)
 
 initialize_app(
-    options={
+    options = {
         'projectId': 'scheppersite',
         'databaseURL': 'http://127.0.0.1:4000'  # Firestore emulator runs on this URL
     }
@@ -36,8 +36,94 @@ initialize_app(
 os.environ["PROJECT_ID"] = params.PROJECT_ID.value
 
 
+  
+
 @https_fn.on_call()
-def tickets_available(req: https_fn.CallableRequest): #req: https_fn.Request) -> https_fn.Response:
+def tickets_available2(req: https_fn.CallableRequest):
+    db = firestore.client()
+    collection = db.collection('tickets')
+
+    validTickets = collection.where('status', '==', 'valid').get()
+    return 400 - len(validTickets)
+    
+
+
+@https_fn.on_call()
+def getTicketLevels(req: https_fn.CallableRequest):
+    db = firestore.client()
+    ticketLevels = db.collection('ticket_levels').get()
+
+    ticket_levels = []
+    for ticket in ticketLevels:
+        ticket_levels.append(ticket.to_dict())
+    return ticket_levels
+
+
+
+
+
+@https_fn.on_call()
+def writeTicket2(form_data):
+    db = firestore.client()
+    collection = db.collection('tickets')
+
+    input_data = form_data.data
+    if not input_data: return {"error": "Invalid input"}
+
+    ticket = {
+        'name': input_data.get('name'),
+        'surname': input_data.get('surname'),
+        'email': input_data.get('email'),
+        'phone': input_data.get('phone'),
+        'hogwarts_house': input_data.get('hogwarts_house')
+    }
+
+    # returns reference to an existing ticket or a new one if the id is not found with get()
+    ticketReference = collection.document(input_data.get('id'))
+    ticketReference_dict = ticketReference.get().to_dict() # for data access
+
+    # existing ticket was altered
+    if input_data.get('id'):
+
+        # e-mail has changed
+        if ticketReference_dict['email'] != ticket.get('email'):
+
+            # create new pending ticket
+            pendingTicketReference = collection.document()
+            pendingTicketReference.set({
+                **ticket,
+                'status': 'pending',
+                'payed': False,
+                'old_ticketID': input_data.get('id')
+            })
+
+            #delete all other pending tickets
+            pendingTicketStream = collection.where('old_ticketID', '==', input_data.get('id')).stream()
+            for oldPendingTickets in pendingTicketStream:
+                if oldPendingTickets.id != pendingTicketReference.id:
+                    oldPendingTickets.reference.delete()
+                
+            # update old ticket data, to have its e-mail not automatically changed by the new temporary ticket
+            ticket['email'] = ticketReference_dict['email']
+
+            # todo: send email function call
+
+        # update original ticket
+        ticketReference.update(ticket)
+        return {"succes": "Ticket updated succesfully"}
+    
+    #new ticket was created
+    ticketReference.set({
+        **ticket,
+        'status': 'valid',
+        'payed': False,
+        'date_reservated': datetime.now()
+    })
+    return {"succes": "Ticket created succesfully"}
+
+
+@https_fn.on_call()
+def tickets_available(req: https_fn.CallableRequest): #req: https_fn.Request) -> https_fn.Response: 
     db = firestore.client()
     ticket_orders_collection = db.collection('tickets_ordered')
     count_orders_query = ticket_orders_collection.count()
@@ -60,92 +146,93 @@ app = initialize_app()
 #     }
 # )
 
-
 @https_fn.on_call()
 def writeTicket(input_data):
+
     input_data = input_data.data
-    if input_data is not None:
-        try:
-            ticket_data = {
-                'name': input_data.get('name'),
-                'surname': input_data.get('surname'),
-                'email': input_data.get('email'),
-                'phone': input_data.get('phone'),
-                'hogwarts_house': input_data.get('hogwarts_house'),
-                'helper': input_data.get("helper"),
-                #'helper_job_preference': input_data.get('helper_job_preference'),
-                'helper_time_preference': input_data.get('timePreferences'),
-                #'ticket_id': input_data.get('ticket_id'),
-            }
-            ticket_data["ticket_id"] = ""
-            ticket_data["helper_job_preference"] = ""
-            
-        except Exception:
-            return {"error": "Input could not be parsed."}
+    if input_data is None: return {"error": "Invalid input"}
 
-        ticket_data["modified_at"] = datetime.now()
+    try:
+        ticket_data = {
+            'name': input_data.get('name'),
+            'surname': input_data.get('surname'),
+            'email': input_data.get('email'),
+            'phone': input_data.get('phone'),
+            'hogwarts_house': input_data.get('hogwarts_house'),
+            'helper': input_data.get("helper"),
+            #'helper_job_preference': input_data.get('helper_job_preference'),
+            'helper_time_preference': input_data.get('timePreferences'),
+            #'ticket_id': input_data.get('ticket_id'),
+        }
+        ticket_data["ticket_id"] = ""
+        ticket_data["helper_job_preference"] = ""
+        
+    except Exception:
+        return {"error": "Input could not be parsed."}
 
-        db = firestore.client()
-        if ticket_data["ticket_id"] == "":
-            ticket_id = str(uuid.uuid4())
-            
-            # determine price for ticket whether it is for helpers or for regulars
-            price_collection_name = "current_helper_price" if ticket_data["helper"]==True else "current_regular_price"
-            ticket_price_doc = db.collection("prices").document(price_collection_name).get()
-            if ticket_price_doc.exists:
-                ticket_price = ticket_price_doc.to_dict()["value"]
-            else:
-                return {"error": "Ticket price could not be determined."}
-            
-            ticket_data["order_id"] = str(random.randint(100000,999999)) # perhaps check if ticket id already in database
-            ticket_data["price"] = ticket_price
-            ticket_data.pop("ticket_id")
+    ticket_data["modified_at"] = datetime.now()
 
-            new_ticket_ref = db.collection("tickets_ordered").document(ticket_id)
-            new_ticket_ref.set(ticket_data)
+    db = firestore.client()
+    if ticket_data["ticket_id"] == "":
+        ticket_id = str(uuid.uuid4())
+        
+        # determine price for ticket whether it is for helpers or for regulars
+        ticket_price_doc = db.collection("prices").document(
+            'current_helper_price' if ticket_data['helper'] else 'current_regular_price'
+        ).get()
+        
 
-            return "New ticket order created successfully."
-
+        if ticket_price_doc.exists:
+            ticket_price = ticket_price_doc.to_dict()["value"]
         else:
-            # get data of existing ticket in "payed" collection (where it needs to be as otherwise there cannot be a
-            # repersonalization)
-            existing_ticket_ref = db.collection("tickets_payed").document(ticket_data["ticket_id"])
-            existing_ticket_doc = existing_ticket_ref.get()
-            # remove the ticket id so that it is not written into the document in firestore
-            ticket_data.pop("ticket_id")
+            return {"error": "Ticket price could not be determined."}
+        
+        ticket_data["order_id"] = str(random.randint(100000,999999)) # perhaps check if ticket id already in database
+        ticket_data["price"] = ticket_price
+        ticket_data.pop("ticket_id")
 
-            if existing_ticket_doc.exists:
-                existing_ticket = existing_ticket_doc.to_dict()
-                # data that is not present in the input from the frontend but needs to be kept
-                ticket_data["price"] = existing_ticket["price"]
-                ticket_data["order_id"] = existing_ticket["order_id"]
+        new_ticket_ref = db.collection("tickets_ordered").document(ticket_id)
+        new_ticket_ref.set(ticket_data)
 
-                if existing_ticket["email"] == ticket_data["email"]:
-                    # repersonalization for same person, update in the same collection 
-                    existing_ticket_ref.set(ticket_data)
-                    return "Ticket repersonalized successfully."
-                else:
-                    # repersonailzation for new person, new ticket needs to created in pending, different one in pending
-                    # with same order id must be removed
-                    other_pending_repersonalizations = db.collection("tickets_pending").where(filter=FieldFilter(
-                        "order_id", "==", ticket_data["order_id"])).stream()
-                    for doc in other_pending_repersonalizations:
-                        db.collection("tickets_pending").document(doc.id).delete()
+        return "New ticket order created successfully."
 
-                    pending_ticket_id = str(uuid.uuid4())
-                    pending_ticket_ref = db.collection("tickets_pending").document(pending_ticket_id)
-                    pending_ticket_ref.set(ticket_data)
-
-                    return "New pending ticket created successfully."
-            else:
-                return {"error": "Ticket with ticket ID does not exist!"}
     else:
-        return {"error": "Invalid input"}
+        # get data of existing ticket in "payed" collection (where it needs to be as otherwise there cannot be a
+        # repersonalization)
+        existing_ticket_ref = db.collection("tickets_payed").document(ticket_data["ticket_id"])
+        existing_ticket_doc = existing_ticket_ref.get()
+        # remove the ticket id so that it is not written into the document in firestore
+        ticket_data.pop("ticket_id")
+
+        if existing_ticket_doc.exists:
+            existing_ticket = existing_ticket_doc.to_dict()
+            # data that is not present in the input from the frontend but needs to be kept
+            ticket_data["price"] = existing_ticket["price"]
+            ticket_data["order_id"] = existing_ticket["order_id"]
+
+            if existing_ticket["email"] == ticket_data["email"]:
+                # repersonalization for same person, update in the same collection 
+                existing_ticket_ref.set(ticket_data)
+                return "Ticket repersonalized successfully."
+            else:
+                # repersonailzation for new person, new ticket needs to created in pending, different one in pending
+                # with same order id must be removed
+                other_pending_repersonalizations = db.collection("tickets_pending").where(filter=FieldFilter(
+                    "order_id", "==", ticket_data["order_id"])).stream()
+                for doc in other_pending_repersonalizations:
+                    db.collection("tickets_pending").document(doc.id).delete()
+
+                pending_ticket_id = str(uuid.uuid4())
+                pending_ticket_ref = db.collection("tickets_pending").document(pending_ticket_id)
+                pending_ticket_ref.set(ticket_data)
+
+                return "New pending ticket created successfully."
+        else:
+            return {"error": "Ticket with ticket ID does not exist!"}
 
 
 @https_fn.on_call()
 def newTicketConfirmed(input_data):
-
     db = firestore.client()
 
     ticket_data = input_data.data
@@ -157,8 +244,9 @@ def newTicketConfirmed(input_data):
     if pending_ticket_doc.exists:
         # Delete the existing ticket with the same order id from tickets_payed
         pending_ticket = pending_ticket_doc.to_dict()
-        payed_tickets_with_same_order_id = list(db.collection("tickets_pending").where(filter=FieldFilter(
-            "order_id", "==", pending_ticket["order_id"])).stream())
+        payed_tickets_with_same_order_id = list(db.collection("tickets_pending").where(filter = FieldFilter(
+            "order_id", "==", pending_ticket["order_id"]
+        )).stream())
         
         amount_of_payed_tickets_with_same_order_id = len(payed_tickets_with_same_order_id)
         if amount_of_payed_tickets_with_same_order_id == 0:

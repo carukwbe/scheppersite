@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-kontakt',
@@ -6,5 +7,29 @@ import { Component } from '@angular/core';
   styleUrls: ['./kontakt.component.css']
 })
 export class KontaktComponent {
+  form!: FormGroup;
+  isLoading = false;
+  statusMessage = '';
+
+  constructor(private fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      email: [''],
+      ticketID: [''],
+      message: ['']
+    });
+  }
+
+  submit() {
+    this.isLoading = true;
+    this.form.disable();
+    console.log(this.form.value);
+
+    setTimeout(() => {
+      this.isLoading = false;
+      this.form.enable();
+    }, 2000);
+  }
 
 }

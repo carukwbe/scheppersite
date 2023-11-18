@@ -1,1 +1,32 @@
-<p>kontakt works!</p>
+<div class="container">
+    <p>
+        Zu allem was dir bezüglich Scheppern einfällt! <br>
+        Hast du Probleme bei irgendwas? Füg am besten direkt eine Mail oder Telefonnummer hinzu. Deine TicketID kann auch nicht
+        schaden, falls sie der Problembehebung dient. 👍
+    </p>
+    
+    <form [formGroup]="form">
+        <mat-form-field>
+            <mat-label>E-Mail</mat-label>
+            <input type="text" id="name" matInput formControlName="email">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>TicketID</mat-label>
+            <input type="text" id="name" matInput formControlName="ticketID">
+        </mat-form-field>
+
+        <mat-form-field class="message">
+            <mat-label>Nachricht</mat-label>
+            <textarea type="text" matInput formControlName="message"></textarea>
+        </mat-form-field>
+
+    
+    
+        <button mat-raised-button color="primary" (click)="submit()" [disabled]="form.invalid">
+            Nachricht abschicken
+        </button>
+    
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
+        <div *ngIf="statusMessage">{{ statusMessage }}</div>
+    </form>
+</div>

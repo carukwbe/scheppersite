@@ -11,16 +11,16 @@
 
 .footerElements {
     display: grid;
-    grid-template-columns: 0.7fr 1fr 1fr;
+    grid-template-columns: 0.7fr 1fr 1fr 0.5fr;
     grid-template-areas: 
-        "windrad iconsMiddle links";
+        "windrad iconsMiddle links slider";
     grid-gap: 20px;
 
     /* height: 100%; */
-    width: min(100%, 950px);
+    width: min(100%, 1150px);
 
     align-items: center;
-    margin-right: 20px;
+    /* margin-right: 20px; */
 }
 
 
@@ -144,7 +144,7 @@ li:hover {
 }
 
 .slider-wrapper {
-    position: absolute;
+
     display: grid;
     grid-template-columns: 0.1fr 1fr;
     align-items: center;
@@ -154,4 +154,14 @@ li:hover {
 
     right: 50px;
     text-align: right;
+}
+
+mat-slider {
+    width: 100%;
+}
+
+@media (max-width: 1000px) {
+    .slider-wrapper {
+        display: none;
+    }
 }

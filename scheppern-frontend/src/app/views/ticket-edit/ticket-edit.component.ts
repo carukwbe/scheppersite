@@ -36,8 +36,8 @@ export class TicketEditComponent {
             name: [ticket.name, Validators.required],
             surname: [ticket.surname, Validators.required],
             email: [ticket.email, [Validators.required, Validators.email]],
-            phone: [ticket.phone, [Validators.required, Validators.pattern(/^(?:\+?[0-9] ?){6,14}[0-9]$/)]],
-            hogwarts_house: [ticket.hogwarts_house, Validators.required],
+            phone: [ticket.phone, Validators.pattern(/^(?:\+?[0-9] ?){6,14}[0-9]$/)],
+            hogwarts_house: [ticket.hogwarts_house, Validators.required]
           });
         } else {
           console.log('Ticket not found.');
@@ -60,6 +60,9 @@ export class TicketEditComponent {
       (result) => {
         this.isLoading = false;
         this.statusMessage = 'Ticket saved successfully.';
+        //todo remove debug
+        console.log(result);
+        
       },
       (error) => {
         this.isLoading = false;

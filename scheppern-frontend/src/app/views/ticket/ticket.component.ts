@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Ticket } from 'src/models';
 import { TicketService } from 'src/app/ticket-service.service';
 import { Router } from '@angular/router';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-ticket',
@@ -10,12 +11,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./ticket.component.css']
 })
 export class TicketComponent {
+  availableTickets$ = this.ticketService.getAvailableTickets();
   form!: FormGroup;
   isLoading = false;
   statusMessage = '';
 
-
-  ticketsAvailable = 50;
   ticketLevels = [
     { price: 45,
       active: false,
@@ -37,19 +37,24 @@ export class TicketComponent {
   // debug
   tickets: Ticket[] = [];
 
-  constructor(private fb: FormBuilder, private ticketService: TicketService, private router: Router) { }
+  constructor(
+    private fb: FormBuilder,
+    private ticketService: TicketService,
+    private router: Router,
+    private scroller: ViewportScroller) { }
 
   ngOnInit(): void {
+
     this.form = this.fb.group({
       name: ['', Validators.required],
       surname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['+', [Validators.pattern(/^(?:\+?[0-9] ?){6,14}[0-9]$/)]], //nur mit plus erlauben?
+      phone: ['', [Validators.pattern(/^(?:\+?[0-9] ?){6,14}[0-9]$/)]], //nur mit plus erlauben?
       hogwarts_house: ['', Validators.required],
       helper: [false],
       timePreferences: [''],
-      agbs: [false],
-      dataProtection: [false]
+      agbsAccepted: [false, Validators.requiredTrue],
+      dataProtectionAccepted: [false, Validators.requiredTrue]
     });
 
     this.ticketService.getAllTickets().subscribe(
@@ -60,15 +65,23 @@ export class TicketComponent {
         console.error('Error getting tickets:', error);
       }
     );
+
+    this.ticketService.getTicketLevels().subscribe( data => {
+      // console.log('Ticket levels_ges:', data);
+      // for (const level of data) {
+      //   console.log('Ticket levels:', level)
+      // }
+    });
   }
 
-  addTicket() {
+  submit() {
     this.isLoading = true;
 
     this.ticketService.writeTicket(this.form.value).subscribe(
       (result) => {
         this.isLoading = false;
         this.statusMessage = result;
+        console.log(result);
       },
       (error) => {
         this.isLoading = false;
@@ -82,5 +95,16 @@ export class TicketComponent {
   routeToTicketEdit(ticket: Ticket) {
     console.log('Route to ticket edit:', ticket.id);
     this.router.navigate(['/ticket/', ticket.id]);
+  }
+
+
+  ngAfterViewInit() {
+    this.router.navigate([], { fragment: "priceBoxes" });
+    this.scroller.scrollToAnchor("priceBoxes");
+    document.getElementById("priceBoxes")!.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest"
+    });
   }
 }

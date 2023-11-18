@@ -1,20 +1,16 @@
 
 <div class="content">
-
-
     <div class="stats">
         <p>
-            Noch <strong>{{ ticketsAvailable }}</strong> Tickets verfügbar! <br>
+            Noch <strong>{{ availableTickets$ | async }}</strong> Tickets verfügbar! <br>
         </p>
-        <div class="priceBoxes">
+        <div class="priceBoxes" id="priceBoxes">
             <div class="box" *ngFor="let ticketLevel of ticketLevels" [ngClass]="{ 'active': ticketLevel.active }" [matTooltip]="'ab ' + ticketLevel.activationDate">
                 <div class="name">{{ ticketLevel.name }}</div>
                 <div class="priceLabel">{{ ticketLevel.price }}€</div>
             </div>
         </div>
     </div>
-
-
 
 
     <form [formGroup]="form">
@@ -50,8 +46,8 @@
             </mat-select>
         </mat-form-field>    
         
-        <mat-checkbox>Ich stimme den AGBs auf jeden Fall zu!</mat-checkbox>
-        <mat-checkbox>Bei Datenschutzhinweisen setz ich auch ein Häkchen!</mat-checkbox>
+        <mat-checkbox formControlName="agbsAccepted">Ich stimme den AGBs auf jeden Fall zu!</mat-checkbox>
+        <mat-checkbox formControlName="dataProtectionAccepted">Bei Datenschutzhinweisen setz ich auch ein Häkchen!</mat-checkbox>
     
         <div class="info">
             <p>
@@ -60,15 +56,13 @@
             </p>
         </div>
 
-        <button mat-raised-button color="primary" (click)="addTicket()" [disabled]="form.invalid">
+        <button mat-raised-button color="primary" (click)="submit()" [disabled]="form.invalid">
             Kauf bestätigen
         </button>
     
         <mat-spinner *ngIf="isLoading"></mat-spinner>
         <div *ngIf="statusMessage">{{ statusMessage }}</div>
     </form>
-    
-
 </div>
 
 

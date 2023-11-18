@@ -29,14 +29,6 @@ export class WidthObserverDirective {
     const gesamt = desktopMaxWidth - mobileMinWidth;
     const isDesktopPercentage = Math.min((htmlElement.clientWidth - mobileMinWidth) / gesamt,1);
 
-
-    // console.log('isDesktopPercentage', isDesktopPercentage);
-    // console.log('isMobilePercentage', 1 - isDesktopPercentage);
-
-    console.log('clientWidth', htmlElement.clientWidth);
-    console.log('clientHeight', htmlElement.clientHeight);
-    console.log('widthHeightRatio', htmlElement.clientWidth / htmlElement.clientHeight);
-
     const properties = {
       '--clientWidth': htmlElement.clientWidth,
       '--clientHeight': htmlElement.clientHeight,

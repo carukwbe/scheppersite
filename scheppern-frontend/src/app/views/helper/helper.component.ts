@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { TicketService } from 'src/app/ticket-service.service';
 
 @Component({
   selector: 'app-helper',
@@ -65,16 +63,7 @@ export class HelperComponent {
     }
   ];
 
-
-  // categoryNames = [
-  //   'Einlass',
-  //   'Bar',
-  //   'Küche',
-  //   'Awareness',
-  //   'Security'
-  // ];
-
-  constructor(private fb: FormBuilder, private ticketService: TicketService, private router: Router) { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -86,6 +75,7 @@ export class HelperComponent {
       comment: ['']
     });
   }
+
 
   submitHelper() {
     this.isLoading = true;
