@@ -11,13 +11,6 @@ export class HomeComponent {
 
   constructor( private darkModeService: DarkModeService ) { }
 
-  bezier_fast = {
-    scroll: { start: 0.3, end: 2.5 },
-    mapTo: { start: 0, end: 15 },
-    bezier: [1,1,0,0]
-  }
-
-
   red = 0;
   green = 55;
   blue = 109;

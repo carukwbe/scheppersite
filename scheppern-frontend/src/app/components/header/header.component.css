@@ -17,12 +17,16 @@
 
     font-size: 50px;
 
-    opacity: calc(2 * var(--scroll) - 4.5 + 0 * var(--isMobilePercentage));
+    
     
 
     /* for outline effect */
     /* -webkit-text-stroke: 3px #fff;
     -webkit-text-fill-color: transparent; */
+}
+
+.fade-in {
+    opacity: calc(2 * var(--scroll) - 4.5 + 0 * var(--isMobilePercentage));
 }
 
 @media (max-width: 1050px) {
@@ -57,48 +61,6 @@
     cursor: pointer;
 }
 
-
-
-
-.logo {
-    position: absolute;
-    margin-right: auto;
-    height: 120px;
-
-    cursor: pointer;
-
-
-    /* margin: 270px 0 370px 0; */
-
-    display: flex;
-    align-items: center;
-
-    /* for safari */
-    backface-visibility: hidden;
-}
-
-.windradFluegel {
-    position: absolute;
-    transform-origin: 41% 58%;
-    transform:
-        rotate(calc(var(--scroll) * 10deg)) 
-        scale(3)
-
-}
-
-.baumring {
-    z-index: 0;
-    position: relative;
-    left: calc(20px + -6px * var(--order) * var(--order));
-    top: 3px;
-    transform:
-        scale(calc(-1 + var(--scroll))) 
-        rotate(calc(var(--scroll) * var(--order) * 1deg));
-
-    /* translate(calc(3px * var(--order)), calc(3px * var(--order))); */
-    /* zoom: calc(0.8 + var(--scroll)); */
-
-}
 
 
 

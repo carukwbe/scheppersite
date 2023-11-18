@@ -1,13 +1,11 @@
 :host {
-    display: grid;
-    justify-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .jungleImage {
-    /* width: calc(100% + 150% * var(--isMobilePercentage)); */
-    /* width: calc(100% + * var(--isMobilePercentage)); */
     width: calc(100% + 150% * var(--isMobilePercentage));
-
 }
 
 .dateContainer {

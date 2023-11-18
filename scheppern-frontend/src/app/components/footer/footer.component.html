@@ -21,7 +21,7 @@
             <mat-icon>groups</mat-icon>
         </div>
         
-        <div class="button whiteOutlineButton" matTooltip="Kontakt">
+        <div class="button whiteOutlineButton" matTooltip="Kontakt" [routerLink]="['/kontakt']">
             <mat-icon>email</mat-icon>
         </div>
 
@@ -38,7 +38,7 @@
         <li>Datenschutzhinweise</li>
     </ul>
 
-    <div class="slider-wrapper">
+    <div class="slider-wrapper" style="grid-area: slider;">
         R
         <mat-slider min="0" max="255">
             <input matSliderThumb [(ngModel)]="red" (input)="updateBackgroundColor()">
@@ -56,6 +56,4 @@
             <input matSliderThumb [(ngModel)]="alpha" (input)="updateBackgroundColor()">
         </mat-slider>
     </div>
-
-
 </div>

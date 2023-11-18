@@ -22,10 +22,11 @@ p, h1, h2, h3, h4, h5, h6 {
     --bg-color: rgb(0, 55, 109);
     
 
-    --accent-color1: #8593c8;
+    /* wird im footer gesetzt */
+    /* --accent-color1: #8593c8;
     --accent-color1: rgb(143, 157, 210);
     --accent-color1: rgba(118, 141, 176, 0.8);
-    --accent-color1: hsla(180, 30%, 50%, 0.8);
+    --accent-color1: hsla(180, 30%, 50%, 0.8); */
 
 
 

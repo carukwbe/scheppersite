@@ -1,4 +1,5 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { ScrollService } from './scroll.service';
 
 
 @Component({
@@ -10,7 +11,7 @@ export class AppComponent {
   @ViewChild('scrollContainer') scrollContainer: ElementRef | undefined;
 
 
-  constructor(private renderer: Renderer2, private elementRef: ElementRef) {
+  constructor(private renderer: Renderer2, private elementRef: ElementRef, private scrollService: ScrollService) {
     // document.documentElement.style.cursor = "none";
 
     // Set the default theme when the component is initialized
@@ -20,14 +21,13 @@ export class AppComponent {
 
   ngAfterViewInit() {
     this.scrollContainer!.nativeElement.addEventListener('scroll', (event: any) => {
-      let scroll = this.scrollContainer!.nativeElement.scrollTop / this.scrollContainer!.nativeElement.clientHeight;
-
-      this.scrollContainer!.nativeElement.style.setProperty('--scroll', scroll);
-      this.elementRef.nativeElement.style.setProperty('--scroll', scroll);
-      this.renderer.setStyle(document.documentElement, '--scroll', scroll);
-
-      console.log(scroll);
       
+      // update shared scroll service
+      let scroll = this.scrollContainer!.nativeElement.scrollTop / this.scrollContainer!.nativeElement.clientHeight;
+      this.scrollService.updateScroll(scroll);
+
+      // update css variable on root element -> deprecated use scrollModifier
+      this.elementRef.nativeElement.style.setProperty('--scroll', scroll);
     });
   }
 

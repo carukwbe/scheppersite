@@ -7,6 +7,7 @@ import { InfosComponent } from './views/infos/infos.component';
 import { TicketEditComponent } from './views/ticket-edit/ticket-edit.component';
 import { GaleryComponent } from './views/galery/galery.component';
 import { HelperComponent } from './views/helper/helper.component';
+import { KontaktComponent } from './views/kontakt/kontakt.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,7 +16,9 @@ const routes: Routes = [
   { path: 'infos', component: InfosComponent },
   { path: 'helfer', component: HelperComponent },
   { path: 'galery', component: GaleryComponent },
-  { path: 'impressum', component: ImpressumComponent }
+  { path: 'impressum', component: ImpressumComponent },
+  { path: 'kontakt', component: KontaktComponent },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

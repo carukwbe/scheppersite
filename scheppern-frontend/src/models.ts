@@ -10,3 +10,11 @@ export interface Ticket {
     price?: number;
     created?: Date;
 }
+
+
+export interface TicketLevel {
+    name: string;
+    price: number;
+    description: string;
+    active: boolean;
+}

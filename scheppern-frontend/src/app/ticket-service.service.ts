@@ -2,9 +2,15 @@ import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { connectFunctionsEmulator, HttpsCallableResult, getFunctions, Functions, httpsCallable } from 'firebase/functions';
 import { connectFirestoreEmulator, getFirestore, Firestore, collection, onSnapshot, doc, getDoc, DocumentSnapshot } from 'firebase/firestore';
-import { Ticket } from 'src/models';
+import { Ticket, TicketLevel } from 'src/models';
 import { environment } from '../environments/environment';
 import { Observable } from 'rxjs';
+
+
+interface Level {
+  ticket_levels: TicketLevel[];
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +30,30 @@ export class TicketService {
     }
   }
 
+  // getAvailableTickets(): Observable<number> {
+  //   // return this.http.get<number>(this.functionUrl);
+  //   const ticketCountTrigger = httpsCallable(this.functions, 'ticketCount');
+
+  // }
+
+  getAvailableTickets(): Observable<number> {
+    const ticketCountTrigger = httpsCallable(this.functions, 'tickets_available2');
+
+    return new Observable((observer) => {
+      // Trigger the Cloud Function
+      ticketCountTrigger()
+        .then((result) => {
+          const initialCount = result.data as number;
+          console.log(initialCount);
+          observer.next(initialCount);
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+
+
   getAllTickets(): Observable<Ticket[]> {
     const ticketsCollection = collection(this.firestore, 'tickets');
 
@@ -35,6 +65,21 @@ export class TicketService {
           return ticketData;
         });
         observer.next(tickets);
+      });
+    });
+  }
+
+  getTicketLevels(): Observable<TicketLevel[][]> {
+    const ticketLevelsCollection = collection(this.firestore, 'general_info');
+
+    return new Observable((observer) => {
+      onSnapshot(ticketLevelsCollection, (querySnapshot) => {
+        const ticketLevels = querySnapshot.docs.map((doc) => {
+          const ticketLevelData = doc.data() as Level;
+          console.log(ticketLevelData.ticket_levels);
+          return ticketLevelData.ticket_levels;
+        });
+        observer.next(ticketLevels);
       });
     });
   }
@@ -59,7 +104,7 @@ export class TicketService {
   }
 
   writeTicket(ticket: Ticket): Observable<string> {
-    const writeTicketTrigger = httpsCallable<Ticket, string>(this.functions, 'writeTicket');
+    const writeTicketTrigger = httpsCallable<Ticket, string>(this.functions, 'writeTicket2');
 
     return new Observable((observer) => {
       writeTicketTrigger(ticket)

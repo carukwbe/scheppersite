@@ -92,7 +92,7 @@ form {
 
     padding: 30px;
 
-    width: 500px;
+    /* width: 500px; */
     display: grid;
     /* margin: 10px; */
     overflow: visible;
