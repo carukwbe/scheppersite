@@ -1,19 +1,19 @@
 
+<div class="test" id="test" #test>
+    test test test
+</div>
 <div class="content">
-    <div class="stats">
-        <p>
-            Noch <strong>{{ availableTickets$ | async }}</strong> Tickets verfügbar! <br>
-        </p>
-        <div class="priceBoxes" id="priceBoxes">
-            <div class="box" *ngFor="let ticketLevel of ticketLevels" [ngClass]="{ 'active': ticketLevel.active }" [matTooltip]="'ab ' + ticketLevel.activationDate">
-                <div class="name">{{ ticketLevel.name }}</div>
-                <div class="priceLabel">{{ ticketLevel.price }}€</div>
-            </div>
+    <div class="ticketCount" id="ticketCount">
+        Noch <strong>{{ availableTickets$ | async }}</strong> Tickets verfügbar! <br>
+    </div>
+    <div class="priceBoxes">
+        <div class="box" *ngFor="let ticketLevel of ticketLevels" [ngClass]="{ 'active': ticketLevel.active }" [matTooltip]="'ab ' + ticketLevel.activationDate">
+            <div class="name">{{ ticketLevel.name }}</div>
+            <div class="priceLabel">{{ ticketLevel.price }}€</div>
         </div>
     </div>
 
-
-    <form [formGroup]="form">
+    <form [formGroup]="ticketInfos">
         <mat-form-field>
             <mat-label>Vorname</mat-label>
             <input type="text" id="name" matInput formControlName="name">
@@ -27,7 +27,7 @@
         <mat-form-field>
             <mat-label>E-Mail</mat-label>
             <input type="email" id="email" matInput formControlName="email" email>
-            <mat-error *ngIf="form.get('email')?.hasError('email') && form.get('email')?.touched">Gib eine gültige E-Mail
+            <mat-error *ngIf="ticketInfos.get('email')?.hasError('email') && ticketInfos.get('email')?.touched">Gib eine gültige E-Mail
                 Adresse ein!</mat-error>
         </mat-form-field>
     
@@ -56,27 +56,70 @@
             </p>
         </div>
 
-        <button mat-raised-button color="primary" (click)="submit()" [disabled]="form.invalid">
+        <button mat-raised-button color="primary" (click)="submit()" [disabled]="ticketInfos.invalid">
             Kauf bestätigen
         </button>
     
         <mat-spinner *ngIf="isLoading"></mat-spinner>
         <div *ngIf="statusMessage">{{ statusMessage }}</div>
     </form>
-</div>
-
-
-<!-- debug -->
-<div class="ticketContainer">
-    <div *ngFor="let ticket of tickets" class="ticket-card" (click)="routeToTicketEdit(ticket)">
-        <h2>{{ ticket.name }} {{ ticket.surname }}</h2>
-        <p>TicketID: {{ ticket.id }}</p>
-        <p>Email: {{ ticket.email }}</p>
-        <p>Phone: {{ ticket.phone }}</p>
-        <p>Price: {{ ticket.price }}</p>
-        <p>Payed: {{ ticket.payed ? 'Yes' : 'No' }}</p>
-        <p>Ticket Sent: {{ ticket.ticket_sent ? 'Yes' : 'No' }}</p>
-        <p>Created: {{ ticket.created }}</p>
+    <mat-stepper #stepper>
+        <mat-step [stepControl]="ticketInfos" errorMessage="Name is required.">
+            <form [formGroup]="ticketInfos">
+                <ng-template matStepLabel>Allgemeine Infos</ng-template>
+                <!-- <mat-form-field>
+                    <mat-label>Name</mat-label>
+                    <input matInput placeholder="Last name, First name" formControlName="ticketInfos" required>
+                </mat-form-field> -->
+                <div>
+                    <p>Go to a different step to see the error state</p>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="helperInfos" errorMessage="Address is required.">
+            <form [formGroup]="helperInfos">
+                <ng-template matStepLabel>Helfer werden</ng-template>
+                <!-- <mat-form-field>
+                    <mat-label>Address</mat-label>
+                    <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="helperInfos" required>
+                </mat-form-field> -->
+                <div>
+                    <p>Go to a different step to see the error state</p>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Kauf abschließen</ng-template>
+            <p>You are now done.</p>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button (click)="stepper.reset()">Reset</button>
+            </div>
+        </mat-step>
+    </mat-stepper>
+    
+    
+    
+    
+    
+    <!-- debug -->
+    <div class="ticketContainer">
+        <div *ngFor="let ticket of tickets" class="ticket-card" (click)="routeToTicketEdit(ticket)">
+            <h2>{{ ticket.name }} {{ ticket.surname }}</h2>
+            <p>TicketID: {{ ticket.id }}</p>
+            <p>Email: {{ ticket.email }}</p>
+            <p>Phone: {{ ticket.phone }}</p>
+            <p>Price: {{ ticket.price }}</p>
+            <p>Payed: {{ ticket.payed ? 'Yes' : 'No' }}</p>
+            <p>Ticket Sent: {{ ticket.ticket_sent ? 'Yes' : 'No' }}</p>
+            <p>Created: {{ ticket.created }}</p>
+            <p>Status: {{ ticket.status }}</p>
+            <p>Old TicketID: {{ ticket.old_ticketID }}</p>
+        </div>
     </div>
 </div>
+
 

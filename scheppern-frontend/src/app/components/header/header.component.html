@@ -1,15 +1,18 @@
 
 <div class="navbar" [appWidthObserver] [ngClass]="{'fade-in': isHomePage}">
 
-    <app-logo-animation></app-logo-animation>
+    <p [routerLink]="['/']" style="grid-area: logo;">Logo</p>
+    
+    <p class="links" [routerLink]="['/tickets']" style="grid-area: tickets; margin-left:auto">Tickets</p>
+    <p class="links" [routerLink]="['/infos']" style="grid-area: infos;">Infos</p>
+    <p class="links" [routerLink]="['/helfer']" style="grid-area: helfer;">Helfer</p>
+    <p class="links turnier" [routerLink]="['/turnier']" style="grid-area: turnier;">Turnier</p>
 
-    <!-- logo is absolute, therefore spaceholder -->
-    <div class="platzhalter" [routerLink]="['/']"></div>
 
-    <div class="links">
-        <p [routerLink]="['/tickets']" style="grid-area: tickets;">Tickets</p>
-        <p [routerLink]="['/infos']" style="grid-area: infos;">Infos</p>
-        <p [routerLink]="['/helfer']" style="grid-area: helfer;">Helfer</p>
-        <p [routerLink]="['/turnier']" style="grid-area: turnier; pointer-events: none;" class="turnier">Turnier</p>
+    <div class="burger" (click)="toggleMenu()">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
     </div>
+
 </div>
