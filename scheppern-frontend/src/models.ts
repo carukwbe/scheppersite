@@ -9,6 +9,8 @@ export interface Ticket {
     ticket_sent?: boolean;
     price?: number;
     created?: Date;
+    status?: string;
+    old_ticketID?: string;
 }
 
 

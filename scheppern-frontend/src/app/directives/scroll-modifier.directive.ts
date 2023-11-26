@@ -51,8 +51,18 @@ export class ScrollModifierDirective implements OnInit {
           [0, 1],
           [this.bezierFunction.mapTo.start, this.bezierFunction.mapTo.end]
         );
-        
-        this.el.nativeElement.style.setProperty('--scrollRange', scroll.toString());
+
+        // todo: test this if it is smoother
+
+        requestAnimationFrame(() => {
+          this.el.nativeElement.style.setProperty('--scrollRange', scroll.toString());
+        });
+
+        // // test this aswell
+        // const observer = new IntersectionObserver((entries) => {
+        //   // Your logic to update scroll variable
+        // }, { threshold: 0.1 }); // Adjust the threshold value as needed
+
       });
   }
 

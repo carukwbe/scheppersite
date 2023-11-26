@@ -37,6 +37,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { HelperComponent } from './views/helper/helper.component';
 import { LogoAnimationComponent } from './components/logo-animation/logo-animation.component';
 import { ScrollModifierDirective } from './directives/scroll-modifier.directive';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { ScrollModifierDirective } from './directives/scroll-modifier.directive'
     MatIconModule,
     MatTooltipModule,
     MatExpansionModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatStepperModule
   ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }

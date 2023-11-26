@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Ticket } from 'src/models';
 import { TicketService } from 'src/app/ticket-service.service';
 import { Router } from '@angular/router';
-import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-ticket',
@@ -12,24 +11,29 @@ import { ViewportScroller } from '@angular/common';
 })
 export class TicketComponent {
   availableTickets$ = this.ticketService.getAvailableTickets();
-  form!: FormGroup;
+
+  ticketInfos!: FormGroup;
+  helperInfos!: FormGroup;
+
   isLoading = false;
   statusMessage = '';
+
+  @ViewChildren('test') testElements: QueryList<ElementRef> | undefined;
 
   ticketLevels = [
     { price: 45,
       active: false,
-      name: 'Early Robin',
+      name: 'frühe Vogel',
       activationDate: '01.11.2023',
     },
     { price: 50,
       active: true,
-      name: 'Mid Eagle',
+      name: 'mittel Vogel',
       activationDate: '01.12.2023',
     },
     { price: 55,
       active: false,
-      name: 'Late Owl',
+      name: 'späte Vogel',
       activationDate: '01.01.2024',
     }
   ];
@@ -40,12 +44,11 @@ export class TicketComponent {
   constructor(
     private fb: FormBuilder,
     private ticketService: TicketService,
-    private router: Router,
-    private scroller: ViewportScroller) { }
+    private router: Router) { }
 
   ngOnInit(): void {
 
-    this.form = this.fb.group({
+    this.ticketInfos = this.fb.group({
       name: ['', Validators.required],
       surname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -57,6 +60,16 @@ export class TicketComponent {
       dataProtectionAccepted: [false, Validators.requiredTrue]
     });
 
+    this.helperInfos = this.fb.group({
+      isHelper: [false],
+      categories: ['', this.isHelper() ? Validators.required : []],
+      comment: ['']
+    });
+
+
+
+
+
     this.ticketService.getAllTickets().subscribe(
       (tickets) => {
         this.tickets = tickets;
@@ -66,6 +79,9 @@ export class TicketComponent {
       }
     );
 
+
+
+
     this.ticketService.getTicketLevels().subscribe( data => {
       // console.log('Ticket levels_ges:', data);
       // for (const level of data) {
@@ -74,10 +90,18 @@ export class TicketComponent {
     });
   }
 
+  isHelper() {
+    if (this.helperInfos) {
+      return this.helperInfos.get('isHelper')?.value;
+    }
+    return false;
+  }
+
+
   submit() {
     this.isLoading = true;
 
-    this.ticketService.writeTicket(this.form.value).subscribe(
+    this.ticketService.writeTicket(this.ticketInfos.value).subscribe(
       (result) => {
         this.isLoading = false;
         this.statusMessage = result;
@@ -99,12 +123,13 @@ export class TicketComponent {
 
 
   ngAfterViewInit() {
-    this.router.navigate([], { fragment: "priceBoxes" });
-    this.scroller.scrollToAnchor("priceBoxes");
-    document.getElementById("priceBoxes")!.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest"
-    });
+    const testElement = this.testElements!.first.nativeElement;
+    // if (testElement) {
+    //   testElement.scrollIntoView({
+    //     behavior: "smooth",
+    //     block: "start",
+    //     inline: "center"
+    //   });
+    // }
   }
 }

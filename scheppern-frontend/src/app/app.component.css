@@ -2,9 +2,6 @@ app-header {
     position: fixed;
     top: 0px;
     z-index: 2;
-    transform: translateZ(0);
-    width: 100vw;
-    pointer-events: none;
 }
 
 .parallax {

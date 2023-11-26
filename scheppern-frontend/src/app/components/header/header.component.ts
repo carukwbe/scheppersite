@@ -8,6 +8,7 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class HeaderComponent {
   isHomePage: boolean = false;
+  isMenuOpen: boolean = false;
 
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
@@ -15,5 +16,10 @@ export class HeaderComponent {
         this.isHomePage = event.url === '/';
       }
     });
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+    console.log(this.isMenuOpen);
   }
 }
