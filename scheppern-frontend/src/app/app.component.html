@@ -3,15 +3,7 @@
 </div> -->
 
 
-<app-header></app-header>
+<app-header *ngIf="!isHomePage"></app-header> 
+<router-outlet [ngClass]="{'hasMargin': !isHomePage}"></router-outlet>
+<app-footer *ngIf="!isHomePage" style="z-index: 2;"></app-footer>
 
-<!-- eigener scroll context -->
-<div class="parallax" id="scrollContainer" #scrollContainer [appWidthObserver]>
-  <app-parallax style="z-index: 0;"></app-parallax>
-  <div class="content" [appWidthObserver]>
-    <router-outlet></router-outlet>
-    <app-footer style="z-index: 2;"></app-footer>
-  </div>
-</div>
-
-<!--  <app-footer></app-footer> -->
