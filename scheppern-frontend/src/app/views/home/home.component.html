@@ -1,29 +1,20 @@
 
 
-<div class="dateContainer">
-    <p class="date">
-        23. - 26.05.2024 <br>
-        Windpark Druiberg
-    </p>
+
+<div class="parallax" id="scrollContainer" #scrollContainer [appWidthObserver]>
+    <app-parallax style="z-index: 0;"></app-parallax>
+    <div class="content" [appWidthObserver]>
+        <div class="dateContainer">
+            <p class="date">
+                23. - 26.05.2024 <br>
+                Windpark Druiberg
+            </p>
+        </div>
+
+        <img class="jungleImage" src="/assets/jungle4.png" alt="">
+        <app-footer></app-footer>
+    </div>
 </div>
-
-<img class="jungleImage" src="/assets/jungle4.png" alt="">
-
-
-
-
-
-<!-- <div class="slider-wrapper">
-    <mat-slider min="0" max="255">
-        <input matSliderThumb [(ngModel)]="red" (input)="updateBackgroundColor()">
-    </mat-slider>
-    <mat-slider min="0" max="255">
-        <input matSliderThumb [(ngModel)]="green" (input)="updateBackgroundColor()">
-    </mat-slider>
-    <mat-slider min="0" max="255">
-        <input matSliderThumb [(ngModel)]="blue" (input)="updateBackgroundColor()">
-    </mat-slider>
-</div> -->
 
 
 
@@ -36,9 +27,7 @@
     </div> -->
 
 
-<!-- <div class="jungleImage2">
-    
-</div> -->
+
 
 <!-- <app-info-card [citation]="'ChatGPT'">
     "Beim <strong>Scheppern auf Brettern</strong> des Klangkollektiv Braunschweig e.V. verschmelzen elektronische Klänge mit der rauen Naturkulisse eines gewaltigen Windparks.

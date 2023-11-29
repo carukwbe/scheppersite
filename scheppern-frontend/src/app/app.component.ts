@@ -1,5 +1,6 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { ScrollService } from './scroll.service';
+import { NavigationEnd, Router } from '@angular/router';
 
 
 @Component({
@@ -9,13 +10,16 @@ import { ScrollService } from './scroll.service';
 })
 export class AppComponent {
   @ViewChild('scrollContainer') scrollContainer: ElementRef | undefined;
+  isHomePage: boolean = false;
 
 
-  constructor(private renderer: Renderer2, private elementRef: ElementRef, private scrollService: ScrollService) {
+  constructor(private elementRef: ElementRef, private scrollService: ScrollService, private router: Router) {
     // document.documentElement.style.cursor = "none";
-
-    // Set the default theme when the component is initialized
-    // toggleDarkMode(this.renderer, this.elementRef, true);
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.isHomePage = event.url === '/';
+      }
+    });
   }
 
 

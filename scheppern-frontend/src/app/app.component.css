@@ -4,51 +4,16 @@ app-header {
     z-index: 2;
 }
 
-.parallax {
-    position: relative;
-    height: 100vh;
-    /* overflow-y: auto; */
-    overflow-x: hidden;
-    perspective: 10px;
-}
 
-app-parallax {
-    height: 100vh;
-}
-
-.content {
-    isolation: isolate;
-    z-index: 1;
-    position: relative;
-
-    /* Scroll Höhe des Parallax Effects bis Content einsetzt */
-    margin-top: calc(20vh + var(--widthHeightRatio) * 100vh);
-
-    /* account for footer height */
-    /* todo: an variable footer größe anpassen */
-    padding-bottom: 200px;
-}
-
-
-
-app-footer {
-    z-index: 3;
-    position: absolute;
-    bottom: 0;
-    margin-top: 200px;
+.hasMargin {
+    display: block;
+    margin-top: 100px;
 }
 
 
 
 
 
-
-
-
-/* router-outlet {
-    z-index: 1;
-    flex: 1;
-} */
 
 /* cursor stuff */
 app-cursor {
