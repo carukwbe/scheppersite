@@ -8,7 +8,8 @@ from google.cloud.firestore_v1.base_query import FieldFilter
 
 from nordigen import NordigenClient
 
-from firestore_utils import get_field_value_of_all_documents 
+from firestore_utils import get_field_value_of_all_documents
+from mail_handling import send_ticket
 
 def get_transactions():
     with open("nordigen_response.json", "r") as nordigen_response:
@@ -27,7 +28,12 @@ def filter_relevant_transactions(transactions):
     transactions_false_amount_correct_id = []
 
     # Get the order ids in our database and the prices to look out for
-    all_order_ids = get_field_value_of_all_documents("tickets_ordered", "order_id")
+    all_order_ids = []
+    for doc in firestore.client().collection("tickets_temp").where(
+        filter=FieldFilter("status", "==", "ordered")).stream():
+        order_id = doc.to_dict()["order_id"]
+        if order_id is not None and order_id != "": all_order_ids.append(order_id)
+
     ticket_prices = get_field_value_of_all_documents("prices", "value")
 
     # Loop through all transactions and append the ones where the ticket price was transferred to us or the
@@ -49,46 +55,49 @@ def filter_relevant_transactions(transactions):
 
 
 def store_faulty_transaction(transaction, collection_name):
-    sender = transaction["creditorName"]
-    sender_iban = transaction["creditorAccount"]["iban"]
-    verwendungszweck = transaction["remittanceInformationUnstructured"]
-    amount = float(transaction["transactionAmount"]["amount"])
-
+ 
     db = firestore.client()
     data = {
-        "sender": sender,
-        "sender_iban": sender_iban,
-        "amount": amount,
-        "verwendungszweck": verwendungszweck,
+        "sender": transaction["creditorName"],
+        "sender_iban": transaction["creditorAccount"]["iban"],
+        "amount": float(transaction["transactionAmount"]["amount"]),
+        "verwendungszweck": transaction["remittanceInformationUnstructured"],
         "created_at": datetime.now()
     }
-    db.collection(collection_name).document(str(uuid.uuid4())).set(data)
+    db.collection(collection_name).document().set(data)
 
 
 def process_relevant_transactions(transactions_correct_amount_correct_id, transactions_correct_amount_false_id, 
     transactions_false_amount_correct_id):
 
     db = firestore.client()
+    tickets_collection_ref = db.collection("tickets_temp")
     for transaction in transactions_correct_amount_correct_id:
         verwendungszweck = transaction["remittanceInformationUnstructured"]
-        amount = float(transaction["transactionAmount"]["amount"])
+                
+        orders_with_order_id = list(tickets_collection_ref.where(
+            filter=FieldFilter("status", "==", "ordered")).where(
+            filter=FieldFilter("order_id", "==", verwendungszweck)).stream())
         
-        orders_with_order_id = list(db.collection("tickets_ordered").where(filter=FieldFilter(
-            "order_id", "==", verwendungszweck)).stream())
-        
-        amount_of_orders_with_order_id = len(orders_with_order_id)
-        if amount_of_orders_with_order_id == 0:
+        if len(orders_with_order_id) == 0:
             print(f"ERROR: Error during processing transaction with valid verwendungszweck and amount: No ticket "
-                    f"order with order ID {verwendungszweck} found!")
-        elif amount_of_orders_with_order_id > 1:
+                f"order with order ID {verwendungszweck} found!")
+        elif len(orders_with_order_id) > 1:
             print(f"ERROR: Error during processing transaction with valid verwendungszweck and amount: "
-                    f"{amount_of_orders_with_order_id} orders with order ID {verwendungszweck} found!")
+                f"{len(orders_with_order_id)} orders with order ID {verwendungszweck} found!")
         else:
-            # If there is exactly one ticket with the order ID of the order, put it into the collection for payed tickets,
+            # If there is exactly one ticket with the order ID of the order, send a ticket,
             # but only when the amount is the one in the ticket.
             ticket_order = orders_with_order_id[0].to_dict()
-            if amount == ticket_order["price"]:
-                db.collection("tickets_payed").document(orders_with_order_id[0].id).set(orders_with_order_id[0].to_dict())
+            if float(transaction["transactionAmount"]["amount"]) == ticket_order["price"]:
+                tickets_collection_ref.document(orders_with_order_id[0].id).update({"status": "payed"})
+                send_ticket(ticket_id=orders_with_order_id[0].id, 
+                            name=ticket_order["name"],
+                            surname=ticket_order["surname"],
+                            email=ticket_order["email"],
+                            order_id=ticket_order["order_id"],
+                            price=ticket_order["price"]
+                )
             else:
                 store_faulty_transaction(transaction, collection_name="transactions_false_amount_correct_id")
 

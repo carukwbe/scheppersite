@@ -1,6 +1,14 @@
 from firebase_admin import firestore
 from google.cloud.firestore_v1.base_query import FieldFilter
 
+from PyPDF2 import PdfReader, PdfWriter
+from fpdf import FPDF
+
+import qrcode
+import jinja2
+import io
+import base64
+
 def get_field_value_of_all_documents(collection_name, field_name):
     all_fields = []
     db = firestore.client()
@@ -19,3 +27,4 @@ def get_field_value_of_all_documents(collection_name, field_name):
                   "is empty!")
 
     return all_fields
+
