@@ -1,3 +1,5 @@
 firebase_functions~=0.1.2
 nordigen
 qrcode
+pypdf2
+fpdf2

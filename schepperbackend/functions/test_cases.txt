@@ -10,3 +10,9 @@ a helper ticket.
 - transaction with valid amount, false amount and correct id
 - transaction with valid amoung and incorrect id
 - transaction with invalid amount and correct id
+
+
+
+- ticket repersonalization with same names and email address
+- ticket repersonalization with different names and same email address
+- ticket repersonalization with different email address
