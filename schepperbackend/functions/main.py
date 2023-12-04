@@ -144,7 +144,7 @@ def writeTicket(form_data):
             #'helper_job_preference': input_data.get('helper_job_preference'),
             'helper_time_preference': input_data.get('timePreferences'),
         }
-        ticket_id = "mJlEIG7DgVoRKskhQH0Z"#input_data.get("ticket_id")
+        ticket_id = ""#input_data.get("ticket_id")
         ticket_data["helper_job_preference"] = ""
             
     except Exception:
@@ -174,7 +174,7 @@ def writeTicket(form_data):
     existing_ticket_ref = tickets_collection_ref.document(ticket_id)
     existing_ticket_doc = existing_ticket_ref.get()
     if not existing_ticket_doc.exists: return {"error": "Ticket with ticket ID does not exist!"}
-            
+    
     existing_ticket = existing_ticket_doc.to_dict()
     if existing_ticket["status"] != "payed": return {"error": "Ticket has not been payed yet!"}
         
