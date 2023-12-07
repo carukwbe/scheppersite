@@ -1,16 +1,11 @@
 :host {
     position: relative;
     display: flex;
-    /* justify-content: center; */
-    /* align-items: flex-start; */
-    align-items: start;
-    height: 100%;
-    top: 0;
 
     transform-style: preserve-3d;
 
 
-    --z-distance-scheppern: 35;
+    --z-distance-scheppern: 39.9;
 
     --z-distance0: 15;
     --z-distance1: 20;
@@ -20,19 +15,17 @@
     --z-distance5: 35;
     --z-distance6: 37;
     --z-distance-background: 40;
-
 }
 
 .imgStack {
     position: absolute;
-    width: 100vw;
+    max-width: 100%;
     min-height: 100vh;
-    /* height: 100vh; */
+
     object-fit: cover;
     object-position: center top;
 
     overflow: visible;
-    pointer-events: none;
 }
 
 
@@ -105,7 +98,6 @@
 .background {
     transform:
         translateZ(calc(var(--z-distance-background) * -1px)) scale(calc((var(--z-distance-background) / 10) + 1));
-
 }
 
 .scheppern {
@@ -115,11 +107,12 @@
     height: 100%;
     width: 100%;
     justify-content: center;
-    align-items: center;
-    /* text-shadow: 30px 50px 60px rgb(0, 0, 0, 1); */
+    /* align-items: center; */
+    /* text-shadow: 30px 50px 60px rgb(0, 0, 0, 0.2); */
 
 
-    top: 10vh;
+    top: -100vh;
+
 
     /* position: fixed;
     z-index: 1; */
@@ -128,12 +121,12 @@
     font-weight: 400;
     font-style: normal;
 
-    --sizeDesktop: 1000px;
-    --sizeMobile:  600px;
 
-    --spacingDesktop: 300px;
-    --spacingMobile:  120px;
+    --sizeDesktop: 1200px;
+    --sizeMobile:  700px;
 
+    --spacingDesktop: 350px;
+    --spacingMobile:  90px;
 
 
     --topStartDesktop: 40%;
@@ -160,7 +153,7 @@
     /* top:            calc( var(--topStart)     + var(--scroll) * (var(--topEnd)     - var(--topStart))     );
     left:           calc( var(--leftStart)    + var(--scroll) * (var(--leftEnd)    - var(--leftStart))    ); */
 
-    /* opacity: calc(0.4 * (var(--scroll) - 0.5)); */
+
     /* transform: 
         translateZ(calc(max(-20px * var(--scroll), var(--z-distance-scheppern) * -1px))); */
 
@@ -170,7 +163,6 @@
     /* for other browsers */
     -webkit-font-smoothing: antialiased;  
 }
-
 
 
 

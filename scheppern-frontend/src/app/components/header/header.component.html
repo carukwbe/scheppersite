@@ -1,18 +1,20 @@
-
-<div class="navbar" [appWidthObserver] [ngClass]="{'fade-in': isHomePage}">
-
-    <p [routerLink]="['/']" style="grid-area: logo;">Logo</p>
-    
-    <p class="links" [routerLink]="['/tickets']" style="grid-area: tickets; margin-left:auto">Tickets</p>
-    <p class="links" [routerLink]="['/infos']" style="grid-area: infos;">Infos</p>
-    <p class="links" [routerLink]="['/helfer']" style="grid-area: helfer;">Helfer</p>
-    <p class="links turnier" [routerLink]="['/turnier']" style="grid-area: turnier;">Turnier</p>
-
+<div class="navbar">
+    <p routerLink="/" class="logo">Logo</p>
+    <p routerLink="/tickets" class="link" style="margin-left: auto;">Tickets</p>
+    <p routerLink="/infos" class="link">Infos</p>
+    <p routerLink="/helfer" class="link">Helfer</p>
+    <p routerLink="/turnier" class="link turnier">Turnier</p>
 
     <div class="burger" (click)="toggleMenu()">
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
+        <div class="line" [ngClass]="{ 'l1': isMenuOpen }"></div>
+        <div class="line" [ngClass]="{ 'l2': isMenuOpen }"></div>
+        <div class="line" [ngClass]="{ 'l3': isMenuOpen }"></div>
     </div>
+</div>
 
+<div class="navbarMobile" *ngIf="isMenuOpen" [@slideInFromTop]>
+    <p routerLink="/tickets" class="linkMobile">Tickets</p>
+    <p routerLink="/infos" class="linkMobile">Infos</p>
+    <p routerLink="/helfer" class="linkMobile">Helfer</p>
+    <p routerLink="/turnier" class="linkMobile turnier">Turnier</p>
 </div>

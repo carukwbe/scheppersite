@@ -10,10 +10,7 @@ export class DarkModeService {
   constructor(
     private renderer: Renderer2,
     private elementRef: ElementRef
-  ) {
-    // Initialize dark mode based on user preference or local storage, if applicable.
-    // You can implement this logic here if needed.
-  }
+  ) {}
 
   // Toggle dark mode and update the global state
   toggleDarkMode() {

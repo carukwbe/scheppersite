@@ -3,14 +3,50 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Ticket } from 'src/models';
 import { TicketService } from 'src/app/ticket-service.service';
 import { Router } from '@angular/router';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-ticket',
   templateUrl: './ticket.component.html',
-  styleUrls: ['./ticket.component.css']
+  styleUrls: ['./ticket.component.css'],
+  animations: [
+    trigger('slideInFromTop', [
+      state('void', style({ height: '0', opacity: '-0.5'})),
+      state('*', style({ height: '*', opacity: '1'})),
+      transition('void => *', animate('300ms ease-out')),
+      transition('* => void', animate('300ms ease-out'))
+    ])
+  ]
 })
 export class TicketComponent {
   availableTickets$ = this.ticketService.getAvailableTickets();
+  availableHelperTickets = 20;
+  // availableCarPasses = 20;
+  availableCarPasses = 0;
+
+  // ticketConfig = {
+  //   availableTickets = 
+  // }
+  ticketLevels = [
+    { price: 45,
+      helperPrice: 22.5,
+      active: false,
+      name: 'frühe Vogel',
+      activationDate: '01.11.2023',
+    },
+    { price: 50,
+      helperPrice: 25,
+      active: true,
+      name: 'mittel Vogel',
+      activationDate: '01.12.2023',
+    },
+    { price: 55,
+      helperPrice: 27.5,
+      active: false,
+      name: 'späte Vogel',
+      activationDate: '01.01.2024',
+    }
+  ];
 
   ticketInfos!: FormGroup;
   helperInfos!: FormGroup;
@@ -18,25 +54,8 @@ export class TicketComponent {
   isLoading = false;
   statusMessage = '';
 
-  @ViewChildren('test') testElements: QueryList<ElementRef> | undefined;
-
-  ticketLevels = [
-    { price: 45,
-      active: false,
-      name: 'frühe Vogel',
-      activationDate: '01.11.2023',
-    },
-    { price: 50,
-      active: true,
-      name: 'mittel Vogel',
-      activationDate: '01.12.2023',
-    },
-    { price: 55,
-      active: false,
-      name: 'späte Vogel',
-      activationDate: '01.01.2024',
-    }
-  ];
+  currentPrice: number | undefined = undefined;
+  currentPriceHelper: number | undefined = undefined;
 
   // debug
   tickets: Ticket[] = [];
@@ -48,27 +67,23 @@ export class TicketComponent {
 
   ngOnInit(): void {
 
+    this.currentPrice = this.ticketLevels.find(level => level.active)?.price;
+    this.currentPriceHelper = this.ticketLevels.find(level => level.active)?.helperPrice;
+
     this.ticketInfos = this.fb.group({
       name: ['', Validators.required],
       surname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.pattern(/^(?:\+?[0-9] ?){6,14}[0-9]$/)]], //nur mit plus erlauben?
-      hogwarts_house: ['', Validators.required],
-      helper: [false],
+      carpass: [{ value: false, disabled: this.availableCarPasses < 1 }],
+      carpassWanted: [false],
+      helper: [{ value: false, disabled: this.availableHelperTickets < 1 }],
+      helperAreas: [[]],
+      helperComment: [''],
       timePreferences: [''],
       agbsAccepted: [false, Validators.requiredTrue],
       dataProtectionAccepted: [false, Validators.requiredTrue]
     });
-
-    this.helperInfos = this.fb.group({
-      isHelper: [false],
-      categories: ['', this.isHelper() ? Validators.required : []],
-      comment: ['']
-    });
-
-
-
-
 
     this.ticketService.getAllTickets().subscribe(
       (tickets) => {
@@ -89,14 +104,6 @@ export class TicketComponent {
       // }
     });
   }
-
-  isHelper() {
-    if (this.helperInfos) {
-      return this.helperInfos.get('isHelper')?.value;
-    }
-    return false;
-  }
-
 
   submit() {
     this.isLoading = true;
@@ -121,15 +128,4 @@ export class TicketComponent {
     this.router.navigate(['/ticket/', ticket.id]);
   }
 
-
-  ngAfterViewInit() {
-    const testElement = this.testElements!.first.nativeElement;
-    // if (testElement) {
-    //   testElement.scrollIntoView({
-    //     behavior: "smooth",
-    //     block: "start",
-    //     inline: "center"
-    //   });
-    // }
-  }
 }

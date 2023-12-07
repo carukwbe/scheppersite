@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { ScrollService } from './scroll.service';
 import { NavigationEnd, Router } from '@angular/router';
 
@@ -9,11 +9,10 @@ import { NavigationEnd, Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  @ViewChild('scrollContainer') scrollContainer: ElementRef | undefined;
   isHomePage: boolean = false;
 
 
-  constructor(private elementRef: ElementRef, private scrollService: ScrollService, private router: Router) {
+  constructor(private router: Router) {
     // document.documentElement.style.cursor = "none";
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -23,17 +22,7 @@ export class AppComponent {
   }
 
 
-  ngAfterViewInit() {
-    this.scrollContainer!.nativeElement.addEventListener('scroll', (event: any) => {
-      
-      // update shared scroll service
-      let scroll = this.scrollContainer!.nativeElement.scrollTop / this.scrollContainer!.nativeElement.clientHeight;
-      this.scrollService.updateScroll(scroll);
 
-      // update css variable on root element -> deprecated use scrollModifier
-      this.elementRef.nativeElement.style.setProperty('--scroll', scroll);
-    });
-  }
 
 
 

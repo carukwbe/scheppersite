@@ -8,6 +8,8 @@ app-header {
 .hasMargin {
     display: block;
     margin-top: 100px;
+    background-image: url("../assets/hintergrund.jpg");
+    background-repeat: repeat;
 }
 
 

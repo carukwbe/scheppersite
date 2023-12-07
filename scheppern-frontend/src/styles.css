@@ -39,6 +39,8 @@ p, h1, h2, h3, h4, h5, h6 {
     --text-color-light: rgb(200, 200, 200);
     --text-color-dark: rgb(100, 100, 100);
 
+    --test: #fff;
+
 }
 
 

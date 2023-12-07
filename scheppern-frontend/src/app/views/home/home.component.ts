@@ -1,35 +1,32 @@
-import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
-import { DarkModeService } from './../../dark-mode.service';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [DarkModeService]
 })
 export class HomeComponent {
+  @ViewChild('scrollContainer') scrollContainer: ElementRef | undefined;
 
-  constructor( private darkModeService: DarkModeService ) { }
-
-  red = 0;
-  green = 55;
-  blue = 109;
   
-  updateBackgroundColor() {
-    const backgroundColor = `rgb(${this.red}, ${this.green}, ${this.blue})`;
-    document.body.style.backgroundColor = backgroundColor;
-    document.documentElement.style.setProperty('--bg-color', `rgb(${this.red}, ${this.green}, ${this.blue})`);
+  
+  
+  
+  
+  
+  // scroll variable stuff
+  // constructor(private scrollService: ScrollService ) { }
+  // ngAfterViewInit() {
+  //   this.scrollContainer!.nativeElement.addEventListener('scroll', (event: any) => {
 
-    //calculate the luminance of the background color
-    const luminance = (0.299 * this.red + 0.587 * this.green + 0.114 * this.blue) / 255;
-    // toggleDarkMode(this.renderer, this.elementRef, luminance < 0.5);
-    this.darkModeService.setDarkMode(luminance < 0.5);
-  }
+  //     // update shared scroll service
+  //     let scroll = this.scrollContainer!.nativeElement.scrollTop / this.scrollContainer!.nativeElement.clientHeight;
+  //     this.scrollService.updateScroll(scroll);
+  //   });
+  // }
 
 
-  ngOnInit(): void {
-    // this.updateBackgroundColor();
-  }
 
   // cursor stuff
 

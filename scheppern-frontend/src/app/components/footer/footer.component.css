@@ -21,6 +21,8 @@
 
     align-items: center;
     /* margin-right: 20px; */
+
+    color: var(--text-color);
 }
 
 
@@ -42,7 +44,6 @@
 
     :host {
         height: 230px;
-        padding-right: 20px!important;
     }
 
     /* .iconsMiddle {
@@ -99,36 +100,43 @@
     align-items: center;
     gap: 20px;
     height: fit-content;
+
+    --test: #fff;
 }
 
-.button {
-    transition: all 0.3s ease-in-out;
+
+
+.buttonBG {
     height: 50px;
     width: 50px;
     background-size: 50px 50px;
     cursor: pointer;
+    position: relative;
+
 }
 
-
-.instagram {
-    background-image: url("../../../assets/instagram_white.svg");
-}
-.instagram:hover {
-    transition: all 0.3s ease-in-out;
+.instagramBG {
     background-image: url("../../../assets/instagram.svg");
 }
 
-.whiteOutlineButton {
-    background-image: url("../../../assets/instagram_outline.svg");
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.whiteOutlineButton:hover {
-    transition: all 0.3s ease-in-out;
+.outlineBG {
     background-image: url("../../../assets/instagram_outline_color.svg");
-    background-size: 50px 50px;
+}
+
+.button {
+    height: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.buttonBG:hover .button {
+    opacity: 0;
+}
+
+.iconContainer {
+    height: 100%;
+    display: grid;
+    align-items: center;
+    justify-items: center;
 }
 
 .links {

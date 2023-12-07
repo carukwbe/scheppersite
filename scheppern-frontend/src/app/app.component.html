@@ -2,8 +2,8 @@
   <img class="windradCursor" src="./../../../assets/windrad.png" alt="">
 </div> -->
 
-
-<app-header *ngIf="!isHomePage"></app-header> 
-<router-outlet [ngClass]="{'hasMargin': !isHomePage}"></router-outlet>
-<app-footer *ngIf="!isHomePage" style="z-index: 2;"></app-footer>
-
+<div appWidthObserver>
+  <app-header *ngIf="!isHomePage"></app-header>
+  <router-outlet [ngClass]="{'hasMargin': !isHomePage}"></router-outlet>
+  <app-footer *ngIf="!isHomePage" style="z-index: 2;"></app-footer>
+</div>

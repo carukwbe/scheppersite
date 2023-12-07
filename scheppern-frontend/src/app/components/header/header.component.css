@@ -1,35 +1,67 @@
 :host {
-    pointer-events: none;
+    width: 100%;
+    background-color: var(--accent-color1);
+    font-size: 50px;
+    font-family: 'Rubik', sans-serif;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 50px rgba(0, 0, 0, 0.1);
 }
 
 .navbar {
-    width: 100vw;
-    background-color: var(--accent-color1);
-    align-items: center;
     position: relative;
-
-    font-family: 'Rubik', sans-serif;
-    margin: 0 30px 5px 0;
-
-    font-size: 50px;
+    margin: 0 0 5px 0;
     height: 60px;
+    display: flex;
     align-items: center;
-
-    display: flex;
     gap: 40px;
-
+    padding: 0 20px;
 }
 
-.fade-in {
-    opacity: calc(2 * var(--scroll) - 4.5 + 0 * var(--isMobilePercentage));
+.navbarMobile {
+    width: 100%;
+    right: 0;
+    text-align: center;
+    line-height: 2;
 }
 
+p {
+    cursor: pointer;
+    margin: 0;
+}
 
+.logo {
+    grid-area: logo;
+}
 
-/* .links {
-    display: flex;
-    column-gap: 40px;
-} */
+.burger {
+    display: none;
+    flex-direction: column;
+    margin-left: auto;
+    gap: 7px;
+    cursor: pointer;
+}
+
+.line {
+    width: 35px;
+    height: 5px;
+    background-color: var(--text-color);
+    transition: all 0.4s ease;
+    border-radius: 2px;
+}
+
+.l1 {
+    transform: translateY(9.5px) rotate(45deg);
+}
+
+.l2 {
+    height: 0;
+    width: 0;
+    opacity: 0;
+}
+
+.l3 {
+    transform: translateY(-9.5px) rotate(-45deg);
+}
 
 @media (max-width: 1050px) {
     .navbar {
@@ -38,6 +70,7 @@
         column-gap: 30px;
     }
 }
+
 @media (max-width: 900px) {
     .navbar {
         font-size: 35px;
@@ -45,6 +78,7 @@
         column-gap: 20px;
     }
 }
+
 @media (max-width: 820px) {
     .navbar {
         font-size: 30px;
@@ -52,62 +86,13 @@
         column-gap: 15px;
     }
 }
-.navbar p {
-    cursor: pointer;
-    pointer-events: auto;
-    margin: 0;
-}
 
-
-
-.turnier {
-    color: rgba(255, 255, 255, 0.3);
-    pointer-events: none;
-}
-
-
-
-.linksOpen {
-    /* padding: 100px 0; */
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    font-size: 100px;
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-
-.burger {
-    display: none;
-    flex-direction: column;
-    margin: 10px 0;
-    margin-left: auto;
-
-
-
-}
-
-.line {
-    width: 35px;
-    height: 5px;
-    background-color: var(--text-color);
-    margin: 4px;
-    /* transition: all 0.3s ease; */
-    /* rounded corners */
-    border-radius: 1.5px;
-}
-
-
-/* todo, why does this not work? */
 @media (max-width: 750px) {
-    .links {
+    .link {
         display: none;
     }
+
     .burger {
         display: flex;
-        pointer-events: auto;
-        cursor: pointer;
     }
 }
