@@ -5,9 +5,6 @@
         <img src="/assets/windrad_fluegel.png" alt="Windrad" class="fluegel">
     </div>
     
-    <!-- <div class="logoWrapper">
-    </div> -->
-    
     
     <div class="iconsMiddle" style="grid-area: iconsMiddle;">
        
@@ -64,23 +61,25 @@
         <li>AGBs</li>
         <li>Datenschutzhinweise</li>
     </ul>
-
-    <div class="slider-wrapper" style="grid-area: slider;">
-        R
-        <mat-slider min="0" max="255">
-            <input matSliderThumb [(ngModel)]="red" (input)="updateBackgroundColor()">
-        </mat-slider>
-        G
-        <mat-slider min="0" max="255">
-            <input matSliderThumb [(ngModel)]="green" (input)="updateBackgroundColor()">
-        </mat-slider>
-        B
-        <mat-slider min="0" max="255">
-            <input matSliderThumb [(ngModel)]="blue" (input)="updateBackgroundColor()">
-        </mat-slider>
+    
+    <!-- <div class="slider-container" style="grid-area: slider;">
+        <div class="rgb">
+            R
+            <mat-slider min="0" max="255">
+                <input matSliderThumb [(ngModel)]="red" (input)="updateBackgroundColor()">
+            </mat-slider>
+            G
+            <mat-slider min="0" max="255">
+                <input matSliderThumb [(ngModel)]="green" (input)="updateBackgroundColor()">
+            </mat-slider>
+            B
+            <mat-slider min="0" max="255">
+                <input matSliderThumb [(ngModel)]="blue" (input)="updateBackgroundColor()">
+            </mat-slider>
+        </div>
         Alpha
-        <mat-slider min="0" max="100">
+        <mat-slider vertical class="alpha" min="0" max="100">
             <input matSliderThumb [(ngModel)]="alpha" (input)="updateBackgroundColor()">
         </mat-slider>
-    </div>
+    </div> -->
 </div>

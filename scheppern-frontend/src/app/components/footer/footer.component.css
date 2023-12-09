@@ -1,36 +1,39 @@
 :host {
-    width: 100vw;
-    position: relative;
     display: grid;
+    position: relative;
     
-    background-color: var(--accent-color1);
-    height: 200px;
+    width: 100vw;
     justify-items: center;
-    align-items: center;
+
+    background-color: var(--accent-color1);
 }
 
 .footerElements {
-    display: grid;
-    grid-template-columns: 0.7fr 1fr 1fr 0.5fr;
+    display: flex;
+    /* grid-template-columns: 0.7fr 1fr 1fr 0.5fr;
     grid-template-areas: 
-        "windrad iconsMiddle links slider";
-    grid-gap: 20px;
+        "windrad iconsMiddle links slider"; */
+    gap: 40px;
 
-    /* height: 100%; */
-    width: min(100%, 1150px);
 
+    /* width: min(100%, 1150px); */
+
+    
+    max-width: 1150px;
     align-items: center;
-    /* margin-right: 20px; */
-
     color: var(--text-color);
+    justify-content: space-between;
+    width: 100%;
 }
+
+
+
+
 
 
 @media (max-width: 550px) {
     .footerElements {
-        /* vertical gap */
-        /* grid-gap: 10px; */
-
+        display: grid;
         grid-template-columns: 1fr 2fr;
         /* grid-template-rows: 1fr 0fr; */
         grid-template-areas:    
@@ -62,35 +65,37 @@
 }
 
 .windrad {
-    position: absolute;
+    position: relative;
     bottom: 0;
     pointer-events: none;
 
-    width: max(150px, 100%);
-    height: 120px;
+    height: 150px;
+
+    display: flex;
+    justify-content: center;
 }
 
 .stamm {
     position: absolute;
     bottom: 0;
-    left: 50%;
-    transform: translateX(-50.1%);
+    /* left: 50%; */
+    /* transform: translateX(-50.1%); */
     height: 100%;
-    width: 100%;
     object-fit: contain;    
 }
 
 .fluegel {
     position: absolute;
-    top: -43%;
-    left: 3px;
+    /* top: -43%; */
+    /* left: -50%; */
 
-    width: 100%;
-    height: 100%;
+    translate: 5px -66px;
+
+    /* width: 100%; */
+    /* height: 100%; */
     object-fit: contain;
 
-    transition: all 2s ease-in-out;
-    animation: rotating 12s linear infinite;
+    /* animation: rotating 12s linear infinite; */
 }
 
 .iconsMiddle {
@@ -141,7 +146,7 @@
 
 .links {
     list-style: none;
-    margin: 0;
+    margin: 25px 0;
     padding: 0;
     line-height: 40px;
     white-space: nowrap;
@@ -151,7 +156,12 @@ li:hover {
     cursor: pointer;
 }
 
-.slider-wrapper {
+
+
+
+
+
+.slider-container {
 
     display: grid;
     grid-template-columns: 0.1fr 1fr;
@@ -169,7 +179,13 @@ mat-slider {
 }
 
 @media (max-width: 1000px) {
-    .slider-wrapper {
+    .slider-container {
         display: none;
     }
+}
+
+.alpha {
+    width: 100px;
+    transform: rotate(270deg);
+    /* transform-origin: bottom left; */
 }

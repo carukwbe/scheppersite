@@ -12,12 +12,13 @@
     margin: 0 0 5px 0;
     height: 60px;
     display: flex;
-    align-items: center;
+    align-items: center;    
     gap: 40px;
     padding: 0 20px;
 }
 
 .navbarMobile {
+    display: none;
     width: 100%;
     right: 0;
     text-align: center;
@@ -27,6 +28,11 @@
 p {
     cursor: pointer;
     margin: 0;
+}
+
+.navbarMobile p:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+
 }
 
 .logo {
@@ -63,6 +69,11 @@ p {
     transform: translateY(-9.5px) rotate(-45deg);
 }
 
+.turnier {
+    opacity: 0.2;
+    pointer-events: none;
+}
+
 @media (max-width: 1050px) {
     .navbar {
         font-size: 40px;
@@ -90,6 +101,9 @@ p {
 @media (max-width: 750px) {
     .link {
         display: none;
+    }
+    .navbarMobile {
+        display: block;
     }
 
     .burger {

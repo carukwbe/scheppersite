@@ -2,7 +2,6 @@
     <p routerLink="/" class="logo">Logo</p>
     <p routerLink="/tickets" class="link" style="margin-left: auto;">Tickets</p>
     <p routerLink="/infos" class="link">Infos</p>
-    <p routerLink="/helfer" class="link">Helfer</p>
     <p routerLink="/turnier" class="link turnier">Turnier</p>
 
     <div class="burger" (click)="toggleMenu()">
@@ -15,6 +14,5 @@
 <div class="navbarMobile" *ngIf="isMenuOpen" [@slideInFromTop]>
     <p routerLink="/tickets" class="linkMobile">Tickets</p>
     <p routerLink="/infos" class="linkMobile">Infos</p>
-    <p routerLink="/helfer" class="linkMobile">Helfer</p>
     <p routerLink="/turnier" class="linkMobile turnier">Turnier</p>
 </div>
