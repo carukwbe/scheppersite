@@ -13,6 +13,11 @@ app-header {
 }
 
 
+app-footer {
+    position: sticky;
+    bottom: 0;
+}
+
 
 
 

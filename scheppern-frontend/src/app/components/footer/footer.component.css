@@ -6,24 +6,20 @@
     justify-items: center;
 
     background-color: var(--accent-color1);
+    box-sizing: border-box;
+    /* margin: 0 100px; */
+    padding: 0 30px;
 }
 
 .footerElements {
     display: flex;
-    /* grid-template-columns: 0.7fr 1fr 1fr 0.5fr;
-    grid-template-areas: 
-        "windrad iconsMiddle links slider"; */
     gap: 40px;
 
-
-    /* width: min(100%, 1150px); */
-
-    
-    max-width: 1150px;
+    max-width: 135„0px;
+    width: 100%;
     align-items: center;
     color: var(--text-color);
-    justify-content: space-between;
-    width: 100%;
+    justify-content: space-around;
 }
 
 
@@ -35,11 +31,15 @@
     .footerElements {
         display: grid;
         grid-template-columns: 1fr 2fr;
-        /* grid-template-rows: 1fr 0fr; */
+        /* grid-template-rows: 0.7fr 0.1fr 0fr; */
         grid-template-areas:    
             "windrad ."
             "windrad iconsMiddle"
             "windrad links";
+
+        gap: 0;
+        grid-gap: 0;
+
 
         text-align: center;
         max-width: 400px;
@@ -47,16 +47,34 @@
 
     :host {
         height: 230px;
+        padding: 0 30px 0 5px;
     }
 
-    /* .iconsMiddle {
-        justify-self: right !important;
-    } */
     .links {
         line-height: 1.8em!important;
-        padding-right: 20px;
     }
 
+}
+
+.windrad {
+    position: relative;
+    pointer-events: none;
+    
+    bottom: 15%;
+    height: 130%;
+    width: 100px;
+
+    display: flex;
+    justify-content: center;
+    /* margin-left: 10%; */
+    z-index: 10;
+}
+
+.stamm {
+    position: absolute;
+    bottom: 0;
+    height: 72.6%;
+    object-fit: contain;
 }
 
 @keyframes rotating {
@@ -64,38 +82,14 @@
     to {   transform: rotate(360deg); }
 }
 
-.windrad {
-    position: relative;
-    bottom: 0;
-    pointer-events: none;
-
-    height: 150px;
-
-    display: flex;
-    justify-content: center;
-}
-
-.stamm {
-    position: absolute;
-    bottom: 0;
-    /* left: 50%; */
-    /* transform: translateX(-50.1%); */
-    height: 100%;
-    object-fit: contain;    
-}
-
 .fluegel {
     position: absolute;
-    /* top: -43%; */
-    /* left: -50%; */
+    translate: 3% 10%;
 
-    translate: 5px -66px;
-
-    /* width: 100%; */
-    /* height: 100%; */
+    height: 53.9%;
     object-fit: contain;
 
-    /* animation: rotating 12s linear infinite; */
+    animation: rotating 12s linear infinite;
 }
 
 .iconsMiddle {

@@ -38,7 +38,7 @@
             (var(--z-distance0) / 10) + 1
         ));
 
-    filter: drop-shadow(-15px -2px 18px rgb(57, 11, 11));
+    filter: drop-shadow(-15px -2px 18px rgba(57, 11, 11, 0.5));
 }
 .e1 {
     transform: 
@@ -48,7 +48,7 @@
         scale(calc(
             (var(--z-distance1) / 10) + 1
         ));
-    /* filter: drop-shadow(-10px 0px 22px rgb(57, 11, 11)); */
+    /* filter: drop-shadow(-15px -2px 18px rgba(57, 11, 11, 0.3)); */
 }
 .e2 {
     transform: 
@@ -107,12 +107,19 @@
     height: 100%;
     width: 100%;
     justify-content: center;
-    /* align-items: center; */
     /* text-shadow: 30px 50px 60px rgb(0, 0, 0, 0.2); */
+    /* text-shadow: -5vw 4vw 0px rgba(0, 0, 0, 0.6); */
+    text-shadow: -5vw 4vw 0px rgba(0, 55, 109, 1);
+    text-shadow: -1.5vw 1vw 0px rgb(214, 54, 105), -5vw 4vw 0px rgba(0, 55, 109, 1), -6.5vw 5vw 0px rgb(50, 116, 85);
+    text-shadow: -1.5vw 1vw 0px rgb(214, 54, 105), -5vw 4vw 0px rgba(0, 55, 109, 1);
+    /* text-shadow: -2vw 1vw 0px rgb(214, 54, 105), -4vw 2vw 0px rgba(0, 55, 109, 1), -6vw 3vw 0px rgb(50, 116, 85); */
+    /* color: rgba(0, 55, 109, 1);
+    text-shadow: 10vw -5vw 0px rgb(214, 54, 105), -10vw 5vw 0px rgb(50, 116, 85); */
+    /* text-shadow: -5vw 4vw 0px rgba(0, 40, 120, 0.7); */
+    
 
 
     top: -100vh;
-
 
     /* position: fixed;
     z-index: 1; */
@@ -121,41 +128,12 @@
     font-weight: 400;
     font-style: normal;
 
+    font-size: calc(40vw + 40rem);
+    letter-spacing: 25vw;
 
-    --sizeDesktop: 1200px;
-    --sizeMobile:  700px;
+    /* adjust for letter spacing on the left of the text */
+    left: calc(25vw / 2);
 
-    --spacingDesktop: 350px;
-    --spacingMobile:  90px;
-
-
-    --topStartDesktop: 40%;
-    --topStartMobile:  40%;
-    --topEndDesktop:    8%;
-    --topEndMobile:     5%;
-    
-    --leftStartDesktop: 14.5%; /*  last letter has letter spacing apllied aswell */
-    --leftStartMobile:   8%;
-    --leftEndDesktop:    5%;
-    --leftEndMobile:     3%;
-
-    /* map text size to desktop-mobile range */
-    --size:    calc( var(--sizeMobile)    + var(--isDesktopPercentage) * (var(--sizeDesktop)    - var(--sizeMobile))    );
-    --spacing: calc( var(--spacingMobile) + var(--isDesktopPercentage) * (var(--spacingDesktop) - var(--spacingMobile)) );
-
-    /* map every calculated value to the position styling elements to create the animation */
-    font-size: var(--size);
-    letter-spacing: var(--spacing);
-    
-    /* letter spacing also applies space on last letter */
-    left: calc(var(--spacing) / 2);
-
-    /* top:            calc( var(--topStart)     + var(--scroll) * (var(--topEnd)     - var(--topStart))     );
-    left:           calc( var(--leftStart)    + var(--scroll) * (var(--leftEnd)    - var(--leftStart))    ); */
-
-
-    /* transform: 
-        translateZ(calc(max(-20px * var(--scroll), var(--z-distance-scheppern) * -1px))); */
 
     transform:
             translateZ(calc(var(--z-distance-scheppern) * -1px));
@@ -195,14 +173,18 @@
     --spacingStart: calc( var(--spacingStartMobile) + var(--isDesktopPercentage) * (var(--spacingStartDesktop) - var(--spacingStartMobile)) );
     --spacingEnd:   calc( var(--spacingEndMobile)   + var(--isDesktopPercentage) * (var(--spacingEndDesktop)   - var(--spacingEndMobile))   );
 
-    --topStart:     calc( var(--topStartMobile)     + var(--isDesktopPercentage) * (var(--topStartDesktop)     - var(--topStartMobile))     );
-    --topEnd:       calc( var(--topEndMobile)       + var(--isDesktopPercentage) * (var(--topEndDesktop)       - var(--topEndMobile))       );
-    --leftStart:    calc( var(--leftStartMobile)    + var(--isDesktopPercentage) * (var(--leftStartDesktop)    - var(--leftStartMobile))    );
-    --leftEnd:      calc( var(--leftEndMobile)      + var(--isDesktopPercentage) * (var(--leftEndDesktop)      - var(--leftEndMobile))      );
-
+    
     /* map every calculated value to the position styling elements to create the animation */
     font-size:      calc( var(--sizeStart)    + min(var(--scroll), 1) * (var(--sizeEnd)    - var(--sizeStart))    );
     letter-spacing: calc( var(--spacingStart) + min(var(--scroll), 1) * (var(--spacingEnd) - var(--spacingStart)) );
+
+
+
+    /* --topStart:     calc( var(--topStartMobile)     + var(--isDesktopPercentage) * (var(--topStartDesktop)     - var(--topStartMobile))     );
+    --topEnd:       calc( var(--topEndMobile)       + var(--isDesktopPercentage) * (var(--topEndDesktop)       - var(--topEndMobile))       );
+    --leftStart:    calc( var(--leftStartMobile)    + var(--isDesktopPercentage) * (var(--leftStartDesktop)    - var(--leftStartMobile))    );
+    --leftEnd:      calc( var(--leftEndMobile)      + var(--isDesktopPercentage) * (var(--leftEndDesktop)      - var(--leftEndMobile))      ); */
+
     /* top:            calc( var(--topStart)     + var(--scroll) * (var(--topEnd)     - var(--topStart))     );
     left:           calc( var(--leftStart)    + var(--scroll) * (var(--leftEnd)    - var(--leftStart))    ); */
 

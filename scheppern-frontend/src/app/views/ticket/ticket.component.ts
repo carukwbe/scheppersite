@@ -1,4 +1,4 @@
-import { Component, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Ticket } from 'src/models';
 import { TicketService } from 'src/app/ticket-service.service';
@@ -67,6 +67,16 @@ export class TicketComponent {
 
   ngOnInit(): void {
 
+    this.ticketService.getTicketInfo().subscribe(
+      (info) => {
+        console.log('Info:', info);
+      },
+      (error) => {
+        console.error('Error getting tickets:', error);
+      }
+    );
+    
+
     this.currentPrice = this.ticketLevels.find(level => level.active)?.price;
     this.currentPriceHelper = this.ticketLevels.find(level => level.active)?.helperPrice;
 
@@ -93,16 +103,6 @@ export class TicketComponent {
         console.error('Error getting tickets:', error);
       }
     );
-
-
-
-
-    this.ticketService.getTicketLevels().subscribe( data => {
-      // console.log('Ticket levels_ges:', data);
-      // for (const level of data) {
-      //   console.log('Ticket levels:', level)
-      // }
-    });
   }
 
   submit() {
