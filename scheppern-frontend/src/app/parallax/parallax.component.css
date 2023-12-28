@@ -1,6 +1,8 @@
 :host {
     position: relative;
     display: flex;
+    align-items: center;
+    justify-content: center;
 
     transform-style: preserve-3d;
 
@@ -19,13 +21,13 @@
 
 .imgStack {
     position: absolute;
-    max-width: 100%;
+    max-width: 100vw;
     min-height: 100vh;
 
     object-fit: cover;
-    object-position: center top;
 
     overflow: visible;
+    /* transform-origin: center left; */
 }
 
 
@@ -97,7 +99,9 @@
 }
 .background {
     transform:
-        translateZ(calc(var(--z-distance-background) * -1px)) scale(calc((var(--z-distance-background) / 10) + 1));
+        translateZ(calc(var(--z-distance-background) * -1px))
+        scale(calc((var(--z-distance-background) / 10) + 1))
+    ;
 }
 
 .scheppern {

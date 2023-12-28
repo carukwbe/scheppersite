@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Ticket } from 'src/models';
+import { Ticket, TicketLevel } from 'src/models';
 import { TicketService } from 'src/app/ticket-service.service';
 import { Router } from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { MatDialog } from '@angular/material/dialog';
+import { HelperPopupComponent } from 'src/app/components/helper-popup/helper-popup.component';
+import { Global } from 'src/environments/environment';
 
 @Component({
   selector: 'app-ticket',
@@ -19,34 +22,13 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   ]
 })
 export class TicketComponent {
+  Global = Global;
   availableTickets$ = this.ticketService.getAvailableTickets();
-  availableHelperTickets = 20;
+  availableHelperTickets = 1;
   // availableCarPasses = 20;
-  availableCarPasses = 0;
+  availableCarPasses = 1;
 
-  // ticketConfig = {
-  //   availableTickets = 
-  // }
-  ticketLevels = [
-    { price: 45,
-      helperPrice: 22.5,
-      active: false,
-      name: 'frühe Vogel',
-      activationDate: '01.11.2023',
-    },
-    { price: 50,
-      helperPrice: 25,
-      active: true,
-      name: 'mittel Vogel',
-      activationDate: '01.12.2023',
-    },
-    { price: 55,
-      helperPrice: 27.5,
-      active: false,
-      name: 'späte Vogel',
-      activationDate: '01.01.2024',
-    }
-  ];
+  ticketLevels: TicketLevel[] = [];
 
   ticketInfos!: FormGroup;
   helperInfos!: FormGroup;
@@ -63,34 +45,40 @@ export class TicketComponent {
   constructor(
     private fb: FormBuilder,
     private ticketService: TicketService,
-    private router: Router) { }
+    private router: Router,
+    public dialog: MatDialog
+  ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {  
 
     this.ticketService.getTicketInfo().subscribe(
-      (info) => {
-        console.log('Info:', info);
+      (data) => { 
+        this.ticketLevels = data;
+        console.log(data)
+        for (const level of this.ticketLevels) {
+          if (level.active) {
+            this.currentPrice = level.regular_price;
+            this.currentPriceHelper = level.helper_price;
+          }
+        }
       },
-      (error) => {
-        console.error('Error getting tickets:', error);
-      }
+      (error) => { console.error('Error getting ticket Info:', error); }
     );
     
-
-    this.currentPrice = this.ticketLevels.find(level => level.active)?.price;
-    this.currentPriceHelper = this.ticketLevels.find(level => level.active)?.helperPrice;
 
     this.ticketInfos = this.fb.group({
       name: ['', Validators.required],
       surname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.pattern(/^(?:\+?[0-9] ?){6,14}[0-9]$/)]], //nur mit plus erlauben?
+      
       carpass: [{ value: false, disabled: this.availableCarPasses < 1 }],
-      carpassWanted: [false],
+      carpassWish: [false],
       helper: [{ value: false, disabled: this.availableHelperTickets < 1 }],
-      helperAreas: [[]],
-      helperComment: [''],
-      timePreferences: [''],
+      helperWish: [false],
+
+      helperShifts: [[]],
+      helperInfos: [''],
       agbsAccepted: [false, Validators.requiredTrue],
       dataProtectionAccepted: [false, Validators.requiredTrue]
     });
@@ -112,7 +100,6 @@ export class TicketComponent {
       (result) => {
         this.isLoading = false;
         this.statusMessage = result;
-        console.log(result);
       },
       (error) => {
         this.isLoading = false;
@@ -122,9 +109,21 @@ export class TicketComponent {
     );
   }
 
+  openHelperDialog(): void {
+    const dialogRef = this.dialog.open(HelperPopupComponent, {
+      // data: {name: this.name, animal: this.animal},
+      // height: '300px',
+      width: '700px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
+  }
+
   // temporary 
   routeToTicketEdit(ticket: Ticket) {
-    console.log('Route to ticket edit:', ticket.id);
     this.router.navigate(['/ticket/', ticket.id]);
   }
 

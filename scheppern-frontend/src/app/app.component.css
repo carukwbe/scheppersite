@@ -1,3 +1,14 @@
+.content {
+    min-height: 100vh;
+    /* Set minimum height to 100% of the viewport height */
+    /* display: flex;
+    flex-direction: column; */
+
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: auto 1fr auto;
+}
+
 app-header {
     position: fixed;
     top: 0px;
@@ -5,16 +16,22 @@ app-header {
 }
 
 
-.hasMargin {
-    display: block;
-    margin-top: 100px;
-    background-image: url("../assets/hintergrund.jpg");
-    background-repeat: repeat;
+.background {
+    display: absolute;
+    position: fixed;
+    background-image: url('../assets/hintergrund.jpg');
+    background-position: center center;
+    /* z-index: 0; */
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: -1;
 }
 
 
 app-footer {
-    position: sticky;
+    /* position: sticky; */
+    margin-top: auto;
     bottom: 0;
 }
 

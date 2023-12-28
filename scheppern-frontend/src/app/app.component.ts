@@ -1,5 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
-import { ScrollService } from './scroll.service';
+import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
 
@@ -12,18 +11,17 @@ export class AppComponent {
   isHomePage: boolean = false;
 
 
+  // constructor(private router: Router, private activatedRoute: ActivatedRoute) {  }
+
   constructor(private router: Router) {
     // document.documentElement.style.cursor = "none";
+
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.isHomePage = event.url === '/';
+        this.isHomePage = event.urlAfterRedirects === '/';
       }
     });
   }
-
-
-
-
 
 
 

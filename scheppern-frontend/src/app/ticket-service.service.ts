@@ -6,12 +6,6 @@ import { Ticket, TicketLevel } from 'src/models';
 import { environment } from '../environments/environment';
 import { Observable, from, map } from 'rxjs';
 
-
-interface Level {
-  ticket_levels: TicketLevel[];
-}
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -30,12 +24,6 @@ export class TicketService {
     }
   }
 
-  // getAvailableTickets(): Observable<number> {
-  //   // return this.http.get<number>(this.functionUrl);
-  //   const ticketCountTrigger = httpsCallable(this.functions, 'ticketCount');
-
-  // }
-
   getAvailableTickets(): Observable<number> {
     const ticketCountTrigger = httpsCallable(this.functions, 'tickets_available');
 
@@ -51,6 +39,41 @@ export class TicketService {
         });
     });
   }
+
+  getTicketInfo(): Observable<TicketLevel[]> {
+    const infoTrigger = httpsCallable(this.functions, 'get_ticket_levels');
+
+    return new Observable((observer) => {
+      infoTrigger()
+        .then((result: any) => {
+          const parsedData = { ticket_levels: JSON.parse(result.data.ticket_levels) };
+          observer.next(parsedData.ticket_levels);
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+
+  // // with a collection
+  // getTicketInfo(): Observable<any> {
+  //   const infoCollection = collection(this.firestore, 'price_levels');
+
+  //   return new Observable((observer) => {
+  //     onSnapshot(infoCollection, (querySnapshot) => {
+  //       const info = querySnapshot.docs.map((doc) => {
+  //         const infoData = doc.data() as TicketLevel;
+
+  //         // prepare date string from firebase timestamp
+  //         const date = infoData.activation_date.toDate();
+  //         infoData.activation_date_string = date.toLocaleDateString('de-DE', { year: 'numeric', month: '2-digit', day: '2-digit' });
+
+  //         return infoData;
+  //       });
+  //       observer.next(info);
+  //     });
+  //   });
+  // }
 
 
   getAllTickets(): Observable<Ticket[]> {
@@ -68,39 +91,6 @@ export class TicketService {
     });
   }
 
-  getTicketInfo(): Observable<string> {
-    const infoTrigger = httpsCallable(this.functions, 'get_ticket_levels');
-
-    return new Observable((observer) => {
-      infoTrigger()
-        .then((result) => {
-          const info = result.data as string;
-          observer.next(info);
-        })
-        .catch((error) => {
-          observer.error(error);
-        });
-    });
-  }
-
-  // with a collection
-
-  // getTicketInfo(): Observable<any> {
-  //   const infoCollection = collection(this.firestore, 'get_ticket_levels');    
-
-  //   return new Observable((observer) => {
-  //     onSnapshot(infoCollection, (querySnapshot) => {
-  //       const info = querySnapshot.docs.map((doc) => {
-  //         const infoData = doc.data();
-  //         console.log(infoData);
-  //         console.log("asdas");
-  //         // return infoData.ticket_levels;
-  //       });
-  //       observer.next(info);
-  //     });
-  //   });
-  // }
-
   getSingleTicket(docID: string): Observable<Ticket | null> {
     const docRef = doc(this.firestore, 'tickets', docID);
 
@@ -109,6 +99,7 @@ export class TicketService {
         .then((docSnap: DocumentSnapshot) => {
           if (docSnap.exists()) {
             const ticketData = docSnap.data() as Ticket;
+            ticketData.id = docSnap.id;
             observer.next(ticketData);
           } else {
             observer.next(null);
@@ -125,6 +116,20 @@ export class TicketService {
 
     return new Observable((observer) => {
       writeTicketTrigger(ticket)
+        .then((result: HttpsCallableResult<string>) => {
+          observer.next(result.data);
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+
+  validateTicket(ticketID: string): Observable<any> {
+    const writeTicketTrigger = httpsCallable<any, string>(this.functions, 'validate_ticket');
+
+    return new Observable((observer) => {
+      writeTicketTrigger(ticketID)
         .then((result: HttpsCallableResult<string>) => {
           observer.next(result.data);
         })

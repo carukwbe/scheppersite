@@ -1,13 +1,87 @@
 :host {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    height: 100%;
+    align-items: center;
+}
+
+.content {
+    width: min(90%, 1100px);
+    padding: 50px 0;
 }
 
 form {
     display: grid;
-    margin: 10px;
-    width: 30%;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: "formular infos";
+    grid-gap: 20px;
+    
+    @media (max-width: 800px) {
+        grid-template-columns: 1fr;
+        grid-template-areas:    
+            "infos"
+            "formular";
+    }
+}
+
+.formular {
+    display: flex;
+    flex-direction: column;
+    /* width: max-content; */
+    flex-grow: 100;
+    min-width: calc(min(80%, 400px));
+    max-width: 100%;
+    grid-area: formular;
+}
+
+.emailWarning {
+    max-width: 100%;
+    word-wrap: break-word;
+    margin-bottom: 30px;
+    display: inline-flex;
+}
+
+.helper {
+    --annotatedText: 'Helferticket';
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+.infos {
+    --annotatedText: 'Infos';
+    height: fit-content;
+    grid-area: infos;
+
+}
+
+.boxAnnotation {
+    position: relative;
+    padding: 20px 15px 0px;
+    border-radius: 5px;
+}
+
+.boxAnnotation::after {
+    content: var(--annotatedText);
+    position: absolute;
+    top: -10px;
+    left: 13px;
+    padding: 1px 7px;
+    
+    background: grey;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+
+
+/* disable table styling */
+.mat-mdc-table {
+    background-color: rgba(0,0,0,0);
+}
+.mat-elevation-z8 {
+    box-shadow: none;
+}
+
+mat-form-field {
+    width: 100%;
 }

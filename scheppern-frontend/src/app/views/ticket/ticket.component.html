@@ -4,10 +4,10 @@
     <div class="ticketCount" id="ticketCount">
         Noch <strong>{{ availableTickets$ | async }}</strong> Tickets verfügbar! <br>
     </div>
-    <div class="priceBoxes">
-        <div class="box" *ngFor="let ticketLevel of ticketLevels" [ngClass]="{ 'active': ticketLevel.active }" [matTooltip]="'ab ' + ticketLevel.activationDate">
+    <div class="priceBoxes" *ngIf="ticketLevels">
+        <div class="box" *ngFor="let ticketLevel of ticketLevels" [ngClass]="{ 'active': ticketLevel.active }" [matTooltip]="'ab ' + ticketLevel.activation_date_string">
             <div class="name">{{ ticketLevel.name }}</div>
-            <div style="font-size: 18px; font-weight: bold;">{{ ticketLevel.price }}€</div>
+            <div style="font-size: 18px; font-weight: bold;">{{ ticketLevel.regular_price }}€</div>
         </div>
     </div>
 
@@ -25,8 +25,9 @@
         <mat-form-field>
             <mat-label>E-Mail</mat-label>
             <input type="email" id="email" matInput formControlName="email" email>
-            <mat-error *ngIf="ticketInfos.get('email')?.hasError('email') && ticketInfos.get('email')?.touched">Gib eine gültige E-Mail
-                Adresse ein!</mat-error>
+            <mat-error *ngIf="ticketInfos.get('email')?.hasError('email') && ticketInfos.get('email')?.touched">
+                Gib eine gültige E-Mail Adresse ein!
+            </mat-error>
         </mat-form-field>
     
         <mat-form-field  matTooltip="Damit wir dich kontaktieren können, falls was schief geht. Zusätzlich landest du in der WhatsApp Gruppe!">
@@ -34,34 +35,35 @@
             <input type="tel" id="phone" matInput formControlName="phone">
         </mat-form-field>
 
-        <div [class.carpassDisabled]="availableCarPasses < 1">
+        <div [class.carpassDisabled]="availableCarPasses < 1" style="margin-top: 30px;">
             <!-- <img *ngIf="availableCarPasses < 1" src="../../../assets/ausverkauft.png" alt="" class="ausverkauft" style="z-index: -1;"> -->
             <mat-checkbox formControlName="carpass">
                 Carpass <br>
-                <p>
-                    Zahle 5€ mehr um in dein Auto auch auf dem Gelände schlummern zu lassen.
-                </p>
             </mat-checkbox>
+            <p class="indented" [ngStyle]="availableCarPasses < 1 ? {'opacity': 0.5} : {}">
+                Zahle 5€ mehr um dein Auto auch auf dem Gelände schlummern zu lassen. <br>
+                Außerhalb gibt es sonst auch in unmittelbarer Nähe genug Parkplätze zum Campen im Auto.
+            </p>
         </div>
-        <p class="indented" style="z-index: 0;">
-             Außerhalb gibt es sonst auch in unmittelbarer Nähe genug Parkplätze zum Campen im Auto.
-        </p>
-        <ng-container *ngIf="availableCarPasses < 1">
-            <mat-checkbox formControlName="carpassWanted">Carpass hätte ich gern noch genommen</mat-checkbox>
+        <div *ngIf="availableCarPasses < 1" class="indented">
+            <mat-checkbox formControlName="carpassWish">Carpass hätte ich wirklich gern noch genommen</mat-checkbox>
             <div class="indented">
-                <p>
-                    Für Statistikzwecke. Evtl. können wir einen Sponti-Carpass-Verkauf vor Ort ermöglichen, je nach Platzlage.
-                </p>
+                <p>Für Statistikzwecke. Evtl. können wir einen Sponti-Carpass-Verkauf vor Ort ermöglichen, je nach Platzlage.</p>
             </div>
-        </ng-container>
+        </div>
 
 
-        <div class="line" style="margin: 10px 0 15px 0; width: 100px;"></div>
+        <!-- <div class="line" style="margin: 10px 0 15px 0; width: 100px;"></div> -->
 
-        <mat-checkbox formControlName="helper">Ich möchte Helfer*in werden!</mat-checkbox>
-
-
-
+        <div class="infosButton">
+            <mat-checkbox formControlName="helper">Ich möchte Helfer*in werden!</mat-checkbox>
+            <button mat-raised-button (click)="openHelperDialog()" class="largeButton" aria-label="Infos zu den Schichten">
+                Infos zu den Schichten
+            </button>
+            <button mat-icon-button (click)="openHelperDialog()" color="white" class="smallButton" aria-label="Infos zu den Schichten ">
+                <mat-icon>infos</mat-icon>
+            </button>
+        </div>
 
         <div class="indented" *ngIf="ticketInfos.get('helper')!.value" [@slideInFromTop]>
             <!-- <div class="line" style="margin: 10px 0;"></div> -->
@@ -70,19 +72,10 @@
                 Bei mehr Arbeitszeit erhältst du weitere Aufwandsentschädigungen in Form von Getränke- und Essensmarken!
             </p>
                 
-
-
             <p>Bereiche in denen ich mich sehe:</p>
             <mat-form-field>
-                <!-- <mat-label>Bereiche in denen ich mich sehe!</mat-label> -->
-                <mat-select multiple formControlName="helperAreas">
-                    <mat-option [value]="'bar'">Bar</mat-option>
-                    <mat-option [value]="'küche'">Küche</mat-option>
-                    <mat-option [value]="'einlass'">Einlass</mat-option>
-                    <mat-option [value]="'awareness'">Awareness</mat-option>
-                    <mat-option [value]="'security'">Security</mat-option>
-                    <mat-option [value]="'aufbau'">Aufbau</mat-option>
-                    <mat-option [value]="'abbau'">Abbau</mat-option>
+                <mat-select multiple formControlName="helperShifts">
+                    <mat-option *ngFor="let shift of Global.helperShifts" [value]="shift.key">{{shift.value}}</mat-option>
                 </mat-select>
             </mat-form-field>
             <p>
@@ -93,19 +86,29 @@
 
             <div class="line" style="margin: 10px 0; width: 100px;"></div>
 
-            <p>Gib uns Infos über dich, z.B. wie deine zeitlichen Präferenzen für Arbeitszeiten so sind</p>
+            <p>
+                Gib uns Infos über dich, die wir wissen sollten. <br>
+                Z.B. deine zeitlichen Präferenzen für Arbeitszeiten auf dem Festival
+            </p>
 
             <mat-form-field>
                 <!-- <mat-label>Gib uns Infos über dich die wir wissen sollten und was deine zeitlichen Präferenzen sind.</mat-label> -->
-                <textarea matInput formControlName="helperComment"></textarea>
+                <textarea matInput formControlName="helperInfos"></textarea>
             </mat-form-field>
 
             <!-- <div class="line" style="margin-bottom: 20px;"></div> -->
         </div>
-        
-        <div class="line" style="margin: 15px 0 15px 0; width: 100px;"></div>
 
-        <mat-checkbox formControlName="agbsAccepted">Bei den AGBs bin ich sowas von dabei*</mat-checkbox>
+        <div *ngIf="availableHelperTickets < 1" class="indented">
+            <mat-checkbox formControlName="carpassWish">Ich wäre gerne noch Helfer*in geworden!</mat-checkbox>
+            <div class="indented">
+                <p>Als Notiz für uns. Falls wir doch mehr Helfer brauchen, als ursprünglich einkalkuliert kommen wir evtl. auf dich zurück.</p>
+            </div>
+        </div>
+        
+        <!-- <div class="line" style="margin: 15px 0 15px 0; width: 100px;"></div> -->
+
+        <mat-checkbox formControlName="agbsAccepted" style="margin-top: 30px;">Bei den AGBs bin ich sowas von dabei*</mat-checkbox>
         <mat-checkbox formControlName="dataProtectionAccepted">Datenschutzhinweise hab ich nicht gelesen, stimm' ich aber trotzdem zu!*</mat-checkbox>
     
         <div class="info">
@@ -131,43 +134,7 @@
     
         <mat-spinner *ngIf="isLoading"></mat-spinner>
         <div *ngIf="statusMessage">{{ statusMessage }}</div>
-    </form>
-    
-    <!-- <mat-stepper #stepper>
-        <mat-step [stepControl]="ticketInfos" errorMessage="Name is required.">
-            <form [formGroup]="ticketInfos">
-                <ng-template matStepLabel>Allgemeine Infos</ng-template>
-
-                <div>
-                    <p>Go to a different step to see the error state</p>
-                    <button mat-button matStepperNext>Next</button>
-                </div>
-            </form>
-        </mat-step>
-        <mat-step [stepControl]="helperInfos" errorMessage="Address is required.">
-            <form [formGroup]="helperInfos">
-                <ng-template matStepLabel>Helfer werden</ng-template>
-
-                <div>
-                    <p>Go to a different step to see the error state</p>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button matStepperNext>Next</button>
-                </div>
-            </form>
-        </mat-step>
-        <mat-step>
-            <ng-template matStepLabel>Kauf abschließen</ng-template>
-            <p>You are now done.</p>
-            <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button (click)="stepper.reset()">Reset</button>
-            </div>
-        </mat-step>
-    </mat-stepper> -->
-    
-    
-    
-    
+    </form>    
     
     <!-- debug -->
     <div class="ticketContainer">
@@ -177,9 +144,8 @@
             <p>Email: {{ ticket.email }}</p>
             <p>Phone: {{ ticket.phone }}</p>
             <p>Price: {{ ticket.price }}</p>
-            <p>Payed: {{ ticket.payed ? 'Yes' : 'No' }}</p>
             <p>Ticket Sent: {{ ticket.ticket_sent ? 'Yes' : 'No' }}</p>
-            <p>Created: {{ ticket.created }}</p>
+            <p>Created: {{ ticket.modified_at }}</p>
             <p>Status: {{ ticket.status }}</p>
             <p>Old TicketID: {{ ticket.old_ticketID }}</p>
         </div>

@@ -16,14 +16,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HomeComponent } from './views/home/home.component';
-import { DjCardComponent } from './components/dj-card/dj-card.component';
 import { TicketComponent } from './views/ticket/ticket.component';
 import { InfosComponent } from './views/infos/infos.component';
 import { KontaktComponent } from './views/kontakt/kontakt.component';
 import { ImpressumComponent } from './views/impressum/impressum.component';
 import { ParallaxComponent } from './parallax/parallax.component';
 import { TicketEditComponent } from './views/ticket-edit/ticket-edit.component';
-import { GaleryComponent } from './views/galery/galery.component';
 import { WidthObserverDirective } from './directives/width-observer.directive';
 import { InfoCardComponent } from './components/info-card/info-card.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -38,26 +36,30 @@ import { HelperComponent } from './views/helper/helper.component';
 import { LogoAnimationComponent } from './components/logo-animation/logo-animation.component';
 import { ScrollModifierDirective } from './directives/scroll-modifier.directive';
 import { MatStepperModule } from '@angular/material/stepper';
+import { TicketValidateComponent } from './views/ticket-validate/ticket-validate.component';
+import { HelperPopupComponent } from './components/helper-popup/helper-popup.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    DjCardComponent,
     TicketComponent,
     InfosComponent,
     KontaktComponent,
     ImpressumComponent,
     ParallaxComponent,
     TicketEditComponent,
-    GaleryComponent,
     WidthObserverDirective,
     InfoCardComponent,
     FooterComponent,
     HeaderComponent,
     HelperComponent,
     LogoAnimationComponent,
-    ScrollModifierDirective
+    ScrollModifierDirective,
+    TicketValidateComponent,
+    HelperPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +80,9 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatTooltipModule,
     MatExpansionModule,
     MatCheckboxModule,
-    MatStepperModule
+    MatStepperModule,
+    MatDialogModule,
+    MatTableModule
   ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }

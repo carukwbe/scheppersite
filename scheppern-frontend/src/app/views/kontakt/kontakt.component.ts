@@ -24,7 +24,6 @@ export class KontaktComponent {
   submit() {
     this.isLoading = true;
     this.form.disable();
-    console.log(this.form.value);
 
     setTimeout(() => {
       this.isLoading = false;

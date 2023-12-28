@@ -1,45 +1,95 @@
 
-<form *ngIf="ticket" [formGroup]="form">
-    <mat-form-field>
-        <mat-label>Vorname</mat-label>
-        <input type="text" id="name" matInput formControlName="name">
-    </mat-form-field>
+<div class="content">
 
-    <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input type="text" id="surname" matInput formControlName="surname">
-    </mat-form-field>
+    <form *ngIf="ticket" [formGroup]="form">
+        <div class="formular card">
+            <mat-form-field>
+                <mat-label>Vorname</mat-label>
+                <input type="text" id="name" matInput formControlName="name">
+            </mat-form-field>
+        
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input type="text" id="surname" matInput formControlName="surname">
+            </mat-form-field>
+        
+            <mat-form-field>
+                <mat-label>E-Mail</mat-label>
+                <input type="email" id="email" matInput formControlName="email" email>
+                <mat-error *ngIf="form.get('email')?.hasError('email') && form.get('email')?.touched">Gib eine gültige
+                    E-Mail Adresse ein!
+                </mat-error>
+                <mat-hint *ngIf="form.get('email')!.getRawValue() != oldEmail">Achtung, mit Änderung der E-Mail Adresse bestätigst du, dass du dein Ticket, an die der E-Mail Adresse zugehörigen Person, abgibst. <br>
+                    → Es wird eine Bestätigungsmail an die neue E-Mail rausgesendet. <br>
+                    → Sobald das neue Ticket angenommen wird, verliert dein Ticket seine Gültigkeit.
+                </mat-hint>
+            </mat-form-field>
+            <!-- notwendig für automatischen Platz, da Mat Design Spec nur 1 Zeilige Hints erlaubt -->
+            <p *ngIf="form.get('email')!.getRawValue() != oldEmail" style="opacity: 0;" [@slideInFromTop]>
+                Achtung, mit Änderung der E-Mail Adresse bestätigst du, dass du dein Ticket, an die der E-Mail Adresse zugehörigen Person, abgibst. <br>
+                Es wird dann eine Bestätigungsmail an die neue E-Mail rausgesendet. Sobald das neue Ticket angenommen wird, verliert dein Ticket seine Gültigkeit.
+            </p>
+    
+            <mat-form-field>
+                <mat-label>Telefonnummer</mat-label>
+                <input type="tel" id="phone" matInput formControlName="phone">
+            </mat-form-field>
+    
+    
+    
+            <div *ngIf="ticket.helper" class="boxAnnotation helper" style="margin-top: 20px;">
+                <p>Bereiche in denen ich mich sehe:</p>
+                <mat-form-field>
+                    <mat-select multiple formControlName="helperShifts">
+                        <mat-option *ngFor="let shift of Global.helperShifts" [value]="shift.key">{{shift.value}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <p>Infos über dich:</p>
+                <mat-form-field>
+                    <textarea matInput formControlName="helperInfos"></textarea>
+                </mat-form-field>
+            </div>
+        
+            <button mat-raised-button color="primary" (click)="submit()" [disabled]="form.invalid" style="margin-top: 30px;">
+                Ändere dein Ticket
+            </button>
+        
+            <mat-spinner *ngIf="isLoading"></mat-spinner>
+            <div *ngIf="statusMessage">{{ statusMessage }}</div>
+        </div>
 
-    <mat-form-field>
-        <mat-label>E-Mail</mat-label>
-        <input type="email" id="email" matInput formControlName="email" email>
-        <mat-error *ngIf="form.get('email')?.hasError('email') && form.get('email')?.touched">Gib eine gültige
-            E-Mail Adresse ein!</mat-error>
+        <div class="boxAnnotation infos card">
+            <table mat-table [dataSource]="tableInfos!" class="mat-elevation-z8" style="margin-bottom: 20px;" >
 
-    </mat-form-field>
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+              
+                <!-- Position Column -->
+                <ng-container matColumnDef="key">
+                  <th mat-header-cell *matHeaderCellDef> No. </th>
+                  <td mat-cell *matCellDef="let element"> {{element.key}} </td>
+                </ng-container>
+              
+                <!-- Name Column -->
+                <ng-container matColumnDef="value">
+                  <th mat-header-cell *matHeaderCellDef> Name </th>
+                  <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+                </ng-container>
+              
+                <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr> -->
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            <!-- <p>
+                Ticket ID: {{ ticket.id }}<br>
+                Order ID: {{ ticket.order_id }}<br>
+                Status: {{ ticket.status }}<br>
+            </p> -->
+        </div>
 
-    <mat-form-field>
-        <mat-label>Telefonnummer</mat-label>
-        <input type="tel" id="phone" matInput formControlName="phone">
-        <mat-hint>Lande in der WhatsApp Gruppe!</mat-hint>
-    </mat-form-field>
-
-    <mat-form-field>
-        <mat-label>Haus</mat-label>
-        <mat-select id="hogwarts_house" formControlName="hogwarts_house">
-            <mat-option value="Gryffindor">Gryffindor</mat-option>
-            <mat-option value="Hufflepuff">Hufflepuff</mat-option>
-            <mat-option value="Ravenclaw">Ravenclaw</mat-option>
-            <mat-option value="Slytherin">Slytherin</mat-option>
-        </mat-select>
-    </mat-form-field>
-
-    <button mat-raised-button color="primary" (click)="submit()" [disabled]="form.invalid">Ändere dein Ticket</button>
-
-    <mat-spinner *ngIf="isLoading"></mat-spinner>
-    <div *ngIf="statusMessage">{{ statusMessage }}</div>
-</form>
+    </form>
+</div>
 
 <div *ngIf="!ticket">
-    <h1>Kein Ticket gefunden</h1>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <div *ngIf="statusMessage">{{ statusMessage }}</div>
 </div>
