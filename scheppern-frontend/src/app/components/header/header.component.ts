@@ -19,14 +19,6 @@ export class HeaderComponent {
   // isHomePage: boolean = false;
   isMenuOpen: boolean = false;
 
-  // constructor(private router: Router) {
-  //   this.router.events.subscribe((event) => {
-  //     if (event instanceof NavigationEnd) {
-  //       this.isHomePage = event.url === '/';
-  //     }
-  //   });
-  // }
-
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }

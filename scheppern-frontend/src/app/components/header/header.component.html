@@ -12,7 +12,7 @@
 </div>
 
 <div class="navbarMobile" *ngIf="isMenuOpen" [@slideInFromTop]>
-    <p routerLink="/tickets" class="linkMobile">Tickets</p>
-    <p routerLink="/infos" class="linkMobile">Infos</p>
+    <p routerLink="/tickets" class="linkMobile" (click)="toggleMenu()">Tickets</p>
+    <p routerLink="/infos" class="linkMobile" (click)="toggleMenu()">Infos</p>
     <p routerLink="/turnier" class="linkMobile turnier">Turnier</p>
 </div>

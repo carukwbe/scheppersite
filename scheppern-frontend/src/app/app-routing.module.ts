@@ -8,17 +8,25 @@ import { TicketEditComponent } from './views/ticket-edit/ticket-edit.component';
 import { HelperComponent } from './views/helper/helper.component';
 import { KontaktComponent } from './views/kontakt/kontakt.component';
 import { TicketValidateComponent } from './views/ticket-validate/ticket-validate.component';
+import { AgbsComponent } from './views/agbs/agbs.component';
+import { TicketScanComponent } from './views/ticket-scan/ticket-scan.component';
+import { SiteNotFoundComponent } from './views/site-not-found/site-not-found.component';
+import { MailComponent } from './views/mail/mail.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'tickets', component: TicketComponent },
   { path: 'ticket/:id', component: TicketEditComponent },
   { path: 'validate_ticket/:id', component: TicketValidateComponent },
+  { path: 'scan_ticket/:id', component: TicketScanComponent },
   { path: 'infos', component: InfosComponent },
   { path: 'helfer', component: HelperComponent },
-  { path: 'impressum', component: ImpressumComponent },
   { path: 'kontakt', component: KontaktComponent },
-  { path: '**', redirectTo: '' }
+  { path: 'impressum', component: ImpressumComponent },
+  { path: 'agbs', component: AgbsComponent },
+  { path: 'mail', component: MailComponent},
+  { path: '404', component: SiteNotFoundComponent },
+  { path: '**', redirectTo: '/404' }
 ];
 
 @NgModule({

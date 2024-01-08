@@ -80,6 +80,12 @@ app-parallax {
 }
 
 .date {
+
+    font-family: gabriella, sans-serif;
+    font-style: normal;
+    font-weight: 900;
+
+
     font-family: 'Rubik', sans-serif;
     font-size: calc(5vw + 1em);
     line-height: 1em;

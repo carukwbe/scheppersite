@@ -16,6 +16,12 @@ import { Global } from 'src/environments/environment';
       state('*', style({ height: '*', margin: '*'})),
       transition('void => *', animate('200ms ease-out')),
       transition('* => void', animate('200ms ease-out'))
+    ]),
+    trigger('slideInFromTopWithOpacity', [
+      state('void', style({ height: '0', margin: '0', opacity: '-0.5'})),
+      state('*', style({ height: '*', margin: '*', opacity: '*'})),
+      transition('void => *', animate('200ms ease-out')),
+      transition('* => void', animate('200ms ease-out'))
     ])
   ]
 })
@@ -38,25 +44,30 @@ export class TicketEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => (this.id = params['id']));
+    this.getTicket(this.id);
+  }
 
-    this.ticketService.getSingleTicket(this.id).subscribe(
+  getTicket(id: string): void {
+    this.ticketService.getSingleTicket(id).subscribe(
       (ticket) => {
         this.isLoading = false;
-        if (ticket) {
-          console.log(ticket);
-          this.ticket = ticket;
-          this.oldEmail = ticket.email;
-          this.initializeForm(ticket);
-          this.tableInfos = [
-            { key: 'Ticket ID', value: ticket.id! },
-            { key: 'Order ID', value: ticket.order_id! },
-            { key: 'Status', value: ticket.status! }
-          ];
-        } else {
-          this.statusMessage = 'Ticket nicht gefunden.';
-        }
+
+        this.ticket = ticket; this.oldEmail = ticket.email;
+        
+        this.initializeForm(ticket);
+        this.tableInfos = [
+          { key: 'Ticket ID', value: ticket.id! },
+          { key: 'Order ID', value: ticket.order_id! },
+          { key: 'Carpass', value: ticket.carpass ? 'Ja' : 'Nein' },
+          { key: 'Helfer', value: ticket.helper ? 'Ja' : 'Nein' },
+          { key: 'Preis', value: ticket.price!.toString() + '€' },
+          { key: 'Bezahlt', value: ticket.status! == 'payed' ? 'Ja' : 'Nein' }
+        ];
       },
-      (error) => this.handleTicketError(error)
+      (error) => {
+        this.isLoading = false;
+        this.statusMessage = error;
+      }
     );
   }
 
@@ -67,9 +78,12 @@ export class TicketEditComponent implements OnInit {
       email: [ticket.email, [Validators.required, Validators.email]],
       phone: [ticket.phone, Validators.pattern(/^(?:\+?[0-9] ?){6,14}[0-9]$/)],
       helper: [ticket.helper],
-      helperShifts: [ticket.helper_job_preference],
-      helperInfos: [ticket.helper_time_preference]
+      helperShifts: [ticket.helper_shifts],
+      helperInfos: [ticket.helper_infos]
     });
+    if (ticket.status != 'payed') {
+      this.form.get('email')?.disable();
+    }
   }
 
   submit(): void {
@@ -78,19 +92,15 @@ export class TicketEditComponent implements OnInit {
 
     const inputData = { ...this.form.value, id: this.id };
 
-    this.ticketService.writeTicket(inputData).subscribe(
-      () => this.handleTicketSuccess(),
-      (error) => this.handleTicketError(error)
+    this.ticketService.writeTicket(inputData, true).subscribe(
+      status => this.handleSubmit(status),
+      error => this.handleSubmit(error)
     );
   }
 
-  handleTicketSuccess(): void {
+  handleSubmit(error: string): void {
+    this.getTicket(this.id);
     this.isLoading = false;
-    this.statusMessage = 'Ticket saved successfully.';
-  }
-
-  handleTicketError(error: any): void {
-    this.isLoading = false;
-    this.statusMessage = 'Fehler bei der Ticketabfrage: ' + error;
+    this.statusMessage = error;
   }
 }

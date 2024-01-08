@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container card">
+    <h1>Kontakt</h1>
     <p>
-        Zu allem was dir bezüglich Scheppern einfällt! <br>
-        Hast du Probleme bei irgendwas? Füg am besten direkt eine Mail oder Telefonnummer hinzu. Deine TicketID kann auch nicht
-        schaden, falls sie der Problembehebung dient. 👍
+        Feedback, Fragen, Anregungen? Schreib uns eine Nachricht! Wir freuen uns über jede Nachricht.
+        Vergiss nicht Kontaktinformation von dir, falls du eine Rückmeldung erwartest. Deine Ticket ID kann auch nicht schaden, falls du Probleme mit deinem Ticket hast. 👍
     </p>
     
     <form [formGroup]="form">
@@ -11,7 +11,11 @@
             <input type="text" id="name" matInput formControlName="email">
         </mat-form-field>
         <mat-form-field>
-            <mat-label>TicketID</mat-label>
+            <mat-label>Telefonnummer</mat-label>
+            <input type="text" id="name" matInput formControlName="phone">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Ticket ID</mat-label>
             <input type="text" id="name" matInput formControlName="ticketID">
         </mat-form-field>
 
@@ -22,7 +26,7 @@
 
     
     
-        <button mat-raised-button color="primary" (click)="submit()" [disabled]="form.invalid">
+        <button mat-raised-button color="primary" (click)="submit()" [disabled]="form.invalid" style="width: fit-content; align-self: center;">
             Nachricht abschicken
         </button>
     

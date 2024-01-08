@@ -1,0 +1,26 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<ng-container *ngIf="success">
+
+    <div class="boxAnnotation ticket card">
+        <p>{{name}} {{surname}}</p>
+
+        <table>
+            <tr>
+                <td>Order ID</td>
+                <td>{{orderID}}</td>
+            </tr>
+            <tr>
+                <td>Carpass</td>
+                <td>{{carpass ? 'Ja' : 'Nein'}}</td>
+            </tr>
+            <tr>
+                <td>Helfer</td>
+                <td>{{helper ? 'Ja' : 'Nein'}}</td>
+            </tr>
+        </table>
+
+    </div>
+</ng-container>
+<ng-container *ngIf="!success">
+    <p>{{ statusMessage }}</p>
+</ng-container>

@@ -6,7 +6,7 @@
 <div mat-dialog-content class="dialogContent">
     <h1 mat-dialog-title>Schichten</h1>
     <mat-tab-group dynamicHeight>
-        <mat-tab *ngFor="let cat of categoryOptions" [label]="cat.name">
+        <mat-tab *ngFor="let cat of Global.helperShifts" [label]="cat.value">
             <div class="tabContent">
                 {{cat.description}}
             </div>

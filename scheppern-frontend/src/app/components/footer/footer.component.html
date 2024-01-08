@@ -27,9 +27,9 @@
             </div>
         </a>
 
+        <!-- {'tooltip': 'Der Verein', 'icon': 'groups', 'link': '/verein'}, -->
         <div 
             *ngFor="let item of [
-                {'tooltip': 'Der Verein', 'icon': 'groups', 'link': '/verein'}, 
                 {'tooltip': 'Kontakt', 'icon': 'email', 'link': '/kontakt'},
             ]" 
             class="buttonBG outlineBG" 
@@ -57,8 +57,8 @@
     
     
     <ul class="links" style="grid-area: links;">
-        <li>Impressum</li>
-        <li>AGBs</li>
+        <li [routerLink]="'/impressum'">Impressum</li>
+        <li [routerLink]="'/agbs'">AGBs</li>
         <li>Datenschutzhinweise</li>
     </ul>
     

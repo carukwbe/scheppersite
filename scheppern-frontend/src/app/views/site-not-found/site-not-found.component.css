@@ -1,11 +1,11 @@
 :host {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    justify-items: center;
     align-items: center;
+    justify-content: center;
     height: 100%;
-}
-p {
+    font-size: 17px;
+    gap: calc(30px + 1vw);
     text-align: center;
+    padding: 0 10px;
 }

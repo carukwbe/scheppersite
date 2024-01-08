@@ -1,4 +1,3 @@
-
 <div class="content">
 
     <form *ngIf="ticket" [formGroup]="form">
@@ -13,7 +12,7 @@
                 <input type="text" id="surname" matInput formControlName="surname">
             </mat-form-field>
         
-            <mat-form-field>
+            <mat-form-field [matTooltip]="ticket.status != 'payed' ? 'Bezahle erste dein Ticket!' : ''">
                 <mat-label>E-Mail</mat-label>
                 <input type="email" id="email" matInput formControlName="email" email>
                 <mat-error *ngIf="form.get('email')?.hasError('email') && form.get('email')?.touched">Gib eine gültige
@@ -24,8 +23,8 @@
                     → Sobald das neue Ticket angenommen wird, verliert dein Ticket seine Gültigkeit.
                 </mat-hint>
             </mat-form-field>
-            <!-- notwendig für automatischen Platz, da Mat Design Spec nur 1 Zeilige Hints erlaubt -->
-            <p *ngIf="form.get('email')!.getRawValue() != oldEmail" style="opacity: 0;" [@slideInFromTop]>
+            <!-- notwendig für automatischen Platz, da Mat Design Spec nur 1 zeilige Hints erlaubt -->
+            <p *ngIf="form.get('email')!.getRawValue() != oldEmail" [@slideInFromTop] style="opacity: 0;">
                 Achtung, mit Änderung der E-Mail Adresse bestätigst du, dass du dein Ticket, an die der E-Mail Adresse zugehörigen Person, abgibst. <br>
                 Es wird dann eine Bestätigungsmail an die neue E-Mail rausgesendet. Sobald das neue Ticket angenommen wird, verliert dein Ticket seine Gültigkeit.
             </p>
@@ -37,7 +36,7 @@
     
     
     
-            <div *ngIf="ticket.helper" class="boxAnnotation helper" style="margin-top: 20px;">
+            <div *ngIf="ticket.helper" class="helper boxAnnotation" style="margin-top: 20px;">
                 <p>Bereiche in denen ich mich sehe:</p>
                 <mat-form-field>
                     <mat-select multiple formControlName="helperShifts">
@@ -50,40 +49,42 @@
                 </mat-form-field>
             </div>
         
-            <button mat-raised-button color="primary" (click)="submit()" [disabled]="form.invalid" style="margin-top: 30px;">
+            <!-- todo disable when helper is active also -->
+            <button 
+                mat-raised-button 
+                color="primary" 
+                (click)="submit()" 
+                [disabled]="form.invalid || (
+                    form.get('name')!.getRawValue() == ticket.name &&
+                    form.get('surname')!.getRawValue() == ticket.surname &&
+                    form.get('email')!.getRawValue() == ticket.email &&
+                    form.get('phone')!.getRawValue() == ticket.phone &&
+                    form.get('helperShifts')!.getRawValue() == ticket.helper_shifts &&
+                    form.get('helperInfos')!.getRawValue() == ticket.helper_infos
+                )"
+                style="margin-top: 30px;"
+            >
                 Ändere dein Ticket
             </button>
-        
-            <mat-spinner *ngIf="isLoading"></mat-spinner>
-            <div *ngIf="statusMessage">{{ statusMessage }}</div>
+            
+            <div *ngIf="isLoading" [@slideInFromTopWithOpacity]>
+                <mat-spinner style="margin-top: 20px;"></mat-spinner>
+            </div>
+            <div *ngIf="statusMessage" style="margin-top: 20px;">{{ statusMessage }}</div>
         </div>
 
         <div class="boxAnnotation infos card">
-            <table mat-table [dataSource]="tableInfos!" class="mat-elevation-z8" style="margin-bottom: 20px;" >
-
-                <!--- Note that these columns can be defined in any order.
-                      The actual rendered columns are set as a property on the row definition" -->
-              
-                <!-- Position Column -->
+            <table mat-table [dataSource]="tableInfos!" style="margin-bottom: 20px;">
                 <ng-container matColumnDef="key">
-                  <th mat-header-cell *matHeaderCellDef> No. </th>
-                  <td mat-cell *matCellDef="let element"> {{element.key}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.key}} </td>
                 </ng-container>
-              
-                <!-- Name Column -->
+                
                 <ng-container matColumnDef="value">
-                  <th mat-header-cell *matHeaderCellDef> Name </th>
-                  <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.value}} </td>
                 </ng-container>
-              
-                <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr> -->
+                
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              </table>
-            <!-- <p>
-                Ticket ID: {{ ticket.id }}<br>
-                Order ID: {{ ticket.order_id }}<br>
-                Status: {{ ticket.status }}<br>
-            </p> -->
+            </table>
         </div>
 
     </form>

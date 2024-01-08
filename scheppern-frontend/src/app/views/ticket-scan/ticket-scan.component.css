@@ -1,0 +1,36 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    height: 100%;
+}
+
+.ticket {
+    --annotatedText: 'Ticket';
+    /* border: 1px solid rgba(255, 255, 255, 0.5); */
+    font-size: calc(18px + 0.2vw);
+    padding: calc(20px + 1vw) calc(20px + 1.5vw)
+}
+
+p {
+    text-align: center;
+    margin: 20px 0 30px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+th, td {
+    /* border: 1px solid #ccc; */
+    padding: calc(10px + 0.7vw);
+    text-align: left;
+}
+
+tr:not(:first-child) td {
+    border-top: 1px solid rgba(255, 255, 255, 0.4); /* Add horizontal line between rows */
+}

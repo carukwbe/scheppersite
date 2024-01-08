@@ -1,22 +1,24 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TicketService } from 'src/app/ticket-service.service'; 
-
+import { TicketService } from 'src/app/ticket-service.service';
 
 @Component({
-  selector: 'app-ticket-validate',
-  templateUrl: './ticket-validate.component.html',
-  styleUrls: ['./ticket-validate.component.css']
+  selector: 'app-ticket-scan',
+  templateUrl: './ticket-scan.component.html',
+  styleUrls: ['./ticket-scan.component.css']
 })
-export class TicketValidateComponent {
+export class TicketScanComponent {
   isLoading = true;
   success = false;
+  id: string | null = null;
   statusMessage = "";
 
-  
-  id: string | null = null;
   surname: string | null = null;
   name: string | null = null;
+  orderID: string | null = null;
+  carpass: boolean | null = null;
+  helper: boolean | null = null;
+
 
   constructor(
     private ticketService: TicketService, 
@@ -28,13 +30,16 @@ export class TicketValidateComponent {
   }
 
   ngOnInit() {
-    this.ticketService.processTicket(this.id!, 'validate_ticket').subscribe(
+    this.ticketService.processTicket(this.id!, 'scan_ticket').subscribe(
       (result) => {
         this.isLoading = false;
         this.success = true;
 
+        this.orderID = result.order_id;
         this.name = result.name;
         this.surname = result.surname;
+        this.carpass = result.carpass;
+        this.helper = result.helper;
       },
       (error) => {
         this.isLoading = false;

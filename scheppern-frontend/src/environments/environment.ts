@@ -8,25 +8,28 @@ export const environment = {
     authDomain: 'scheppersite.firebaseapp.com',
     messagingSenderId: '106030566145',
   },
-    firebaseConfig: {
-        apiKey: 'AIzaSyB0pKhxP6HD0bUM6a4fcHVyystaTa-VHFM',
-        authDomain: 'scheppersite.firebaseapp.com',
-        // authDomain: 'localhost',
-        projectId: 'scheppersite',
-        storageBucket: 'scheppersite.appspot.com',
-        messagingSenderId: '106030566145',
-        appId: '1:106030566145:web:cc4aec14e4d2167b5c2900',
-    },
-    // Add emulator settings
-    useEmulators: false,
-    emulatorHost: 'localhost',
-    emulatorPort: 8080, // Firestore emulator port
-    production: false,
+  // Add emulator settings
+  useEmulators: false,
+  emulatorHost: 'localhost',
+  emulatorPort: 8080, // Firestore emulator port
+  production: false
 };
 
 export const Global = {
   darkMode: false,
   helperShifts: [{
+    key: 'einlass',
+    value: 'Einlass',
+    description: `
+      Leider durften wir letztes Jahr feststellen, dass wir doch nicht ganz nur wir waren auf dem Festival. Es haben sich eine
+      Handvoll ungebetene Gäste unter uns geschlichen und auch einen erheblichen finanziellen Schaden verursacht. Um dies
+      diesmal zu verhindern müssen wir leider den Einlass intensiver bewachen. Da wir 2 Eingänge haben ist das natürlich
+      doppelt ärgerlich. Für ein bisschen Entertainment am Eingang werden wir auf jeden Fall sorgen!
+      Gerne könnt ihr dort auch mit euren Homies chillen, allerdings sollte natürlich ein offenes Auge auf den Eingang zu
+      jeder Zeit gewährleistet sein! Ihr bekommt eine Funke in die Hand und habt jederzeit die Möglichkeit Security zu rufen,
+      falls ihr Probleme bekommt! Zu Stoßzeiten wird Security aber auch selber dort sein!
+      `
+    }, {
       key: 'bar',
       value: 'Bar',
       description: `
@@ -41,18 +44,6 @@ export const Global = {
         du selber Kocherfahrung mitbringen und Lust haben ein Gericht zu übernehmen, schreib es uns, dann planen wir
         zusammen!
       `
-    }, {
-      key: 'einlass',
-      value: 'Einlass',
-      description: `
-        Leider durften wir letztes Jahr feststellen, dass wir doch nicht ganz nur wir waren auf dem Festival. Es haben sich eine
-        Handvoll ungebetene Gäste unter uns geschlichen und auch einen erheblichen finanziellen Schaden verursacht. Um dies
-        diesmal zu verhindern müssen wir leider den Einlass intensiver bewachen. Da wir 2 Eingänge haben ist das natürlich
-        doppelt ärgerlich. Für ein bisschen Entertainment am Eingang werden wir auf jeden Fall sorgen!
-        Gerne könnt ihr dort auch mit euren Homies chillen, allerdings sollte natürlich ein offenes Auge auf den Eingang zu
-        jeder Zeit gewährleistet sein! Ihr bekommt eine Funke in die Hand und habt jederzeit die Möglichkeit Security zu rufen,
-        falls ihr Probleme bekommt! Zu Stoßzeiten wird Security aber auch selber dort sein!
-        `
     }, {
       key: 'awareness',
       value: 'Awareness',

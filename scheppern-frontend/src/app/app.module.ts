@@ -40,6 +40,10 @@ import { TicketValidateComponent } from './views/ticket-validate/ticket-validate
 import { HelperPopupComponent } from './components/helper-popup/helper-popup.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
+import { AgbsComponent } from './views/agbs/agbs.component';
+import { TicketScanComponent } from './views/ticket-scan/ticket-scan.component';
+import { SiteNotFoundComponent } from './views/site-not-found/site-not-found.component';
+import { MailComponent } from './views/mail/mail.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +63,11 @@ import { MatTableModule } from '@angular/material/table';
     LogoAnimationComponent,
     ScrollModifierDirective,
     TicketValidateComponent,
-    HelperPopupComponent
+    HelperPopupComponent,
+    AgbsComponent,
+    TicketScanComponent,
+    SiteNotFoundComponent,
+    MailComponent
   ],
   imports: [
     BrowserModule,

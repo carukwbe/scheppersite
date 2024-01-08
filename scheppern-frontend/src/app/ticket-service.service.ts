@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { connectFunctionsEmulator, HttpsCallableResult, getFunctions, Functions, httpsCallable } from 'firebase/functions';
-import { connectFirestoreEmulator, getFirestore, Firestore, collection, onSnapshot, doc, getDoc, DocumentSnapshot, getDocs } from 'firebase/firestore';
+import { connectFirestoreEmulator, getFirestore, Firestore, collection, onSnapshot, DocumentData } from 'firebase/firestore';
 import { Ticket, TicketLevel } from 'src/models';
 import { environment } from '../environments/environment';
-import { Observable, from, map } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,30 +24,77 @@ export class TicketService {
     }
   }
 
-  getAvailableTickets(): Observable<number> {
-    const ticketCountTrigger = httpsCallable(this.functions, 'tickets_available');
+  // gets the entire collection
+  getFirestoreCollection(collectionName: string): Observable<any[]> {
+    const collectionRef = collection(this.firestore, collectionName);
 
     return new Observable((observer) => {
-      // Trigger the Cloud Function
-      ticketCountTrigger()
-        .then((result) => {
-          const initialCount = result.data as number;
-          observer.next(initialCount);
-        })
-        .catch((error) => {
+      const unsubscribe = onSnapshot(collectionRef, 
+        (querySnapshot) => {
+          const documents: any[] = [];
+          querySnapshot.forEach((doc) => {
+            documents.push({
+              id: doc.id,
+              ...doc.data() as DocumentData
+            });
+          });
+          observer.next(documents);
+        },
+        (error) => {
           observer.error(error);
-        });
+        }
+      );
+
+      // Unsubscribe from the snapshot listener when the observable is unsubscribed
+      return () => unsubscribe();
     });
   }
 
-  getTicketInfo(): Observable<TicketLevel[]> {
-    const infoTrigger = httpsCallable(this.functions, 'get_ticket_levels');
+  // gets ticket levels from collection, processes date format 
+  getTicketLevels(): Observable<any> {
+    const levelsCollection = collection(this.firestore, 'price_levels');
 
     return new Observable((observer) => {
-      infoTrigger()
+      const unsubscribe = onSnapshot(levelsCollection, (querySnapshot) => {
+        const levels = querySnapshot.docs.map(
+          (doc) => {
+            const levelData = doc.data() as TicketLevel;
+
+            const dateFrom = levelData.active_from.toDate();
+            const dateUntil = levelData.active_until.toDate();
+            const now = new Date();
+
+            levelData.active = dateFrom <= now && dateUntil >= now;
+            levelData.future = dateFrom > now;
+            
+            // prepare date strings from firebase timestamp
+            levelData.active_from_string  =  dateFrom.toLocaleDateString('de-DE', { year: 'numeric', month: '2-digit', day: '2-digit' });
+            levelData.active_until_string = dateUntil.toLocaleDateString('de-DE', { year: 'numeric', month: '2-digit', day: '2-digit' });
+            
+            console.log("level: ", levelData.name);
+            console.log("datefrom: ", dateFrom);
+            console.log("dateuntil: ", dateUntil);
+            console.log("now: ", now);
+            console.log("")
+            return levelData;
+          });
+          observer.next(levels);
+        },
+        (error) => {
+          observer.error(error);
+        }
+      );
+      return () => unsubscribe();
+    });
+  }
+
+  getSingleTicket(ticketID: string): Observable<Ticket> {
+    const infoTrigger = httpsCallable(this.functions, 'get_ticket');
+
+    return new Observable((observer) => {
+      infoTrigger(ticketID)
         .then((result: any) => {
-          const parsedData = { ticket_levels: JSON.parse(result.data.ticket_levels) };
-          observer.next(parsedData.ticket_levels);
+          observer.next(result.data);
         })
         .catch((error) => {
           observer.error(error);
@@ -55,27 +102,53 @@ export class TicketService {
     });
   }
 
-  // // with a collection
-  // getTicketInfo(): Observable<any> {
-  //   const infoCollection = collection(this.firestore, 'price_levels');
+  // creates or updates ticket
+  writeTicket(ticket: Ticket, update: boolean = false): Observable<string> {
+    const writeTicketTrigger = httpsCallable(this.functions, update ? 'edit_ticket' : 'create_ticket');
 
-  //   return new Observable((observer) => {
-  //     onSnapshot(infoCollection, (querySnapshot) => {
-  //       const info = querySnapshot.docs.map((doc) => {
-  //         const infoData = doc.data() as TicketLevel;
+    return new Observable((observer) => {
+      writeTicketTrigger(ticket)
+        .then((result: any) => {
+            observer.next(result.data);
+        })
+        .catch((error) => {
+            observer.error(error);
+        });
+    });
+  }
 
-  //         // prepare date string from firebase timestamp
-  //         const date = infoData.activation_date.toDate();
-  //         infoData.activation_date_string = date.toLocaleDateString('de-DE', { year: 'numeric', month: '2-digit', day: '2-digit' });
+  sendMessage(message: string): Observable<string> {
+    console.log("message: ", message);
+    const sendMessageTrigger = httpsCallable(this.functions, 'save_message_from_contact_form');
 
-  //         return infoData;
-  //       });
-  //       observer.next(info);
-  //     });
-  //   });
-  // }
+    return new Observable((observer) => {
+      sendMessageTrigger(message)
+        .then((result: any) => {
+          observer.next(result.data);
+        })
+        .catch((error) => {
+          observer.error(error);
+          console.log(error);
+        });
+    });
+  }
 
+  // scan or validate ticket
+  processTicket(ticketID: string, action: string): Observable<any> {
+    const processTicketTrigger = httpsCallable<any, string>(this.functions, action);
 
+    return new Observable((observer) => {
+      processTicketTrigger(ticketID)
+        .then((result: HttpsCallableResult<string>) => {
+          observer.next(result.data);
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+
+  // debug
   getAllTickets(): Observable<Ticket[]> {
     const ticketsCollection = collection(this.firestore, 'tickets');
 
@@ -88,54 +161,6 @@ export class TicketService {
         });
         observer.next(tickets);
       });
-    });
-  }
-
-  getSingleTicket(docID: string): Observable<Ticket | null> {
-    const docRef = doc(this.firestore, 'tickets', docID);
-
-    return new Observable((observer) => {
-      getDoc(docRef)
-        .then((docSnap: DocumentSnapshot) => {
-          if (docSnap.exists()) {
-            const ticketData = docSnap.data() as Ticket;
-            ticketData.id = docSnap.id;
-            observer.next(ticketData);
-          } else {
-            observer.next(null);
-          }
-        })
-        .catch((error) => {
-          observer.error(error);
-        });
-    });
-  }
-
-  writeTicket(ticket: Ticket): Observable<string> {
-    const writeTicketTrigger = httpsCallable<Ticket, string>(this.functions, 'write_ticket');
-
-    return new Observable((observer) => {
-      writeTicketTrigger(ticket)
-        .then((result: HttpsCallableResult<string>) => {
-          observer.next(result.data);
-        })
-        .catch((error) => {
-          observer.error(error);
-        });
-    });
-  }
-
-  validateTicket(ticketID: string): Observable<any> {
-    const writeTicketTrigger = httpsCallable<any, string>(this.functions, 'validate_ticket');
-
-    return new Observable((observer) => {
-      writeTicketTrigger(ticketID)
-        .then((result: HttpsCallableResult<string>) => {
-          observer.next(result.data);
-        })
-        .catch((error) => {
-          observer.error(error);
-        });
     });
   }
 }
