@@ -1,7 +1,7 @@
 // scroll-modifier.directive.ts
 
 import { Directive, Input, OnInit, ElementRef } from '@angular/core';
-import { ScrollService } from '../scroll.service';
+import { ScrollService } from '../services/scroll.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { capToRange, mapStartRangeToEndRange, mapToBezier } from '../utils';
@@ -28,7 +28,7 @@ export class ScrollModifierDirective implements OnInit {
   ngOnInit() {
     if ( 
       this.bezierFunction.scroll.start === this.bezierFunction.scroll.end ||
-      this.bezierFunction.bezier.length != 4
+      this.bezierFunction.bezier.length!==4
     ) { console.error("appScrollModifier got invalid values"); return; }
 
     this.scrollService.scroll$

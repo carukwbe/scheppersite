@@ -1,0 +1,38 @@
+
+
+:host {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+h1 {
+    margin-top: 50px;
+    text-align: center;
+}
+
+section {
+    margin-bottom: 20px;
+}
+section p {
+    margin-left: 40px;
+}
+
+
+.styled-list {
+    list-style-type: none;
+    counter-reset: alphabet-counter;
+}
+
+.styled-list li {
+    position: relative;
+    margin-bottom: 10px; /* Adjust the spacing between items as needed */
+}
+
+.styled-list li:before {
+    content: counter(alphabet-counter, upper-alpha);
+    counter-increment: alphabet-counter;
+    position: absolute;
+    left: -20px; /* Adjust the positioning of the alphabet counter */
+    font-weight: bold;
+}

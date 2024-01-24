@@ -1,68 +1,22 @@
-
-
 <div class="parallax" id="scrollContainer" #scrollContainer>
-    <app-parallax style="z-index: 0;"></app-parallax>
+    <app-parallax style="z-index: 1;"></app-parallax>
     <div class="contentContainer">
-        <!-- <img class="jungleImage" src="/assets/jungle5.jpg" alt=""> -->
         <div class="jungleContainer">
             <img class="jungleImage" src="/assets/jungle5.jpg" alt="">
         </div>
-            <!-- <div class="links2">
-                <div class="link tickets" routerLink="/tickets">Tickets</div>
-                <div class="link infos" routerLink="/infos">Infos</div>
-                <div class="link turnier" routerLink="/">Turnier</div>
-            </div>
-        </div> -->
 
-
-        <div class="content">            
-            <p class="date">
-                23. - 26.05.2024 <br>
+        <div class="content">
+            <p class="date fontGabriella">
+                23. - 26.05.24<br>
                 Windpark Druiberg
             </p>
 
-            <!-- <div class="links">
-                <div class="link tickets" routerLink="/tickets">Tickets</div>
-                <div class="link infos" routerLink="/infos">Infos</div>
-                <div class="link turnier" routerLink="/">Turnier</div>
-            </div> -->
-            <!-- <div class="link helfer" routerLink="/helfer">Helfer*in werden</div> -->
-
-
+            <div class="link clickable fontGabriella" matTooltip="Ab dem 04.02.2024">Tickets</div>
+            <div class="link active clickable fontGabriella" routerLink="/infos">Infos</div>
+            <div class="links fontGabriella">
+                <!-- <div class="link turnier" routerLink="/">Turnier</div> -->
+            </div>
         </div>
-        <app-footer></app-footer>
-        <div class="links">
-            <div class="link tickets" routerLink="/tickets">Tickets</div>
-            <div class="link infos" routerLink="/infos">Infos</div>
-            <div class="link turnier" routerLink="/">Turnier</div>
-        </div>
+        <app-footer></app-footer>        
     </div>
 </div>
-
-
-
-
-<!-- <div class="infoBackground">
-        <p class="infoText">
-            "Beim <strong>Scheppern auf Brettern</strong> des Klangkollektiv Braunschweig e.V. verschmelzen elektronische Klänge mit der rauen Naturkulisse eines gewaltigen Windparks.
-            Ein atemberaubendes Festival, das Musik und Natur vereint, um dich in ein audiovisuelles Abenteuer zu entführen."
-        </p>
-    </div> -->
-
-
-
-
-<!-- <app-info-card [citation]="'ChatGPT'">
-    "Beim <strong>Scheppern auf Brettern</strong> des Klangkollektiv Braunschweig e.V. verschmelzen elektronische Klänge mit der rauen Naturkulisse eines gewaltigen Windparks.
-    Ein atemberaubendes Festival, das Musik und Natur vereint, um dich in ein audiovisuelles Abenteuer zu entführen."
-</app-info-card> -->
-
-
-
-
-
-
-
-<!-- <app-cursor class="cursor" [style.top]="top" [style.left]="left"></app-cursor> -->
-
-

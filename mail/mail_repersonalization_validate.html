@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Scheppern auf Brettern Ticket</title>
+        <link rel="stylesheet" href="mail.css">
+    </head>
+    <body>
+        <div class="container card">         
+            <p>Hey {{ name }},</p>
+            <p>
+                Es hat jemand ein Ticket für das wahnsinnige
+            </p>
+            <h1 style="margin-bottom: 20px;">Scheppern auf Brettern Festival {{ year }}</h1>
+            <p>
+                locker gemacht für dich! Du erhältst dieses E-Mail, weil jemand sein personalisiertes Ticket auf dich übertragen möchte. Dein Name oder andere Daten sind noch falsch? Keine Sorge mit Erhalt deines Tickets bekommst du zusätzlich einen ganz persönlichen Link, mit dem du deine Daten noch ändern kannst.
+            </p>
+
+            <p>
+                Mit Klick auf folgenden Link nimmst du das Ticket an und bestätigst unserere <a href="https://www.scheppernaufbrettern.de/agbs">AGBs</a> und <a href="https://www.scheppernaufbrettern.de/datenschutz">Datenschutzerklärungen</a> gelesen und akzeptiert zu haben. Außerdem erklärst du, dass du zum Zeitpunkt des Festivals über 18 Jahre alt bist.
+            </p>
+            <a href="https:www.scheppernaufbrettern.de/validate_ticket/{{ ticket_ID }}">
+                <button>Ticket annehmen</button>
+            </a>
+            <p>
+                Wir freuen uns wahnsinnig dich begrüßen zu dürfen, wir warten jetzt schon am Eingang ganz sehnsüchtig. <br>
+                Dein Scheppern auf Brettern Team
+            </p>
+        </div>
+    </body>
+</html>

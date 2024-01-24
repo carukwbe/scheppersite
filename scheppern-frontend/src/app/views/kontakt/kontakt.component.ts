@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { TicketService } from 'src/app/ticket-service.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TicketService } from 'src/app/services/ticket-service.service';
+import { emailValidators, phoneValidators, textValidators, ticketIDValidators } from 'src/app/validators';
+import { Global } from 'src/environments/environment';
 
 @Component({
   selector: 'app-kontakt',
@@ -19,11 +21,16 @@ export class KontaktComponent {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      email: [''],
-      phone: [''],
-      ticketID: [''],
-      message: ['']
+      email: ['', emailValidators],
+      phone: ['', phoneValidators],
+      ticketID: ['', ticketIDValidators],
+      message:  ['', [Validators.required, ...textValidators]]
     });
+  }
+
+  getError(controlName: string, errorType: string): boolean {
+    const control = this.form.get(controlName);
+    return !!control?.hasError(errorType) && !!control?.touched;
   }
 
   submit() {
@@ -33,7 +40,7 @@ export class KontaktComponent {
     this.ticketService.sendMessage(this.form.value).subscribe(
       (result) => {
         this.isLoading = false;
-        this.statusMessage = "Ticket erfolgreich gespeichert.";
+        this.statusMessage = result;
       },
       (error) => {
         this.isLoading = false;

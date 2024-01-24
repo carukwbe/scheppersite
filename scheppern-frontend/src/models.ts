@@ -1,3 +1,4 @@
+import { AbstractControl, FormGroup } from "@angular/forms";
 import { Timestamp } from "firebase/firestore";
 
 export interface Ticket {
@@ -9,16 +10,37 @@ export interface Ticket {
     email: string;
     phone?: string;
 
-    status?: "ordered" | "payed" | "pending";
-    modified_at?: Date;
+    status?: "ordered" | "payed" | "pending" | "scanned";
     price?: number;
     carpass: boolean;
     helper: boolean;
     helper_shifts?: string;
     helper_infos?: string;
 
-    ticket_sent?: boolean;
     old_ticketID?: string;
+    secret?: boolean;
+}
+
+export interface TicketForm extends FormGroup {
+    controls: {
+        name: AbstractControl;
+        surname: AbstractControl;
+        email: AbstractControl;
+        phone: AbstractControl;
+
+        carpass: AbstractControl;
+        carpassWish: AbstractControl;
+
+        helper: AbstractControl;
+        helperWish: AbstractControl;
+        helperShifts: AbstractControl;
+        helperInfos: AbstractControl;
+
+        agbsAccepted: AbstractControl;
+        dataProtectionAccepted: AbstractControl;
+        over18: AbstractControl;
+        secret?: AbstractControl;
+    };
 }
 
 

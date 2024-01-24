@@ -1,0 +1,13 @@
+:host {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+
+p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    line-height: 2em;
+
+}

@@ -1,3 +1,18 @@
+app-slider {
+    position: absolute;
+    bottom: 150px;
+
+    transform: translateX(-6%);
+    z-index: 5;
+
+    @media screen and (max-width: 550px) {
+        bottom: 250px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+
 :host {
     display: grid;
     position: relative;
@@ -5,13 +20,14 @@
     width: 100vw;
     justify-items: center;
 
-    background-color: var(--accent-color1);
     box-sizing: border-box;
-    /* margin: 0 100px; */
+
     padding: 0 30px;
+    background-color: var(--accent-color1);
 }
 
 .footerElements {
+
     display: flex;
     gap: 40px;
 
@@ -21,10 +37,6 @@
     color: var(--text-color);
     justify-content: space-around;
 }
-
-
-
-
 
 
 @media (max-width: 550px) {
@@ -67,7 +79,7 @@
     display: flex;
     justify-content: center;
     /* margin-left: 10%; */
-    z-index: 10;
+    z-index: 2;
 }
 
 .stamm {
@@ -148,38 +160,4 @@
 li:hover {
     color: var(--accent-color2);
     cursor: pointer;
-}
-
-
-
-
-
-
-.slider-container {
-
-    display: grid;
-    grid-template-columns: 0.1fr 1fr;
-    align-items: center;
-    
-    /* horizontal gap */
-    gap: 0 20px;
-
-    right: 50px;
-    text-align: right;
-}
-
-mat-slider {
-    width: 100%;
-}
-
-@media (max-width: 1000px) {
-    .slider-container {
-        display: none;
-    }
-}
-
-.alpha {
-    width: 100px;
-    transform: rotate(270deg);
-    /* transform-origin: bottom left; */
 }

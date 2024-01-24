@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bestätigung deiner Ticketbestellung</title>
+        <link rel="stylesheet" href="mail.css">
+    </head>
+    <body>
+        <div class="container card">
+            <h3 style="margin: 0;">Bestätigung deiner Ticketbestellung für das</h3>
+            <h1>Scheppern auf Brettern Festival {{ year }}</h1>
+            
+            <p>Hey {{ name }},</p>
+            <p>
+                Es ist bereits 7 Tage her, und wir haben leider noch kein Geld von dir verbuchen können!
+                Zahle bitte bis spätestens dem {{ expired_date }} die {{ price }}€ an folgendes Konto:
+            </p>
+
+            <div class="card boxAnnotation bank-details">
+                <p class="key">Name</p>
+                <p class="value">Klangkollektiv Braunschweig e.V.</p>
+
+                <p class="key">IBAN</p>
+                <p class="value">todo: iban ersetzen</p>
+
+                <p class="key">BIC</p>
+                <p class="value">todo: bic ersetzen</p>
+                
+                <p class="key">Verwendungszweck</p>
+                <p class="value">{{ verwendungszweck }}</p>
+            </div>
+
+            <p>
+                Beachte, dass es je nach Bank einige Tage dauern kann, bis die Überweisung eingeht. Sollte das Geld bis zum {{ expired_date }}, und oder bis maximal vor Beginn des Festivals nicht eingegangen sein, verfällt das Ticket leider.
+            </p>
+            <p>
+                Hast du bereits gezahlt? Überprüfe bitte nocheinmal deine in der Überweisung angebenen Daten. Auch ein falscher Verwendungszweck führt dazu, dass das System die Zahlung nicht zuordnen kann.
+            </p>
+            <p>
+                Deine im System hinterlegten Ticketdaten kannst du hier einsehen und ändern! 
+            </p>
+            <a href="https:www.scheppernaufbrettern.de/ticket/{{ ticket_ID }}">
+                <button>Ticket Infos</button>
+            </a>
+            <p>
+                Falls du es dir anders überlegt hast, hast du dort auch jetzt noch die Möglichkeit dein Ticket zu stronieren. <br>
+                Wende dich bei Problemen an uns, wir versuchen das Problem zu beheben! Gib uns dazu deine Ticket ID mit!
+            </p>
+            <a href="https:www.scheppernaufbrettern.de/kontakt">
+                <button>Kontaktformular</button>
+            </a>
+            <p>
+                Wir freuen uns auf jeden Fall auf dich, falls es klappt! <br>
+                Dein Scheppern auf Brettern Team
+            </p>
+        </div>
+    </body>
+</html>

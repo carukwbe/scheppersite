@@ -1,4 +1,4 @@
-<!-- <div class="cursor" [style.top]="top" [style.left]="left">
+<!-- <div class="cursor" [ngClass]="{'expand': expand, 'tilt': tilt}" [style.top]="top" [style.left]="left">
   <img class="windradCursor" src="./../../../assets/windrad.png" alt="">
 </div> -->
 
@@ -9,4 +9,5 @@
   <!-- todo: margin of header -> not consistent with height change on mobile -->
   <router-outlet [ngStyle]="!isHomePage ? {'margin-top': '60px'} : {}" ></router-outlet> <!-- header height -->
   <app-footer *ngIf="!isHomePage" style="z-index: 2;"></app-footer>
+
 </div>

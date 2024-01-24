@@ -3,8 +3,8 @@ import { initializeApp } from 'firebase/app';
 import { connectFunctionsEmulator, HttpsCallableResult, getFunctions, Functions, httpsCallable } from 'firebase/functions';
 import { connectFirestoreEmulator, getFirestore, Firestore, collection, onSnapshot, DocumentData } from 'firebase/firestore';
 import { Ticket, TicketLevel } from 'src/models';
-import { environment } from '../environments/environment';
-import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { Observable, map, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +29,7 @@ export class TicketService {
     const collectionRef = collection(this.firestore, collectionName);
 
     return new Observable((observer) => {
-      const unsubscribe = onSnapshot(collectionRef, 
+      const unsubscribe = onSnapshot(collectionRef,
         (querySnapshot) => {
           const documents: any[] = [];
           querySnapshot.forEach((doc) => {
@@ -71,11 +71,6 @@ export class TicketService {
             levelData.active_from_string  =  dateFrom.toLocaleDateString('de-DE', { year: 'numeric', month: '2-digit', day: '2-digit' });
             levelData.active_until_string = dateUntil.toLocaleDateString('de-DE', { year: 'numeric', month: '2-digit', day: '2-digit' });
             
-            console.log("level: ", levelData.name);
-            console.log("datefrom: ", dateFrom);
-            console.log("dateuntil: ", dateUntil);
-            console.log("now: ", now);
-            console.log("")
             return levelData;
           });
           observer.next(levels);
@@ -94,7 +89,9 @@ export class TicketService {
     return new Observable((observer) => {
       infoTrigger(ticketID)
         .then((result: any) => {
-          observer.next(result.data);
+          const ticket = result.data;
+          ticket.id = ticketID;
+          observer.next(ticket);
         })
         .catch((error) => {
           observer.error(error);
@@ -118,7 +115,6 @@ export class TicketService {
   }
 
   sendMessage(message: string): Observable<string> {
-    console.log("message: ", message);
     const sendMessageTrigger = httpsCallable(this.functions, 'save_message_from_contact_form');
 
     return new Observable((observer) => {
@@ -128,12 +124,11 @@ export class TicketService {
         })
         .catch((error) => {
           observer.error(error);
-          console.log(error);
         });
     });
   }
 
-  // scan or validate ticket
+  // scan, validate or delete ticket
   processTicket(ticketID: string, action: string): Observable<any> {
     const processTicketTrigger = httpsCallable<any, string>(this.functions, action);
 

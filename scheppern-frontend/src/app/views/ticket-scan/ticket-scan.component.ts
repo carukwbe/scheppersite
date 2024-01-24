@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TicketService } from 'src/app/ticket-service.service';
+import { TicketService } from 'src/app/services/ticket-service.service';
 
 @Component({
   selector: 'app-ticket-scan',
@@ -24,29 +24,37 @@ export class TicketScanComponent {
     private ticketService: TicketService, 
     private route: ActivatedRoute
   ) {
-    this.route.params.subscribe(params => {
-      this.id = params['id'];
+    this.route.params.subscribe((params) => {
+      if (/^[a-zA-Z0-9]{20}$/.test(params['id'])) {
+        this.id = params['id'];
+      } else {
+        this.isLoading = false;
+        this.statusMessage = 'Ticket ID hat ein inkorrektes Format, wende dich an die IT.';
+      }
     });
   }
 
   ngOnInit() {
-    this.ticketService.processTicket(this.id!, 'scan_ticket').subscribe(
-      (result) => {
-        this.isLoading = false;
-        this.success = true;
-
-        this.orderID = result.order_id;
-        this.name = result.name;
-        this.surname = result.surname;
-        this.carpass = result.carpass;
-        this.helper = result.helper;
-      },
-      (error) => {
-        this.isLoading = false;
-        this.success = false;
-        
-        this.statusMessage = error;
-      }
-    )
+    if (this.id) {
+      this.ticketService.processTicket(this.id!, 'scan_ticket').subscribe(
+        (result) => {
+          this.isLoading = false;
+          this.success = true;
+          this.statusMessage = result.message;
+    
+          this.orderID = result.data.order_id;
+          this.name = result.data.name;
+          this.surname = result.data.surname;
+          this.carpass = result.data.carpass;
+          this.helper = result.data.helper;
+        },
+        (error) => {
+          this.isLoading = false;
+          this.success = false;
+          
+          this.statusMessage = error;
+        }
+      )
+    }
   }
 }

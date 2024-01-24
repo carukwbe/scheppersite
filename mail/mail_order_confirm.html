@@ -9,28 +9,26 @@
     <body>
         <div class="container card">
             <h3 style="margin: 0;">Bestätigung deiner Ticketbestellung für das</h3>
-            <h1>Scheppern auf Brettern Festival 2024</h1>
+            <h1>Scheppern auf Brettern Festival {{ year }}</h1>
             
-            <p>Hey Name,</p>
+            <p>Hey {{ name }},</p>
             <p>
                 Wir haben deine Ticketbestellung erhalten!
-                Bitte überweise den Betrag von <strong>50€</strong> innerhalb der nächsten 14 Tage auf folgendes Konto:
+                Bitte überweise den Betrag von <strong>{{ price }}</strong> innerhalb der nächsten 14 Tage auf folgendes Konto:
             </p>
 
             <div class="card boxAnnotation bank-details">
-                <div class="inner">
-                    <p class="left">Name</p>
-                    <p class="right">Klangkollektiv Braunschweig e.V.</p>
+                <p class="key">Name</p>
+                <p class="value">Klangkollektiv Braunschweig e.V.</p>
 
-                    <p class="left">IBAN</p>
-                    <p class="right">DE 1213908129837</p>
+                <p class="key">IBAN</p>
+                <p class="value">todo: iban ersetzen</p>
 
-                    <p class="left">BIC</p>
-                    <p class="right">TESTBIC</p>
-                    
-                    <p class="left">Verwendungszweck</p>
-                    <p class="right">testzweck</p>
-                </div>
+                <p class="key">BIC</p>
+                <p class="value">todo: bic ersetzen</p>
+                
+                <p class="key">Verwendungszweck</p>
+                <p class="value">{{ verwendungszweck }}</p>
             </div>
 
             <p>

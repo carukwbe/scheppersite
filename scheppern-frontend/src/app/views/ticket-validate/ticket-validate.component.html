@@ -1,10 +1,10 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
 <ng-container *ngIf="success">
     <p>
-        Das Ticket wurde erfolgreich auf den Namen {{ surname }} {{ name }} umpersonalisiert. <br>
+        Das Ticket wurde erfolgreich auf den Namen {{ name }} {{ surname }} umpersonalisiert. <br>
         Du erhältst nun dein eigenes Ticket per E-Mail.
     </p>
-    <button mat-stroked-button>Klicke hier um deine Daten zu ändern.</button>
+    <button mat-stroked-button [routerLink]="['/ticket', id]" >Klicke hier um deine Daten zu ändern.</button>
 </ng-container>
 <ng-container *ngIf="!success">
     <p>{{ statusMessage }}</p>

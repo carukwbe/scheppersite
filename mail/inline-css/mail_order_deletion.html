@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bestätigung deiner Ticketbestellung</title>
+        <style>
+            body {
+                background: url(data:image/jpeg;base64,{{ background_base64 }}) no-repeat center center fixed;
+                background-color: #8195cc;
+                background-size: cover;
+
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 15px;
+                min-height: calc(100vh - 120px);
+                
+                font-family: Arial, sans-serif;
+                color: #ffffff;
+            }
+            h1 {
+                margin: 0;
+                margin-bottom: 40px;
+            }
+            p {
+                margin-bottom: 20px;
+            }
+            strong {
+                font-size: 20px;
+                margin: 0 10px;
+            }
+
+            .container {
+                max-width: 800px;
+                margin: auto;
+                padding: 20px;
+            }
+            .card {
+                padding: 15px;
+
+                background: rgba(0, 0, 0, 0.2);
+                border-radius: 8px;
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
+                border: 1px solid rgba(0, 0, 0, 0.3);
+
+                color: var(--text-color);
+            }
+
+            button {
+                position: relative;
+                
+                /* disable default styling */
+                border: none;
+                background: none;
+                outline: none;
+
+                width: fit-content;
+                margin-left: 30px; 
+                border-radius: 3px;
+
+                font-size: 16px;
+                font-weight: 200;
+                letter-spacing: 1px;
+
+                background-color: rgba(0, 0, 0, 0);
+                border: 1px solid black;
+
+                cursor: pointer;
+                user-select: none;
+                -webkit-user-select: none;
+                touch-action: manipulation;
+                padding: 7px 30px;
+
+                @media screen and (max-width: 441px){
+                    padding: 7px 20px;
+                }
+            }
+            .button:hover {
+                box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+            }
+            button:after {
+                position: absolute;
+                content: "";
+                height: 100%;
+                width: 100%;
+                top: 5px;
+                left: 5px;
+                background-color: rgb(199, 131, 179);
+                z-index: -1;
+                transition: 0.2s;
+            }
+            button:hover:after {
+                top: 0px;
+                left: 0px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container card">
+            <h3 style="margin: 0;">Ticket Stornierung des</h3>
+            <h1>Scheppern auf Brettern Festival {{ year }}</h1>
+            
+            <p>Hey {{ name }},</p>
+            <p>
+                Entweder das Ticket wurde von dir storniert. Oder wir konnten innerhalb der von uns gesetzten Frist kein Geldeingang auf deinen Namen zuweisen.
+            </p>
+            <p>
+                Hast du bereits gezahlt, oder gab es sonstige Probleme, wende dich auf jeden Fall an uns. Gib uns deine Ticket ID mit, damit wir dein Ticket direkt zuordnen können: 
+                {{ ticket_ID }}. 
+            </p>
+            <a href="https:www.scheppernaufbrettern.de/kontakt">
+                <button class=".button-23">Kontaktformular</button>
+            </a>
+            <p>
+                Falls du es einfach verpennt hast ist das natürlich ärgerlich, aber du kannst nochmal im Ticketshop nachschauen und vielleicht kannst du dir einfach noch ein neues kaufen!
+                Wir weisen allerdings darauf hin, dass ein Ticketkauf auf keinen Fall mit einer Reservierung gleichzusetzen ist, sondern mit Klick auf den Button "Ticket kaufen" direkt ein rechtlich bindendener Kaufvertrag eingegangen wird.
+            </p>
+            <p>
+                Wir freuen uns auf jeden Fall auf dich, falls es klappt! <br>
+                Dein Scheppern auf Brettern Team
+            </p>
+        </div>
+    </body>
+</html>

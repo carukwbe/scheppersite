@@ -1,0 +1,70 @@
+
+
+<div class="drag" cdkDrag [@slideInFromTop]>
+    <div class="titlebar">
+        <div class="titlebar-stoplight">
+            <div class="titlebar-close" (click)="closeSliderEvent.emit()"></div>
+            <div class="titlebar-minimize"></div>
+            <div class="titlebar-fullscreen"></div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="rgb">
+            <div class="slider">
+                R
+                <mat-slider 
+                    min="0" 
+                    max="255" 
+                    (mousedown)="onSliderMouseDown($event)" 
+                    (touchstart)="onSliderMouseDown($event)"
+                    color="accent"
+                    discrete
+                >
+                    <input matSliderThumb [(ngModel)]="color.red" (input)="slide()">
+                </mat-slider>
+            </div>
+            <div class="slider">
+                G
+                <mat-slider 
+                    min="0" 
+                    max="255" 
+                    (mousedown)="onSliderMouseDown($event)" 
+                    (touchstart)="onSliderMouseDown($event)"
+                    color="accent"
+                    discrete
+                >
+                    <input matSliderThumb [(ngModel)]="color.green" (input)="slide()">
+                </mat-slider>
+            </div>
+            <div class="slider">
+                B
+                <mat-slider 
+                    min="0" 
+                    max="255" 
+                    (mousedown)="onSliderMouseDown($event)" 
+                    (touchstart)="onSliderMouseDown($event)"
+                    color="accent"
+                    discrete
+                >
+                    <input matSliderThumb [(ngModel)]="color.blue" (input)="slide()">
+                </mat-slider>
+            </div>
+        </div>
+    
+        <div class="alphaContainer">
+            <mat-slider 
+                vertical
+                class="alpha"
+                min="0" 
+                max="255" 
+                (mousedown)="onSliderMouseDown($event)" 
+                (touchstart)="onSliderMouseDown($event)"
+                color="accent"
+                discrete
+            >
+                <input matSliderThumb [(ngModel)]="color.alpha" (input)="slide()">
+            </mat-slider>
+        </div>
+    </div>
+</div>    

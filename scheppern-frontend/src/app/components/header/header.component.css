@@ -3,18 +3,25 @@
     background-color: var(--accent-color1);
     font-size: 50px;
     font-family: 'Rubik', sans-serif;
-    backdrop-filter: blur(6px);
-    box-shadow: 0 4px 50px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 50px rgba(0, 0, 0, 0.3);
+
+    font-family: gabriella, sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    color: var(--text-color);
+    backdrop-filter: blur(3px);
+
 }
 
 .navbar {
     position: relative;
-    margin: 0 0 5px 0;
+    /* margin: 0 0 5px 0; */
     height: 60px;
     display: flex;
-    align-items: center;    
+    align-items: center;
     gap: 40px;
-    padding: 0 20px;
+    padding: 5px 20px;
+
 }
 
 .navbarMobile {
@@ -30,14 +37,53 @@ p {
     margin: 0;
 }
 
+.deactivated {
+    opacity: 0.2;
+    pointer-events: none;
+}
+
 .navbarMobile p:hover {
     background-color: rgba(255, 255, 255, 0.1);
-
 }
 
-.logo {
+
+
+
+
+
+.logoTouchArea {
     grid-area: logo;
+    height: 100%;
+    cursor: pointer;
 }
+.logoWrapper {
+    position: relative;
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+.logo {
+    position: absolute;
+    height: 150px;
+
+    width: auto;
+    
+    transform: rotate(-10deg);
+    transition: all 0.1s ease;
+    /* box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); */
+    filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.2));
+} 
+
+.logoTouchArea:hover .logo {    
+    filter: drop-shadow(0px 0px 18px rgba(0, 0, 0, 0.3));
+    transform:
+        translateY(30px)
+        rotate(-1deg);
+}
+
+
+
+
 
 .burger {
     display: none;
@@ -54,17 +100,14 @@ p {
     transition: all 0.4s ease;
     border-radius: 2px;
 }
-
 .l1 {
     transform: translateY(9.5px) rotate(45deg);
 }
-
 .l2 {
     height: 0;
     width: 0;
     opacity: 0;
 }
-
 .l3 {
     transform: translateY(-9.5px) rotate(-45deg);
 }
@@ -73,6 +116,7 @@ p {
     opacity: 0.2;
     pointer-events: none;
 }
+
 
 @media (max-width: 1050px) {
     .navbar {
@@ -96,6 +140,9 @@ p {
         height: 45px;
         column-gap: 15px;
     }
+    .logo {
+        height: calc(10vw + 70px);
+    }
 }
 
 @media (max-width: 750px) {
@@ -105,8 +152,10 @@ p {
     .navbarMobile {
         display: block;
     }
-
     .burger {
         display: flex;
+    }
+    .navbar {
+        padding-left: 10px;
     }
 }

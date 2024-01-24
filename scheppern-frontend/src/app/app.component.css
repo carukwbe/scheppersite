@@ -1,41 +1,31 @@
-.content {
-    min-height: 100vh;
-    /* Set minimum height to 100% of the viewport height */
-    /* display: flex;
-    flex-direction: column; */
-
-    display: grid;
-    min-height: 100vh;
-    grid-template-rows: auto 1fr auto;
-}
-
-app-header {
-    position: fixed;
-    top: 0px;
-    z-index: 3;
-}
-
-
 .background {
     display: absolute;
     position: fixed;
     background-image: url('../assets/hintergrund.jpg');
     background-position: center center;
-    /* z-index: 0; */
+
     top: 0;
     height: 100vh;
     width: 100%;
     z-index: -1;
+    overflow: hidden;
 }
 
-
+.content {
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: auto 1fr auto;
+}
+app-header {
+    position: fixed;
+    top: 0px;
+    z-index: 3;
+}
 app-footer {
     /* position: sticky; */
     margin-top: auto;
     bottom: 0;
 }
-
-
 
 
 
@@ -64,6 +54,7 @@ app-cursor {
     top: 100px;
     pointer-events: none;
 }
+
 
 @keyframes cursorAnim {
     from {
@@ -102,5 +93,19 @@ app-cursor {
 
 .expand {
     animation: cursorAnim3 .5s forwards;
-    border: 1px solid red;
+}
+
+@keyframes cursorTilt {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(10deg);
+    }
+}
+
+.tilt {
+    animation: cursorTilt .5s forwards;
+
 }

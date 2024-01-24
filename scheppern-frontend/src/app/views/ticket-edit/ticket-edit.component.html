@@ -1,94 +1,135 @@
-<div class="content">
+<form *ngIf="ticket" [formGroup]="form">
+    <div class="formular card">
+        <mat-form-field>
+            <mat-label>Vorname</mat-label>
+            <input type="text" id="name" matInput formControlName="name">
+            <mat-error *ngIf="getError('name', 'required')">Gib deinen Vornamen ein!</mat-error>
+            <mat-error *ngIf="getError('name', 'maxlength')">Dein Name ist zu lang!</mat-error>
+            <mat-error *ngIf="getError('name', 'pattern')">Dein Name enthält nicht erlaubte Zeichen!</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input type="text" id="surname" matInput formControlName="surname">
+            <mat-error *ngIf="getError('surname', 'required')">Gib deinen Nachnamen ein!</mat-error>
+            <mat-error *ngIf="getError('surname', 'maxlength')">Dein Name ist zu lang!</mat-error>
+            <mat-error *ngIf="getError('surname', 'pattern')">Dein Name enthält nicht erlaubte Zeichen!</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field [matTooltip]="ticket.status!=='payed' ? 'Bezahle erst dein Ticket!' : ''">
+            <mat-label>E-Mail</mat-label>
+            <input type="email" id="email" matInput formControlName="email" email>
+            <mat-error *ngIf="getError('email', 'required')">Ohne die können wir dir kein Ticket schicken!</mat-error>
+            <mat-error *ngIf="getError('email', 'maxlength')">Dein Mail ist leider zu lang!</mat-error>
+            <mat-error *ngIf="getError('email', 'email') || getError('email', 'pattern')">
+                Deine Mail scheint keine gültige Mail Adresse zu sein!
+            </mat-error>
+            <mat-hint *ngIf="form.get('email')!.getRawValue()!==ticket.email">Achtung, mit Änderung der E-Mail Adresse bestätigst du, dass du dein Ticket, an die der E-Mail Adresse zugehörigen Person, abgibst. <br>
+                → Es wird eine Bestätigungsmail an die neue E-Mail rausgesendet. <br>
+                → Sobald das neue Ticket angenommen wird, verliert dein Ticket seine Gültigkeit.
+            </mat-hint>
+        </mat-form-field>
+        <!-- notwendig für automatischen Platz, da Mat Design Spec nur 1 zeilige Hints erlaubt -->
+        <p *ngIf="form.get('email')!.getRawValue()!==ticket.email" [@slideInFromTop] style="opacity: 0;">
+            Achtung, mit Änderung der E-Mail Adresse bestätigst du, dass du dein Ticket, an die der E-Mail Adresse zugehörigen Person, abgibst. <br>
+            Es wird dann eine Bestätigungsmail an die neue E-Mail rausgesendet. Sobald das neue Ticket angenommen wird, verliert dein Ticket seine Gültigkeit.
+        </p>
 
-    <form *ngIf="ticket" [formGroup]="form">
-        <div class="formular card">
+        <mat-form-field>
+            <mat-label>Telefonnummer</mat-label>
+            <input type="tel" id="phone" matInput formControlName="phone">
+            <mat-error *ngIf="getError('phone', 'minlength')">Dein Telefonnummer ist zu kurz!</mat-error>
+            <mat-error *ngIf="getError('phone', 'maxlength')">Dein Telefonnummer ist zu lang!</mat-error>
+            <mat-error *ngIf="getError('phone', 'pattern')">Deine Telefonnummer enthält nicht erlaubte Zeichen!</mat-error>
+        </mat-form-field>
+
+
+
+        <div *ngIf="ticket.helper" class="helper boxAnnotation" style="margin-top: 20px;">
+            <p>Bereiche in denen ich mich sehe:</p>
             <mat-form-field>
-                <mat-label>Vorname</mat-label>
-                <input type="text" id="name" matInput formControlName="name">
+                <mat-select multiple formControlName="helperShifts">
+                    <mat-option *ngFor="let shift of Global.helperShifts" [value]="shift.key">{{shift.value}}</mat-option>
+                </mat-select>
             </mat-form-field>
-        
+            <p>Infos über dich:</p>
             <mat-form-field>
-                <mat-label>Name</mat-label>
-                <input type="text" id="surname" matInput formControlName="surname">
+                <textarea matInput formControlName="helperInfos"></textarea>
+                <mat-error *ngIf="getError('helperInfos', 'maxlength')">Puh, der Text ist leider zu lang, versuch' dich kürzer zu halten!</mat-error>
+                <mat-error *ngIf="getError('helperInfos', 'pattern')">Ungültige*s Zeichen entdeckt! Erlaubte Satzzeichen sind nur :,().?!</mat-error>
             </mat-form-field>
-        
-            <mat-form-field [matTooltip]="ticket.status != 'payed' ? 'Bezahle erste dein Ticket!' : ''">
-                <mat-label>E-Mail</mat-label>
-                <input type="email" id="email" matInput formControlName="email" email>
-                <mat-error *ngIf="form.get('email')?.hasError('email') && form.get('email')?.touched">Gib eine gültige
-                    E-Mail Adresse ein!
-                </mat-error>
-                <mat-hint *ngIf="form.get('email')!.getRawValue() != oldEmail">Achtung, mit Änderung der E-Mail Adresse bestätigst du, dass du dein Ticket, an die der E-Mail Adresse zugehörigen Person, abgibst. <br>
-                    → Es wird eine Bestätigungsmail an die neue E-Mail rausgesendet. <br>
-                    → Sobald das neue Ticket angenommen wird, verliert dein Ticket seine Gültigkeit.
-                </mat-hint>
-            </mat-form-field>
-            <!-- notwendig für automatischen Platz, da Mat Design Spec nur 1 zeilige Hints erlaubt -->
-            <p *ngIf="form.get('email')!.getRawValue() != oldEmail" [@slideInFromTop] style="opacity: 0;">
-                Achtung, mit Änderung der E-Mail Adresse bestätigst du, dass du dein Ticket, an die der E-Mail Adresse zugehörigen Person, abgibst. <br>
-                Es wird dann eine Bestätigungsmail an die neue E-Mail rausgesendet. Sobald das neue Ticket angenommen wird, verliert dein Ticket seine Gültigkeit.
-            </p>
+        </div>
     
-            <mat-form-field>
-                <mat-label>Telefonnummer</mat-label>
-                <input type="tel" id="phone" matInput formControlName="phone">
-            </mat-form-field>
+        <!-- todo disable when helper is active also -->
+        <button
+            mat-raised-button 
+            color="primary" 
+            (click)="submit()" 
+            [disabled]="form.invalid || (
+                form.get('name')!.getRawValue() === ticket.name &&
+                form.get('surname')!.getRawValue()===ticket.surname &&
+                form.get('email')!.getRawValue()===ticket.email &&
+                form.get('phone')!.getRawValue()===ticket.phone &&
+                form.get('helperShifts')!.getRawValue()===ticket.helper_shifts &&
+                form.get('helperInfos')!.getRawValue()===ticket.helper_infos
+            )"
+            style="margin-top: 30px;"
+        >
+            Ändere dein Ticket
+        </button>
+        <div *ngIf="isLoading" [@slideInFromTopWithOpacity]>
+            <mat-spinner style="margin-top: 20px;"></mat-spinner>
+        </div>
+        <div *ngIf="statusMessage" style="margin-top: 20px;">{{ statusMessage }}</div>
+    </div>
     
-    
-    
-            <div *ngIf="ticket.helper" class="helper boxAnnotation" style="margin-top: 20px;">
-                <p>Bereiche in denen ich mich sehe:</p>
-                <mat-form-field>
-                    <mat-select multiple formControlName="helperShifts">
-                        <mat-option *ngFor="let shift of Global.helperShifts" [value]="shift.key">{{shift.value}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <p>Infos über dich:</p>
-                <mat-form-field>
-                    <textarea matInput formControlName="helperInfos"></textarea>
-                </mat-form-field>
-            </div>
-        
-            <!-- todo disable when helper is active also -->
-            <button 
-                mat-raised-button 
-                color="primary" 
-                (click)="submit()" 
-                [disabled]="form.invalid || (
-                    form.get('name')!.getRawValue() == ticket.name &&
-                    form.get('surname')!.getRawValue() == ticket.surname &&
-                    form.get('email')!.getRawValue() == ticket.email &&
-                    form.get('phone')!.getRawValue() == ticket.phone &&
-                    form.get('helperShifts')!.getRawValue() == ticket.helper_shifts &&
-                    form.get('helperInfos')!.getRawValue() == ticket.helper_infos
-                )"
-                style="margin-top: 30px;"
-            >
-                Ändere dein Ticket
-            </button>
+    <div class="boxAnnotation card infos">
+        <table mat-table [dataSource]="tableInfos!" >
+            <ng-container matColumnDef="key">
+                <td mat-cell *matCellDef="let element"> {{element.key}} </td>
+            </ng-container>
             
-            <div *ngIf="isLoading" [@slideInFromTopWithOpacity]>
+            <ng-container matColumnDef="value">
+                <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+            </ng-container>
+            
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <div class="stornoInside">
+            <button
+                *ngIf="ticket.status==='ordered'"
+                mat-raised-button
+                color="primary" 
+                (click)="openDeleteDialog()"
+                aria-label="Ticket stornieren"
+            >
+                Ticket stornieren
+            </button>
+    
+            <div *ngIf="isLoadingDelete" [@slideInFromTopWithOpacity]>
                 <mat-spinner style="margin-top: 20px;"></mat-spinner>
             </div>
-            <div *ngIf="statusMessage" style="margin-top: 20px;">{{ statusMessage }}</div>
+            <div *ngIf="statusMessageDelete" style="margin-top: 20px;">{{ statusMessageDelete }}</div>
         </div>
+    </div>
+    <div class="storno">
+        <button 
+            *ngIf="ticket.status==='ordered'"
+            mat-raised-button
+            color="primary" 
+            (click)="openDeleteDialog()"
+            class="storno" 
+            aria-label="Ticket stornieren"
+        >
+            Ticket stornieren
+        </button>
 
-        <div class="boxAnnotation infos card">
-            <table mat-table [dataSource]="tableInfos!" style="margin-bottom: 20px;">
-                <ng-container matColumnDef="key">
-                    <td mat-cell *matCellDef="let element"> {{element.key}} </td>
-                </ng-container>
-                
-                <ng-container matColumnDef="value">
-                    <td mat-cell *matCellDef="let element"> {{element.value}} </td>
-                </ng-container>
-                
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
+        <div *ngIf="isLoadingDelete" [@slideInFromTopWithOpacity]>
+            <mat-spinner style="margin-top: 20px;"></mat-spinner>
         </div>
-
-    </form>
-</div>
+        <div *ngIf="statusMessageDelete" style="margin-top: 20px;">{{ statusMessageDelete }}</div>
+    </div>
+</form>
 
 <div *ngIf="!ticket">
     <mat-spinner *ngIf="isLoading"></mat-spinner>

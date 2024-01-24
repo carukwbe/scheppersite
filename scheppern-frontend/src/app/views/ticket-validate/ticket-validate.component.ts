@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TicketService } from 'src/app/ticket-service.service'; 
+import { TicketService } from 'src/app/services/ticket-service.service'; 
 
 
 @Component({
@@ -22,26 +22,33 @@ export class TicketValidateComponent {
     private ticketService: TicketService, 
     private route: ActivatedRoute
   ) {
-    this.route.params.subscribe(params => {
-      this.id = params['id'];
+    this.route.params.subscribe((params) => {
+      if (/^[a-zA-Z0-9]{20}$/.test(params['id'])) {
+        this.id = params['id'];
+      } else {
+        this.isLoading = false;
+        this.statusMessage = 'Ticket ID hat ein inkorrektes Format, wende dich an die IT.';
+      }
     });
   }
 
   ngOnInit() {
-    this.ticketService.processTicket(this.id!, 'validate_ticket').subscribe(
-      (result) => {
-        this.isLoading = false;
-        this.success = true;
+    if (this.id) {
+      this.ticketService.processTicket(this.id, 'validate_ticket').subscribe(
+        (result) => {
+          this.isLoading = false;
+          this.success = true;
 
-        this.name = result.name;
-        this.surname = result.surname;
-      },
-      (error) => {
-        this.isLoading = false;
-        this.success = false;
-        
-        this.statusMessage = error;
-      }
-    )
+          this.name = result.name;
+          this.surname = result.surname;
+        },
+        (error) => {
+          this.isLoading = false;
+          this.success = false;
+          
+          this.statusMessage = error;
+        }
+      )
+    }
   }
 }

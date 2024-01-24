@@ -8,20 +8,33 @@
     <form [formGroup]="form">
         <mat-form-field>
             <mat-label>E-Mail</mat-label>
-            <input type="text" id="name" matInput formControlName="email">
+            <input type="email" matInput formControlName="email" email>
+            <mat-error *ngIf="getError('email', 'maxlength')">Dein Mail ist leider zu lang!</mat-error>
+            <mat-error *ngIf="getError('email', 'email') || getError('email', 'pattern')">
+                Deine Mail scheint keine gültige Mail Adresse zu sein!
+            </mat-error>
         </mat-form-field>
         <mat-form-field>
             <mat-label>Telefonnummer</mat-label>
-            <input type="text" id="name" matInput formControlName="phone">
+            <input type="text" matInput formControlName="phone">
+            <mat-error *ngIf="getError('phone', 'minlength')">Dein Telefonnummer ist zu kurz!</mat-error>
+            <mat-error *ngIf="getError('phone', 'maxlength')">Dein Telefonnummer ist zu lang!</mat-error>
+            <mat-error *ngIf="getError('phone', 'pattern')">Deine Telefonnummer enthält nicht erlaubte Zeichen!</mat-error>
         </mat-form-field>
         <mat-form-field>
             <mat-label>Ticket ID</mat-label>
-            <input type="text" id="name" matInput formControlName="ticketID">
+            <input type="text" matInput formControlName="ticketID">
+            <mat-error *ngIf="getError('ticketID', 'minlength')">Dein Ticket ID ist zu kurz!</mat-error>
+            <mat-error *ngIf="getError('ticketID', 'maxlength')">Dein Ticket ID ist zu lang!</mat-error>
+            <mat-error *ngIf="getError('ticketID', 'pattern')">Deine Ticket ID enthält nicht erlaubte Zeichen!</mat-error>
         </mat-form-field>
 
         <mat-form-field class="message">
             <mat-label>Nachricht</mat-label>
             <textarea type="text" matInput formControlName="message"></textarea>
+            <mat-error *ngIf="getError('message', 'required')">Dein Anliegen ist uns schon wichtig, vergiss es nicht!</mat-error>
+            <mat-error *ngIf="getError('message', 'maxlength')">Puh, der Text ist leider zu lang, versuch' dich kürzer zu halten!</mat-error>
+            <mat-error *ngIf="getError('message', 'pattern')">Ungültige*s Zeichen entdeckt! Erlaubte Satzzeichen sind nur :,().?!</mat-error>
         </mat-form-field>
 
     

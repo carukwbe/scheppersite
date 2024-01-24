@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Scheppern auf Brettern Ticket</title>
+        <link rel="stylesheet" href="mail.css">
+    </head>
+    <body>
+        <div class="container card">         
+            <p>Hey {{ name }},</p>
+            <p>
+                durch Änderung der E-Mail hast du soeben die Umpersonalisierung an eine andere Person gestartet. Die neue Person erhält jetzt eine E-Mail in der sie das Ticket annehmen kann.
+            </p>
+            <p>
+                Warst du das nicht? Kontaktiere uns bitte umgehend via Kontaktfromular oder persönlich!
+            </p>
+            <a href="https:www.scheppernaufbrettern.de/kontakt">
+                <button class=".button-23">Kontaktformular</button>
+            </a>
+            <p>
+                Nimmt die neue Person ihr Ticket nicht an, gehört das Ticket weiterhin dir und du hast die Möglichkeit es entweder selber noch einzulösen oder an eine andere Person abzugeben.
+            </p>
+            <p>
+                Den aktuellen Status deines Tickets kannst du hier einsehen:
+            </p>
+            <a href="https:www.scheppernaufbrettern.de/ticket/{{ ticket_ID }}">
+                <button>Ticket Status</button>
+            </a>
+            <p>
+                Dein Scheppern auf Brettern Team
+            </p>
+        </div>
+    </body>
+</html>

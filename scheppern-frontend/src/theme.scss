@@ -1,41 +1,24 @@
 
 @import '@angular/material/theming';
 @include mat-core();
-// $my-app-primary: mat-palette($mat-blue-grey);
-// $my-app-accent: mat-palette($mat-pink, 500, 900, A100);
-// $my-app-warn: mat-palette($mat-deep-orange);
-// $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
-// @include angular-material-theme($my-app-theme);
 
-// .light-mode {
-//     $alternate-primary: mat-palette($mat-light-blue);
-//     $alternate-accent: mat-palette($mat-yellow, 400);
-//     $alternate-theme: mat-light-theme($alternate-primary, $alternate-accent);
-// }
-
-// .dark-mode {
-//     $alternate-primary: mat-palette($mat-blue-grey);
-//     $alternate-accent: mat-palette($mat-pink, 500, 900, A100);
-//     $alternate-theme: mat-dark-theme($alternate-primary, $alternate-accent);
-// }
 
 
 // Light mode
-$alternate-primary-light: mat-palette($mat-blue-grey);
-$alternate-accent-light: mat-palette($mat-pink, 500, 900, A100);
-// $alternate-accent-light: mat-palette($mat-yellow, 400);
-$alternate-warn-light: mat-palette($mat-red);
-$alternate-theme-light: mat-light-theme($alternate-primary-light, $alternate-accent-light, $alternate-warn-light);
+$alternate-primary: mat-palette($mat-blue-grey);
+$alternate-accent: mat-palette($mat-pink, 500, 900, A100);
+$alternate-warn: mat-palette($mat-red);
+$alternate-theme-light: mat-light-theme($alternate-primary, $alternate-accent, $alternate-warn);
 
 // Dark mode
-$alternate-primary-dark: mat-palette($mat-blue-grey);
-$alternate-accent-dark: mat-palette($mat-pink, 500, 900, A100);
-$alternate-warn-dark: mat-palette($mat-red);
-$alternate-theme-dark: mat-dark-theme($alternate-primary-dark, $alternate-accent-dark, $alternate-warn-dark);
+$alternate-primary: mat-palette($mat-blue-grey);
+$alternate-accent: mat-palette($mat-pink, 500, 900, A100);
+$alternate-warn: mat-palette($mat-red);
+$alternate-theme-dark: mat-dark-theme($alternate-primary, $alternate-accent, $alternate-warn);
 
-
+// leight and dark mode change nothing, always dark mode 
 .light-mode {
-    @include angular-material-theme($alternate-theme-light);
+    @include angular-material-theme($alternate-theme-dark);
 }
 
 .dark-mode {

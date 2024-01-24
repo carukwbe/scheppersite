@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Host, HostListener } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
 
@@ -10,8 +10,10 @@ import { NavigationEnd, Router } from '@angular/router';
 export class AppComponent {
   isHomePage: boolean = false;
 
-
-  // constructor(private router: Router, private activatedRoute: ActivatedRoute) {  }
+  top: string = "";
+  left: string = "";
+  expand: boolean = false;
+  tilt = false;
 
   constructor(private router: Router) {
     // document.documentElement.style.cursor = "none";
@@ -27,9 +29,36 @@ export class AppComponent {
 
   // cursor stuff
 
-  // @HostListener('document:mousemove', ['$event'])
-  // onMousemove($event: any) {
-  //   this.top = ($event.pageY - 29) + "px";
-  //   this.left = ($event.pageX - 19) + "px";
-  // }
+  @HostListener('document:mousemove', ['$event'])
+  onMousemove($event: any) {
+    this.top = ($event.pageY - 29) + "px";
+    this.left = ($event.pageX - 19) + "px";
+  }
+
+  // onclick expand
+
+  @HostListener('document:click', ['$event'])
+  onClick($event:any) {
+    this.expand = true;
+    setTimeout(() => {
+      this.expand = false; 
+    }, 500)
+  }
+
+  //hover over clickable
+ @HostListener('document:mouseover', ['$event'])
+  onMouseover($event: any) {
+    if ($event.target.classList.contains("clickable")) {
+      this.tilt = true;
+    }
+  }
+
+  @HostListener('document:mouseout', ['$event'])
+  onMouseout($event: any) {
+    if ($event.target.classList.contains("clickable")) {
+      this.tilt = false;
+    }
+  }
+
+  // cursor stuff end 
 }

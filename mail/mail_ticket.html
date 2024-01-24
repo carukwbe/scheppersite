@@ -8,29 +8,24 @@
     </head>
     <body>
         <div class="container card">         
-            <p>Hey Name,</p>
+            <p>Hey {{ name }},</p>
             <p>
                 Die 50 Tackos sind erfolgreich auf unser Konto gewandert! In return erhältst du nun die einmalige Zutrittsberechtigung für das wahnsinnige
             </p>
-            <h1>Scheppern auf Brettern Festival 2024</h1>
-
-            <div class="card boxAnnotation ticket">
-                <div class="inner">
-                    Ticketinfos bla
-                </div>
-            </div>
-
+            <h1>Scheppern auf Brettern Festival {{ year }}</h1>
             <p>
-                Falls du deine Ticketdaten ändern möchtest kannst du das hier machen:
+                Falls du deine Ticketdaten ändern möchtest, kannst du das hier machen:
             </p>
-            <div class="button">Ticket ändern</div>
+            <a href="https:www.scheppernaufbrettern.de/ticket/{{ ticket_ID }}">
+                <button>Ticket ändern</button>
+            </a>
             <p>
                 Pro Tipp: du kannst dort auch dein Ticket auf jemand anderen umschreiben indem du die Mail Adresse änderst!
             </p>
             <p>
-                Wir freuen uns wahnsinnig dich begrüßen zu dürfen, wir warten jetzt schon am Eingang ganz sehnsüchtig.
+                Wir freuen uns wahnsinnig dich begrüßen zu dürfen, wir warten jetzt schon am Eingang ganz sehnsüchtig. <br>
+                Dein Scheppern auf Brettern Team
             </p>
-            <p>Dein Scheppern auf Brettern Team</p>
         </div>
     </body>
 </html>

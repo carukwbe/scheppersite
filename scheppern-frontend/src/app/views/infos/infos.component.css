@@ -8,10 +8,56 @@
 
     background-size: 100% 100%;
     background-size: cover; */
-    padding: 100px 0;
+    padding: 100px 5px;
+
+    --mat-expansion-container-background-color: rgba(0, 0, 0, 0.3);
+
 }
 
 mat-accordion {
 
     max-width: 1000px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    margin-bottom: 50px;
 }
+
+.row {
+    padding: 0;
+    border: none;
+    /* border only left and right */
+
+    --border-width: 2px;
+    /* --border-color: rgba(255,255,255,0.75); */
+    --border-style: solid;
+
+    border-left: var(--border-width) var(--border-style) var(--border-color);
+    border-right: var(--border-width) var(--border-style) var(--border-color);
+}
+
+.row:first-child {
+    border-top: var(--border-width) var(--border-style) var(--border-color);
+}
+
+.row:last-child {
+    border-bottom: var(--border-width) var(--border-style) var(--border-color);
+}
+
+.row:active {
+    background-color: rgba(255,255,255,0.2);
+}
+
+.cdk-focuced {
+    background-color: rgba(255,255,255,0)!important;
+}
+
+.cdk-mouse-focused {
+    background-color: rgba(255,255,255,0)!important;
+}
+
+
+/* mat-expansion-panel-header mat-focus-indicator ng-tns-c2690051721-8 ng-tns-c1859850774-7 mat-expansion-toggle-indicator-after ng-star-inserted
+mat-expansion-panel-header mat-focus-indicator ng-tns-c2690051721-6 ng-tns-c1859850774-5 mat-expansion-toggle-indicator-after ng-star-inserted mat-expanded */

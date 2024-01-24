@@ -1,13 +1,11 @@
-<mat-accordion>
-    <mat-expansion-panel *ngFor="let faq of faqItems">
+<mat-accordion *ngFor="let section of faqSections">
+    <h1 style="margin: 0 20px">{{section.title}}</h1>
+    <mat-expansion-panel *ngFor="let questions of section.questions" class="card row" style="padding: 0;">
         <mat-expansion-panel-header>
             <mat-panel-title>
-                {{ faq.question }}
+                {{ questions.question }}
             </mat-panel-title>
-            <!-- <mat-panel-description>
-                This is a summary of the content
-            </mat-panel-description> -->
         </mat-expansion-panel-header>
-        {{ faq.answer }}
+        {{ questions.answer }}
     </mat-expansion-panel>
 </mat-accordion>

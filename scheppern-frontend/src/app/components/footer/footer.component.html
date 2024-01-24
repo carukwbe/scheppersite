@@ -1,4 +1,5 @@
 
+
 <div class="footerElements">
     <div class="windrad" style="grid-area: windrad;">
         <img src="/assets/windrad_stamm.png" alt="Windrad" class="stamm">
@@ -6,6 +7,7 @@
     </div>
     
     
+    <app-slider *ngIf="!sliderHidden" (closeSliderEvent)="toggleSlider()"></app-slider>
     <div class="iconsMiddle" style="grid-area: iconsMiddle;">
        
         <a href="https://www.instagram.com/scheppernfestival/" target="_blank" rel="noopener noreferrer">
@@ -27,14 +29,19 @@
             </div>
         </a>
 
+
+
         <!-- {'tooltip': 'Der Verein', 'icon': 'groups', 'link': '/verein'}, -->
-        <div 
+        <div
             *ngFor="let item of [
                 {'tooltip': 'Kontakt', 'icon': 'email', 'link': '/kontakt'},
+                {'tooltip': '', 'icon': 'tune', 'link': null, 'action': toggleSlider},
             ]" 
             class="buttonBG outlineBG" 
             matTooltip="{{ item.tooltip }}"
             [routerLink]="item.link"
+            (click)="item.action ? item.action.call(this) : null"
+
         >
             <div class="button">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
@@ -54,32 +61,12 @@
             </div>
         </div>
     </div>
+
     
     
     <ul class="links" style="grid-area: links;">
         <li [routerLink]="'/impressum'">Impressum</li>
         <li [routerLink]="'/agbs'">AGBs</li>
-        <li>Datenschutzhinweise</li>
-    </ul>
-    
-    <!-- <div class="slider-container" style="grid-area: slider;">
-        <div class="rgb">
-            R
-            <mat-slider min="0" max="255">
-                <input matSliderThumb [(ngModel)]="red" (input)="updateBackgroundColor()">
-            </mat-slider>
-            G
-            <mat-slider min="0" max="255">
-                <input matSliderThumb [(ngModel)]="green" (input)="updateBackgroundColor()">
-            </mat-slider>
-            B
-            <mat-slider min="0" max="255">
-                <input matSliderThumb [(ngModel)]="blue" (input)="updateBackgroundColor()">
-            </mat-slider>
-        </div>
-        Alpha
-        <mat-slider vertical class="alpha" min="0" max="100">
-            <input matSliderThumb [(ngModel)]="alpha" (input)="updateBackgroundColor()">
-        </mat-slider>
-    </div> -->
+        <li [routerLink]="'/datenschutz'">Datenschutzhinweise</li>
+    </ul>    
 </div>

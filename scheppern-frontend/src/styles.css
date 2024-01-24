@@ -3,11 +3,18 @@
 /* @import '~@angular/material/theming'; */
 
 body { 
-    background-color: var(--bg-color);
+
+    /* background: url('/assets/hintergrund.jpg') no-repeat center center fixed;
+    background-size: cover;  */
+
+    background-color: #8195cc;
+    
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
     color: rgb(255, 255, 255);
 }
+
+
 
 p, h1, h2, h3, h4, h5, h6 {
     /* margin: 0!important; */
@@ -17,27 +24,22 @@ p, h1, h2, h3, h4, h5, h6 {
     --bg-color: #323232;
     --bg-color: rgb(80, 55, 53);
     --bg-color: rgb(0, 55, 109);
+    --accent-color2: #3c17179b;
+    --accent-color2-hover: rgb(247, 117, 117);
     
 
     /* wird im footer gesetzt */
     /* --accent-color1: #8593c8;
-    --accent-color1: rgb(143, 157, 210);
-    --accent-color1: rgba(118, 141, 176, 0.8);
-    --accent-color1: hsla(180, 30%, 50%, 0.8); */
-
-
-
-    --accent-color2: #3c17179b;
-    --accent-color2-hover: rgb(247, 117, 117);
-
-    --scroll: 0;
-
+    /* --accent-color1: rgb(143, 157, 210); */
+    /* --accent-color1: rgba(118, 141, 176, 0.8); */
+    
+    
+    
+    --accent-color1: rgba(89, 166, 166, 0.5);
+    --accent-color2: #004fca;
     --text-color: white;
-    --text-color-light: rgb(200, 200, 200);
-    --text-color-dark: rgb(100, 100, 100);
-
-    --test: #fff;
-
+    
+    --scroll: 0;
 }
 
 
@@ -52,23 +54,22 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 .card {
-    padding: 20px;
-
     /* background: rgba(0, 0, 0, 0.48); */
     border-radius: 3px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(0, 0, 0, 0.3);
-
+    
     color: var(--text-color);
+    padding: 20px;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.3);
 }
 
 .boxAnnotation {
     position: relative;
-    box-sizing: border-box;
-    padding: 20px 15px 0px;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 
 .boxAnnotation::after {
@@ -86,7 +87,9 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-    color: #3396d8; /* Set text color to a shade of blue */
+    color: #3396d8;
+    color: #282898;
+    color: #004fca;
     text-decoration: none; /* Remove default underline */
     /* Additional styles as needed */
 }
@@ -94,5 +97,7 @@ a {
 /* Hover styles for the anchor tag */
 a:hover {
     color: #2980b9; /* Darken the color slightly on hover */
+    color: #282898;
+
     /* Additional hover styles as needed */
 }

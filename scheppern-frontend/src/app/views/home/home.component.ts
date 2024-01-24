@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 
 
 @Component({
@@ -24,18 +24,6 @@ export class HomeComponent {
   //     let scroll = this.scrollContainer!.nativeElement.scrollTop / this.scrollContainer!.nativeElement.clientHeight;
   //     this.scrollService.updateScroll(scroll);
   //   });
-  // }
-
-
-
-  // cursor stuff
-
-  // @HostListener('document:click', ['$event'])
-  // onClick($event:any) {
-  //   this.expand = true;
-  //   setTimeout(() => {
-  //     this.expand = false; 
-  //   }, 500)
   // }
 
 

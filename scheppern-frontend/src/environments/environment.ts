@@ -17,18 +17,19 @@ export const environment = {
 
 export const Global = {
   darkMode: false,
-  helperShifts: [{
-    key: 'einlass',
-    value: 'Einlass',
-    description: `
-      Leider durften wir letztes Jahr feststellen, dass wir doch nicht ganz nur wir waren auf dem Festival. Es haben sich eine
-      Handvoll ungebetene Gäste unter uns geschlichen und auch einen erheblichen finanziellen Schaden verursacht. Um dies
-      diesmal zu verhindern müssen wir leider den Einlass intensiver bewachen. Da wir 2 Eingänge haben ist das natürlich
-      doppelt ärgerlich. Für ein bisschen Entertainment am Eingang werden wir auf jeden Fall sorgen!
-      Gerne könnt ihr dort auch mit euren Homies chillen, allerdings sollte natürlich ein offenes Auge auf den Eingang zu
-      jeder Zeit gewährleistet sein! Ihr bekommt eine Funke in die Hand und habt jederzeit die Möglichkeit Security zu rufen,
-      falls ihr Probleme bekommt! Zu Stoßzeiten wird Security aber auch selber dort sein!
-      `
+  helperShifts: [
+    {
+      key: 'einlass',
+      value: 'Einlass',
+      description: `
+        Leider durften wir letztes Jahr feststellen, dass wir doch nicht ganz nur wir waren auf dem Festival. Es haben sich eine
+        Handvoll ungebetene Gäste unter uns geschlichen und auch einen erheblichen finanziellen Schaden verursacht. Um dies
+        diesmal zu verhindern müssen wir leider den Einlass intensiver bewachen. Da wir 2 Eingänge haben ist das natürlich
+        doppelt ärgerlich. Für ein bisschen Entertainment am Eingang werden wir auf jeden Fall sorgen!
+        Gerne könnt ihr dort auch mit euren Homies chillen, allerdings sollte natürlich ein offenes Auge auf den Eingang zu
+        jeder Zeit gewährleistet sein! Ihr bekommt eine Funke in die Hand und habt jederzeit die Möglichkeit Security zu rufen,
+        falls ihr Probleme bekommt! Zu Stoßzeiten wird Security aber auch selber dort sein!
+        `
     }, {
       key: 'bar',
       value: 'Bar',
@@ -70,5 +71,8 @@ export const Global = {
       description: `
         Darauf hat keiner Bock, aber vielleicht ja du! Wir werden vorraussichtlich den Montag und den Dienstag beschäftigt sein.
       `
-    }]
+    }
+  ],
+  textCharLimit: 50,
+  textAreaCharLimit: 5000,
 };

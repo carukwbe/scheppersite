@@ -5,22 +5,23 @@
     align-items: center;
 }
 
-.content {
-    width: min(90%, 1100px);
-    padding: 50px 0;
-}
-
 form {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    grid-template-areas: "formular infos";
+    grid-template-areas: "formular infos"
+                         "formular storno"
+                         "formular .";
     grid-gap: 20px;
+    align-items: start;
+
+    width: min(90%, 1100px);
+    padding: 50px 0;
     
-    @media (max-width: 800px) {
-        grid-template-columns: 1fr;
-        grid-template-areas:    
-            "infos"
-            "formular";
+    @media screen and (max-width: 374px) {
+        width: 97%;
+    }
+    @media screen and (max-width: 348px) {
+        width: 100%;
     }
 }
 
@@ -46,13 +47,46 @@ form {
     --annotatedText: 'Helferticket';
     border: 1px solid rgba(255, 255, 255, 0.5);
     width: 100%;
+    padding: 20px 15px 0;
 }
 .infos {
     --annotatedText: 'Infos';
-    height: fit-content;
+    /* height: fit-content; */
     grid-area: infos;
-
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+.storno {
+    grid-area: storno;
+    width: fit-content;
+    justify-self: center;
+}
+.stornoInside {
+    display: none;
+    width: fit-content;
+    margin-top: 10px;
+    /* margin-left: 30px; */
+}
+
+
+@media (max-width: 800px) {
+    form {
+        grid-template-columns: 1fr;
+        grid-template-areas:    
+            "infos"
+            "formular";
+    }
+    .storno {
+        display: none;
+    }
+    .stornoInside {
+        display: block;
+    }
+}
+
 
 /* disable table styling */
 .mat-mdc-table {
