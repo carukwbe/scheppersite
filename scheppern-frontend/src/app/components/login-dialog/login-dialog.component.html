@@ -11,4 +11,6 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="login()">Login</button>
+  <mat-spinner [diameter]="50" *ngIf="isLoading"></mat-spinner>
+  <p style="white-space: pre-line;">{{ statusMessage }}</p>
 </div>

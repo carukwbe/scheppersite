@@ -6,6 +6,8 @@
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 301.865 295.418"
                 class="logo"
+                alt="Logo"
+                aria-label="Link zur Startseite"
             >
                 <defs>
                     <style>
@@ -59,7 +61,8 @@
             </svg>
         </div>
     </div>
-    <p routerLink="/tickets" class="link deactivated" style="margin-left: auto;">Tickets</p>
+    <p routerLink="/tickets" class="link" style="margin-left: auto;">Tickets</p>
+    <p routerLink="/galerie" class="link">Galerie</p>
     <p routerLink="/infos" class="link">Infos</p>
     <!-- <p routerLink="/turnier" class="link turnier">Turnier</p> -->
 
@@ -71,7 +74,8 @@
 </div>
 
 <div class="navbarMobile" *ngIf="isMenuOpen" [@slideInFromTop]>
-    <p routerLink="/tickets" class="deactivated" (click)="toggleMenu()">Tickets</p>
+    <p routerLink="/tickets" (click)="toggleMenu()">Tickets</p>
+    <p routerLink="/galerie" (click)="toggleMenu()">Galerie</p>
     <p routerLink="/infos" (click)="toggleMenu()">Infos</p>
     <!-- <p routerLink="/turnier" class="linkMobile turnier">Turnier</p> -->
 </div>

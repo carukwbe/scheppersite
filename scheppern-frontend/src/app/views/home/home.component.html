@@ -1,8 +1,11 @@
 <div class="parallax" id="scrollContainer" #scrollContainer>
-    <app-parallax style="z-index: 1;"></app-parallax>
+    <app-parallax></app-parallax>
+
+    <div class="line" style="width: 100%; background-color: green; margin-top: 100px;"></div>
+    
     <div class="contentContainer">
         <div class="jungleContainer">
-            <img class="jungleImage" src="/assets/jungle5.jpg" alt="">
+            <img class="jungleImage" src="/assets/jungle.jpg" alt="">
         </div>
 
         <div class="content">
@@ -11,12 +14,13 @@
                 Windpark Druiberg
             </p>
 
-            <div class="link clickable fontGabriella" matTooltip="Ab dem 04.02.2024">Tickets</div>
-            <div class="link active clickable fontGabriella" routerLink="/infos">Infos</div>
             <div class="links fontGabriella">
-                <!-- <div class="link turnier" routerLink="/">Turnier</div> -->
+                <div class="link active clickable" routerLink="/tickets">Tickets</div>
+                <div class="link active clickable" routerLink="/galerie">Galerie</div>
+                <div class="link active clickable" routerLink="/infos">Infos</div>
             </div>
         </div>
-        <app-footer></app-footer>        
+        <app-footer></app-footer>
     </div>
 </div>
+<!-- <div class="link turnier" routerLink="/">Turnier</div> -->

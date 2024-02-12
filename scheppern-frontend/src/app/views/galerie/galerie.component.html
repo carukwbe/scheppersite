@@ -1,0 +1,14 @@
+
+<img 
+  *ngFor="let image of imageData" 
+  src="/assets/galerie/{{image.name}}" 
+  alt="" 
+  (click)="openModal(image)"
+>
+
+<app-image-modal
+  *ngIf="selectedImage !== null"
+  [images]="imageData"
+  [index]="selectedImage"
+  (closeModal)="closeModal()"
+></app-image-modal>

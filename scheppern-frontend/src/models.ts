@@ -19,6 +19,7 @@ export interface Ticket {
 
     old_ticketID?: string;
     secret?: boolean;
+
 }
 
 export interface TicketForm extends FormGroup {
@@ -40,6 +41,7 @@ export interface TicketForm extends FormGroup {
         dataProtectionAccepted: AbstractControl;
         over18: AbstractControl;
         secret?: AbstractControl;
+        secret_token?: AbstractControl;
     };
 }
 

@@ -7,7 +7,9 @@ body {
     /* background: url('/assets/hintergrund.jpg') no-repeat center center fixed;
     background-size: cover;  */
 
-    background-color: #8195cc;
+    background-color: rgb(0, 55, 109);
+
+
     
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -24,19 +26,16 @@ p, h1, h2, h3, h4, h5, h6 {
     --bg-color: #323232;
     --bg-color: rgb(80, 55, 53);
     --bg-color: rgb(0, 55, 109);
-    --accent-color2: #3c17179b;
-    --accent-color2-hover: rgb(247, 117, 117);
-    
-
-    /* wird im footer gesetzt */
-    /* --accent-color1: #8593c8;
-    /* --accent-color1: rgb(143, 157, 210); */
-    /* --accent-color1: rgba(118, 141, 176, 0.8); */
-    
-    
     
     --accent-color1: rgba(89, 166, 166, 0.5);
+    --accent-color1: rgb(13, 70, 160, 0.44);
+    
+    
+    --accent-color2: #3c17179b;
+    --accent-color2: #003c9d;
     --accent-color2: #004fca;
+    --accent-color2: rgb(13, 70, 160);
+    --accent-color2-hover: rgb(247, 117, 117);
     --text-color: white;
     
     --scroll: 0;
@@ -89,7 +88,7 @@ p, h1, h2, h3, h4, h5, h6 {
 a {
     color: #3396d8;
     color: #282898;
-    color: #004fca;
+    color: #003fa3;
     text-decoration: none; /* Remove default underline */
     /* Additional styles as needed */
 }
@@ -98,6 +97,59 @@ a {
 a:hover {
     color: #2980b9; /* Darken the color slightly on hover */
     color: #282898;
-
-    /* Additional hover styles as needed */
 }
+
+/* not mat-icon-button */
+
+button[mat-raised-button] {
+    position: relative;
+    
+    /* disable default styling */
+    border: none;
+    background: none;
+    outline: none;
+  
+    width: fit-content;
+    border-radius: 3px;
+  
+    font-size: 16px;
+    /* font-weight: 200; */
+    letter-spacing: 1px;
+  
+    background-color: rgba(0, 0, 0, 0);
+  
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    padding: 7px 30px;
+  
+    @media screen and (max-width: 441px){
+        padding: 7px 20px;
+    }
+}
+button[mat-raised-button]:enabled {
+    /* border: 0.5px solid rgb(0, 0, 0); */
+
+}
+
+  .button[mat-raised-button]:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+}
+  button[mat-raised-button]:after {
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 100%;
+    top: 5px;
+    left: 5px;
+    background-color: rgb(199, 131, 179);
+    z-index: -1;
+    transition: 0.2s;
+    border-radius: 4px;
+}
+  button[mat-raised-button]:hover:after {
+    top: 0px;
+    left: 0px;
+}
+

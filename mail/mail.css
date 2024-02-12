@@ -1,8 +1,9 @@
 body {
-  background: url('background.jpg') no-repeat center center fixed;
-  background-color: #8195cc;
-  /* background: url(data:image/jpeg;base64,{{ background_base64 }}) no-repeat center center fixed; */
+  background: url('https://firebasestorage.googleapis.com/v0/b/scheppersite.appspot.com/o/background.jpg?alt=media&token=394fcae4-4311-4d60-a5c6-0c49e58ec4d2') no-repeat center center fixed;
   background-size: cover;
+
+  /* fallback if image does not load */
+  background-color: #8195cc;
 
   display: flex;
   flex-direction: column;
@@ -28,16 +29,12 @@ a {
   color: #3396d8;
   color: #282898;
   color: #004fca;
-  text-decoration: none; /* Remove default underline */
-  /* Additional styles as needed */
+  text-decoration: none;
 }
 
-/* Hover styles for the anchor tag */
 a:hover {
-  color: #2980b9; /* Darken the color slightly on hover */
+  color: #2980b9;
   color: #282898;
-
-  /* Additional hover styles as needed */
 }
 
 .container {
@@ -79,7 +76,7 @@ a:hover {
   padding: 1px 7px;
   
   background: grey;
-  color: white;
+  /* color: white; */
   font-size: 0.8rem;
   font-weight: 500;
   border-radius: 4px;
@@ -100,20 +97,15 @@ a:hover {
     margin: 0 0 15px 0;
 }
 
-button {
+.button {
   position: relative;
-  
-  /* disable default styling */
-  border: none;
-  background: none;
-  outline: none;
 
   width: fit-content;
   margin-left: 30px; 
   border-radius: 3px;
 
   font-size: 16px;
-  font-weight: 200;
+  font-weight: 100;
   letter-spacing: 1px;
 
   background-color: rgba(0, 0, 0, 0);
@@ -129,10 +121,7 @@ button {
     padding: 7px 20px;
   }
 }
-.button:hover {
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-}
-button:after {
+.button:after {
   position: absolute;
   content: "";
   height: 100%;
@@ -143,7 +132,15 @@ button:after {
   z-index: -1;
   transition: 0.2s;
 }
-button:hover:after {
+.button:hover:after {
   top: 0px;
   left: 0px;
+}
+
+.button > a {
+  color: black!important;
+  all: unset;
+}
+.button > a:active {
+  color: white!important;
 }

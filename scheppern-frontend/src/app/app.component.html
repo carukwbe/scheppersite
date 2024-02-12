@@ -4,7 +4,7 @@
 
 <div *ngIf="!isHomePage" class="background"></div>
 
-<div appWidthObserver class="content" [ngClass]="{'backgroundImage': !isHomePage}">
+<div class="content" [ngClass]="{'backgroundImage': !isHomePage}">
   <app-header *ngIf="!isHomePage"></app-header>
   <!-- todo: margin of header -> not consistent with height change on mobile -->
   <router-outlet [ngStyle]="!isHomePage ? {'margin-top': '60px'} : {}" ></router-outlet> <!-- header height -->

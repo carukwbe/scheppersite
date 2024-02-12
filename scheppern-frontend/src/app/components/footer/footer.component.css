@@ -1,35 +1,24 @@
-app-slider {
-    position: absolute;
-    bottom: 150px;
-
-    transform: translateX(-6%);
-    z-index: 5;
-
-    @media screen and (max-width: 550px) {
-        bottom: 250px;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-}
-
-
 :host {
     display: grid;
     position: relative;
     
-    width: 100vw;
+    width: 100%;
     justify-items: center;
 
     box-sizing: border-box;
 
     padding: 0 30px;
     background-color: var(--accent-color1);
+
+    -webkit-user-select: none;  /* Chrome all, Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none; 
 }
 
 .footerElements {
-
     display: flex;
-    gap: 40px;
+    /* gap: 40px; */
 
     max-width: 1350px;
     width: 100%;
@@ -38,42 +27,12 @@ app-slider {
     justify-content: space-around;
 }
 
-
-@media (max-width: 550px) {
-    .footerElements {
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        /* grid-template-rows: 0.7fr 0.1fr 0fr; */
-        grid-template-areas:    
-            "windrad ."
-            "windrad iconsMiddle"
-            "windrad links";
-
-        gap: 0;
-        grid-gap: 0;
-
-
-        text-align: center;
-        max-width: 400px;
-    }
-
-    :host {
-        height: 230px;
-        padding: 0 30px 0 5px;
-    }
-
-    .links {
-        line-height: 1.8em!important;
-    }
-
-}
-
 .windrad {
     position: relative;
     pointer-events: none;
     
-    bottom: 15%;
-    height: 130%;
+    bottom: 35%;
+    height: 170%;
     width: 100px;
 
     display: flex;
@@ -104,6 +63,21 @@ app-slider {
     animation: rotating 12s linear infinite;
 }
 
+
+app-slider {
+    position: absolute;
+    pointer-events: none;
+    bottom: 150px;
+
+    transform: translateX(-6%);
+    z-index: 5;
+
+    @media screen and (max-width: 550px) {
+        bottom: 250px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
 .iconsMiddle {
     justify-self: center;
     display: flex;
@@ -113,9 +87,8 @@ app-slider {
     height: fit-content;
 
     --test: #fff;
+    /* margin: 20px 0; */
 }
-
-
 
 .buttonBG {
     height: 50px;
@@ -150,7 +123,8 @@ app-slider {
     justify-items: center;
 }
 
-.links {
+
+.links2 {
     list-style: none;
     margin: 25px 0;
     padding: 0;
@@ -160,4 +134,56 @@ app-slider {
 li:hover {
     color: var(--accent-color2);
     cursor: pointer;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.5em;
+    font-size: 1.5em;
+    color: var(--text-color);
+    align-items: center;
+    gap: 10ypx;
+    margin: 40px 0;
+}
+
+.top {
+    display: flex;
+    gap: 20px;
+}
+
+.link:hover {
+    color: var(--accent-color2);
+    cursor: pointer;
+}
+
+
+@media (max-width: 650px) {
+    .footerElements {
+        width: 100%;
+        margin-top: 30px;
+        /* margin-bottom: 10px; */
+        display: grid;
+        grid-template-columns: 1fr 5fr;
+        grid-template-areas:
+            "windrad iconsMiddle"
+            "windrad links";
+
+        /* grid-column-gap: 100px; */
+        justify-items: stretch;
+        text-align: center;
+    }
+
+    :host {
+        height: 230px;
+        padding: 0 30px 0 5px;
+    }
+
+    .links {
+        line-height: 1.8em!important;
+        padding: 0;
+        margin: 0;
+        margin-bottom: 30px;
+        font-size: 1.3em;
+    }
 }

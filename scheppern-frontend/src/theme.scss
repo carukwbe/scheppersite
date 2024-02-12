@@ -4,23 +4,31 @@
 
 
 
-// Light mode
-$alternate-primary: mat-palette($mat-blue-grey);
-$alternate-accent: mat-palette($mat-pink, 500, 900, A100);
-$alternate-warn: mat-palette($mat-red);
-$alternate-theme-light: mat-light-theme($alternate-primary, $alternate-accent, $alternate-warn);
+// $custom-primary: mat-palette($mat-pink, 400);
+$custom-primary: mat-palette($mat-blue, 900);
+$custom-accent: mat-palette($mat-blue-grey, 500);
+$custom-warn: mat-palette($mat-red, 800);
+$custom-theme: mat-dark-theme(
+  (
+    color: (
+        primary: $custom-primary,
+        accent: $custom-accent,
+        warn: $custom-warn
+    )
+  )
+);
+@include angular-material-theme($custom-theme);
 
-// Dark mode
-$alternate-primary: mat-palette($mat-blue-grey);
-$alternate-accent: mat-palette($mat-pink, 500, 900, A100);
-$alternate-warn: mat-palette($mat-red);
-$alternate-theme-dark: mat-dark-theme($alternate-primary, $alternate-accent, $alternate-warn);
 
-// leight and dark mode change nothing, always dark mode 
-.light-mode {
-    @include angular-material-theme($alternate-theme-dark);
-}
 
-.dark-mode {
-    @include angular-material-theme($alternate-theme-dark);
-}
+
+
+// @include angular-material-theme($custom-theme-dark);
+
+
+// .light-mode {
+//     @include angular-material-theme($custom-theme-light);
+// }
+// .dark-mode {
+//     @include angular-material-theme($custom-theme-dark);
+// }

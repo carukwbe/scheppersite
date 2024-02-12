@@ -16,7 +16,13 @@
             <mat-error *ngIf="getError('surname', 'pattern')">Dein Name enthält nicht erlaubte Zeichen!</mat-error>
         </mat-form-field>
     
-        <mat-form-field [matTooltip]="ticket.status!=='payed' ? 'Bezahle erst dein Ticket!' : ''">
+        <mat-form-field 
+            [matTooltip]="
+                ticket.status === 'ordered' ? 'Bezahle dein Ticket zuerst!' : (
+                    ticket.status === 'pending' ? 'Aktiviere dein Ticket zuerst!' : ''
+                )
+            "
+        >
             <mat-label>E-Mail</mat-label>
             <input type="email" id="email" matInput formControlName="email" email>
             <mat-error *ngIf="getError('email', 'required')">Ohne die können wir dir kein Ticket schicken!</mat-error>
@@ -65,14 +71,17 @@
             mat-raised-button 
             color="primary" 
             (click)="submit()" 
-            [disabled]="form.invalid || (
-                form.get('name')!.getRawValue() === ticket.name &&
-                form.get('surname')!.getRawValue()===ticket.surname &&
-                form.get('email')!.getRawValue()===ticket.email &&
-                form.get('phone')!.getRawValue()===ticket.phone &&
-                form.get('helperShifts')!.getRawValue()===ticket.helper_shifts &&
-                form.get('helperInfos')!.getRawValue()===ticket.helper_infos
-            )"
+            [disabled]="
+                form.invalid || (
+                    form.get('name')!.getRawValue() === ticket.name &&
+                    form.get('surname')!.getRawValue()===ticket.surname &&
+                    form.get('email')!.getRawValue()===ticket.email &&
+                    form.get('phone')!.getRawValue()===ticket.phone &&
+                    form.get('helperShifts')!.getRawValue()===ticket.helper_shifts &&
+                    form.get('helperInfos')!.getRawValue()===ticket.helper_infos 
+                ) || 
+                isDeleted
+            "
             style="margin-top: 30px;"
         >
             Ändere dein Ticket
@@ -80,26 +89,31 @@
         <div *ngIf="isLoading" [@slideInFromTopWithOpacity]>
             <mat-spinner style="margin-top: 20px;"></mat-spinner>
         </div>
-        <div *ngIf="statusMessage" style="margin-top: 20px;">{{ statusMessage }}</div>
+        <p *ngIf="statusMessage" style="margin-top: 20px; white-space: pre-line;">{{ statusMessage }}</p>
     </div>
     
     <div class="boxAnnotation card infos">
         <table mat-table [dataSource]="tableInfos!" >
             <ng-container matColumnDef="key">
-                <td mat-cell *matCellDef="let element"> {{element.key}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.key}}</td>
             </ng-container>
             
             <ng-container matColumnDef="value">
-                <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+                <td 
+                    mat-cell *matCellDef="let element"
+                    [matTooltip]="element.key === 'Ticket ID' ? 'Dein persönliches Passwort zu deinem Ticket. Gib sie niemals einfach so weiter. Andere können dir damit dein Ticket klauen!' : ''" 
+                >
+                    {{element.value}}
+                </td>
             </ng-container>
             
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
         <div class="stornoInside">
             <button
-                *ngIf="ticket.status==='ordered'"
+                *ngIf="ticket.status==='ordered' && !isDeleted"
                 mat-raised-button
-                color="primary" 
+                color="accent" 
                 (click)="openDeleteDialog()"
                 aria-label="Ticket stornieren"
             >
@@ -109,14 +123,14 @@
             <div *ngIf="isLoadingDelete" [@slideInFromTopWithOpacity]>
                 <mat-spinner style="margin-top: 20px;"></mat-spinner>
             </div>
-            <div *ngIf="statusMessageDelete" style="margin-top: 20px;">{{ statusMessageDelete }}</div>
+            <p *ngIf="statusMessageDelete" style="margin-top: 20px; white-space: pre-line;">{{ statusMessageDelete }}</p>
         </div>
     </div>
     <div class="storno">
         <button 
-            *ngIf="ticket.status==='ordered'"
+            *ngIf="ticket.status==='ordered' && !isDeleted"
             mat-raised-button
-            color="primary" 
+            color="accent" 
             (click)="openDeleteDialog()"
             class="storno" 
             aria-label="Ticket stornieren"
@@ -127,11 +141,11 @@
         <div *ngIf="isLoadingDelete" [@slideInFromTopWithOpacity]>
             <mat-spinner style="margin-top: 20px;"></mat-spinner>
         </div>
-        <div *ngIf="statusMessageDelete" style="margin-top: 20px;">{{ statusMessageDelete }}</div>
+        <p *ngIf="statusMessageDelete" style="margin-top: 20px; white-space: pre-line;">{{ statusMessageDelete }}</p>
     </div>
 </form>
 
 <div *ngIf="!ticket">
     <mat-spinner *ngIf="isLoading"></mat-spinner>
-    <div *ngIf="statusMessage">{{ statusMessage }}</div>
+    <p *ngIf="statusMessage" style="white-space: pre-line;">{{ statusMessage }}</p>
 </div>

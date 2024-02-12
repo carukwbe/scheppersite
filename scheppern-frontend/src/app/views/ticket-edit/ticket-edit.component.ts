@@ -51,6 +51,7 @@ export class TicketEditComponent implements OnInit {
   tableInfos: { 'key': string, 'value': string }[] | null = null;
 
   isLoading = true;
+  isDeleted = false;
   statusMessage = '';
   isLoadingDelete = false;
   statusMessageDelete = '';
@@ -67,7 +68,9 @@ export class TicketEditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
+    this.ticketService.sendHeaders('ticket_edit');
+    
+    this.route.params.subscribe((params) => { 
       if (/^[a-zA-Z0-9]{20}$/.test(params['id'])) {
         this.id = params['id'];
         this.getTicket(this.id);
@@ -81,6 +84,7 @@ export class TicketEditComponent implements OnInit {
   getTicket(id: string): void {
     this.ticketService.getSingleTicket(id).subscribe(
       (ticket) => {
+        console.log(ticket);
         this.isLoading = false;
 
         this.ticket = ticket;
@@ -91,7 +95,8 @@ export class TicketEditComponent implements OnInit {
           { key: 'Carpass',       value: ticket.carpass ? 'Ja' : 'Nein' },
           { key: 'Helfer*in',     value: ticket.helper  ? 'Ja' : 'Nein' },
           { key: 'Preis',         value: ticket.price!.toString() + '€' },
-          { key: 'Bezahlt',       value: ticket.status! === 'payed' || ticket.status! === 'scanned' ? 'Ja' : 'Nein' }
+          { key: 'Bezahlt',       value: ticket.status! === 'payed' || ticket.status! === 'scanned' ? 'Ja' : 'Nein' },
+          { key: 'Status',        value: ticket.status! }
         ];
       },
       (error) => {
@@ -167,6 +172,8 @@ export class TicketEditComponent implements OnInit {
       status => {
         this.isLoadingDelete = false;
         this.statusMessageDelete = status;
+        this.form.disable();
+        this.isDeleted = true;
       },
       error => {
         this.isLoadingDelete = false;

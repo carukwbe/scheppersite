@@ -37,13 +37,13 @@
             <mat-error *ngIf="getError('message', 'pattern')">Ungültige*s Zeichen entdeckt! Erlaubte Satzzeichen sind nur :,().?!</mat-error>
         </mat-form-field>
 
-    
-    
-        <button mat-raised-button color="primary" (click)="submit()" [disabled]="form.invalid" style="width: fit-content; align-self: center;">
-            Nachricht abschicken
-        </button>
-    
-        <mat-spinner *ngIf="isLoading"></mat-spinner>
-        <div *ngIf="statusMessage">{{ statusMessage }}</div>
+        <div class="submit">
+            <button mat-raised-button color="primary" (click)="submit()" [disabled]="form.invalid" style="width: fit-content; align-self: center;">
+                Nachricht abschicken
+            </button>
+        
+            <mat-spinner *ngIf="isLoading" style="width: fit-content; align-self: center;"></mat-spinner>
+            <p style="width: fit-content; align-self: center;" *ngIf="statusMessage" style="white-space: pre-line; margin-top: 20px;">{{ statusMessage }}</p>
+        </div>
     </form>
 </div>

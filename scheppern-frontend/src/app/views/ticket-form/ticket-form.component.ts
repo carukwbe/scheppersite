@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Ticket, TicketForm,  TicketLevel } from 'src/models';
 import { TicketService } from 'src/app/services/ticket-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -59,6 +59,8 @@ export class TicketFormComponent { //todo scret form erstellen!
     public dialog: MatDialog,
     private route: ActivatedRoute
   ) { 
+    this.ticketService.sendHeaders('tickets');
+
     this.ticketInfos = this.fb.group({
       name:    ['', [Validators.required, ...nameValidators]],
       surname: ['', [Validators.required, ...nameValidators]],
@@ -118,7 +120,7 @@ export class TicketFormComponent { //todo scret form erstellen!
 
     // DEBUG
     this.ticketInfos.valueChanges.subscribe((formValues) => {
-      // console.log(formValues);
+      console.log(formValues);
     });
 
   }
@@ -183,6 +185,14 @@ export class TicketFormComponent { //todo scret form erstellen!
     }
   }
 
+  private updateForm(controlName: string, value: any): void {
+    if (value !== undefined && this.ticketInfos.get(controlName)) {
+      this.ticketInfos.patchValue({ [controlName]: value });
+    } else if (value !== undefined) {
+      this.ticketInfos.addControl(controlName, this.fb.control(value));
+    }
+  }
+
   submit(): void {
     this.submitLoading = true;
     this.statusMessage = '';
@@ -192,13 +202,8 @@ export class TicketFormComponent { //todo scret form erstellen!
 
     // add secret value
     if (this.isSecret) {
-      if (this.ticketInfos.get('secret')) {
-        this.ticketInfos.patchValue({
-          secret: this.isSecret
-        });
-      } else {
-        this.ticketInfos.addControl('secret', this.fb.control(this.isSecret));
-      }
+      this.updateForm('secret', this.isSecret);
+      this.updateForm('secret_token', this.ticketService.authTokenSubject.value);
     }
 
     this.ticketService.writeTicket(this.ticketInfos.value as Ticket).subscribe(

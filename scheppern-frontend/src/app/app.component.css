@@ -5,7 +5,7 @@
     background-position: center center;
 
     top: 0;
-    height: 100vh;
+    height: 100%;
     width: 100%;
     z-index: -1;
     overflow: hidden;
@@ -21,12 +21,6 @@ app-header {
     top: 0px;
     z-index: 3;
 }
-app-footer {
-    /* position: sticky; */
-    margin-top: auto;
-    bottom: 0;
-}
-
 
 
 /* cursor stuff */

@@ -1,16 +1,14 @@
-
-
 <div class="footerElements">
-    <div class="windrad" style="grid-area: windrad;">
+    <div class="windrad" style="grid-area: windrad;" aria-label="gezeichnetes sich drehendes Windrad">
         <img src="/assets/windrad_stamm.png" alt="Windrad" class="stamm">
-        <img src="/assets/windrad_fluegel.png" alt="Windrad" class="fluegel">
+        <img src="/assets/windrad_fluegel.png" alt="Flügel" class="fluegel">
     </div>
     
     
     <app-slider *ngIf="!sliderHidden" (closeSliderEvent)="toggleSlider()"></app-slider>
     <div class="iconsMiddle" style="grid-area: iconsMiddle;">
        
-        <a href="https://www.instagram.com/scheppernfestival/" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.instagram.com/scheppernfestival/" target="_blank" rel="noopener noreferrer" aria-label="link to instagram">
             <div class="buttonBG instagramBG">
                 <div class="button">
                     
@@ -29,19 +27,17 @@
             </div>
         </a>
 
-
-
         <!-- {'tooltip': 'Der Verein', 'icon': 'groups', 'link': '/verein'}, -->
         <div
             *ngFor="let item of [
-                {'tooltip': 'Kontakt', 'icon': 'email', 'link': '/kontakt'},
-                {'tooltip': '', 'icon': 'tune', 'link': null, 'action': toggleSlider},
+                {'tooltip': 'Kontakt', 'icon': 'email', 'link': '/kontakt', 'aria-label': 'Link zu Kontaktformular'},
+                {'tooltip': '', 'icon': 'tune', 'link': null, 'action': toggleSlider, 'aria-label': 'Regler um Farben Farben des Header und Footer zu ändern'},
             ]" 
             class="buttonBG outlineBG" 
             matTooltip="{{ item.tooltip }}"
             [routerLink]="item.link"
             (click)="item.action ? item.action.call(this) : null"
-
+            aria-label=""
         >
             <div class="button">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
@@ -62,11 +58,20 @@
         </div>
     </div>
 
+    <div class="links" style="grid-area: links;">
+        <div class="top">
+            <div class="link" [routerLink]="'/impressum'">Impressum</div>
+            •
+            <div class="link" [routerLink]="'/agbs'">AGBs</div>
+        </div>
+        <div class="bottom">
+            <div class="link" [routerLink]="'/datenschutz'">Datenschutzhinweise</div>
+        </div>
+    </div>
     
-    
-    <ul class="links" style="grid-area: links;">
+    <!-- <ul class="links" style="grid-area: links;">
         <li [routerLink]="'/impressum'">Impressum</li>
         <li [routerLink]="'/agbs'">AGBs</li>
         <li [routerLink]="'/datenschutz'">Datenschutzhinweise</li>
-    </ul>    
+    </ul>     -->
 </div>

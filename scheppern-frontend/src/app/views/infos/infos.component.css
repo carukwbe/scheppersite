@@ -8,7 +8,7 @@
 
     background-size: 100% 100%;
     background-size: cover; */
-    padding: 100px 5px;
+    padding: 100px 7px;
 
     --mat-expansion-container-background-color: rgba(0, 0, 0, 0.3);
 
@@ -51,12 +51,40 @@ mat-accordion {
 }
 
 .cdk-focuced {
-    background-color: rgba(255,255,255,0)!important;
+    /* background-color: rgba(255,255,255,0)!important; */
+    /* background-color: none!important; */
+
 }
 
 .cdk-mouse-focused {
     background-color: rgba(255,255,255,0)!important;
+    /* background-color: none!important; */
+
 }
+.cdk-touch-focused {
+    /* background-color: rgba(255,255,255,0)!important; */
+    /* background-color: none!important; */
+
+}
+
+.mat-expansion-panel-header.mat-expanded:focus, .mat-expansion-panel-header.mat-expanded:hover {
+    background-color: rgba(255,255,255,0)!important;
+    /* background-color: none!important; */
+}
+
+.mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled=true]):hover {
+    background-color: rgba(255,255,255,0)!important;
+    /* background-color: none!important; */
+}
+
+
+
+.mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled=true]):hover {
+    background-color: rgba(255,255,255,0)!important;
+    /* background-color: none!important; */
+}
+
+
 
 
 /* mat-expansion-panel-header mat-focus-indicator ng-tns-c2690051721-8 ng-tns-c1859850774-7 mat-expansion-toggle-indicator-after ng-star-inserted

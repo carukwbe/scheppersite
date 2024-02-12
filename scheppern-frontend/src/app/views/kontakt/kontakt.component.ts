@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TicketService } from 'src/app/services/ticket-service.service';
 import { emailValidators, phoneValidators, textValidators, ticketIDValidators } from 'src/app/validators';
-import { Global } from 'src/environments/environment';
 
 @Component({
   selector: 'app-kontakt',
@@ -17,7 +16,9 @@ export class KontaktComponent {
   constructor(
     private fb: FormBuilder,
     private ticketService: TicketService
-  ) { }
+  ) { 
+    this.ticketService.sendHeaders('kontact');
+  }
 
   ngOnInit(): void {
     this.form = this.fb.group({

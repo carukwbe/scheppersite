@@ -39,6 +39,13 @@ export class TicketValidateComponent {
           this.isLoading = false;
           this.success = true;
 
+          console.log(result);
+
+          this.statusMessage = `
+            ${result.name} ${result.surname}
+            Order ID: ${result.order_id}
+            `;
+
           this.name = result.name;
           this.surname = result.surname;
         },

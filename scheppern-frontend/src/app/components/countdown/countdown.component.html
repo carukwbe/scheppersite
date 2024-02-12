@@ -1,0 +1,23 @@
+<ng-container *ngIf="timeRemaining">
+    <div class="box" description="Tage">
+        {{ timeRemaining.days }}
+    </div>
+    <div class="box" description="Stunden">
+        {{ timeRemaining.hours }}
+    </div>
+    <div class="box" description="Minuten">
+        {{ timeRemaining.minutes }}
+    </div>
+    <div class="box" description="Sekunden">
+        {{ timeRemaining.seconds }}
+    </div>
+    <!-- <p>Tage</p>
+    <p>Stunden</p>
+    <p>Minuten</p>
+    <p>Sekunden</p> -->
+</ng-container>
+
+<div *ngIf="!timeRemaining">
+    <p>Der Countdown ist Zuende!</p>
+</div>
+

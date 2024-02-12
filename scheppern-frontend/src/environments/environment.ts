@@ -22,57 +22,42 @@ export const Global = {
       key: 'einlass',
       value: 'Einlass',
       description: `
-        Leider durften wir letztes Jahr feststellen, dass wir doch nicht ganz nur wir waren auf dem Festival. Es haben sich eine
-        Handvoll ungebetene Gäste unter uns geschlichen und auch einen erheblichen finanziellen Schaden verursacht. Um dies
-        diesmal zu verhindern müssen wir leider den Einlass intensiver bewachen. Da wir 2 Eingänge haben ist das natürlich
-        doppelt ärgerlich. Für ein bisschen Entertainment am Eingang werden wir auf jeden Fall sorgen!
-        Gerne könnt ihr dort auch mit euren Homies chillen, allerdings sollte natürlich ein offenes Auge auf den Eingang zu
-        jeder Zeit gewährleistet sein! Ihr bekommt eine Funke in die Hand und habt jederzeit die Möglichkeit Security zu rufen,
-        falls ihr Probleme bekommt! Zu Stoßzeiten wird Security aber auch selber dort sein!
-        `
+        Um die beim Festival entstehenden Kosten zu decken, sollen diese fair durch alle Besucher*innen geteilt werden.
+        Um dies zu ermöglichen und für Sicherheit zu sorgen wird es eine Einlasskontrolle geben. 
+        Für die beiden Eingänge suchen wir daher noch motivierte Helfer*innen, die bei der Schicht die Tickets kontrollieren und auf ein Verhalten nach unseren Werten achten. 
+        Bei Bedarf eilt unser Security-Team selbstverständlich an eure Seite. An sich könnt ihr aber eine entspannte Schicht erwarten, bei denen ihr sicherlich viele nette Gäste begrüßen dürft!
+      `
     }, {
       key: 'bar',
       value: 'Bar',
       description: `
-        Als Barschicht hast du die Möglichkeit die Welt auf einmal aus einer ganz anderen Perspektive zu sehen und zwar aus der
-        hinterdemthresensteh-Perspektive.
-      `
-    }, {
-      key: 'kueche',
-      value: 'Küche',
-      description: `
-        Wir planen diesmal zu bestimmten Uhrzeiten Essen auszugeben. Schnippelhilfen können wir dabei immer gebrauchen. Solltest
-        du selber Kocherfahrung mitbringen und Lust haben ein Gericht zu übernehmen, schreib es uns, dann planen wir
-        zusammen!
+        Gibt nichts zu erklären, klassische Barschicht halt!
       `
     }, {
       key: 'awareness',
       value: 'Awareness',
       description: `
-        Es wird ein ganzes Awareness Team geben und du bekommst ein Briefing vorher. Im Grundsatz übt Awareness bei uns keine
-        Kontrolle aus, sondern ist streitschlichtender und problemlösender Part. Falls ihr euch nicht wohl fühlt, ist die
-        Awareness Crew für euch da!
+        Awareness Arbeit ist eine verantwortungsvolle Aufgabe mit dem Ziel, allen Teilnehmenden ein angenehmes Festival zu ermöglichen. 
+        Dabei wirkt sie präventiv und reaktiv Diskriminierung und übergriffigem Verhalten verhindernd entgegen. 
+        Uns ist wichtig, dass wir uns auf dich verlassen können. Zur Vorbereitung wird es ein verpflichtendes Awareness-Treffen geben. 
+        Wir tauschen uns über die Aufgaben und Ziele der Awareness auf dem Festival aus und geben dir Handlungsmöglichkeiten für den Notfall an die Hand. 
+        Wir wollen sicherstellen, dass die Awareness-Teams gut koordiniert und vorbereitet sind. Du wirst von uns auf mögliche Schwierigkeiten vorbereitet und in den Schichten auch nicht alleine eingeteilt werden. 
+        Ihr bekommt eine lila Weste und einem Telefon, auf dem ihr zu der Zeit dauerhaft erreichbar seid. 
+        Außerdem wünschen wir uns von euch, dass ihr regelmäßig den Ort wechselt, um überall auf dem Gelände präsent zu sein und bei diskriminierendem und grenzüberschreitendem Verhalten eingreifen zu können. 
+        Es wird Aufmerksamkeit und Handlungsfähigkeit vorausgesetzt, sodass wir von allen, die diese Verantwortung übernehmen wollen, Nüchternheit während der Schicht erwarten.
       `
     }, {
       key: 'security',
       value: 'Security',
       description: `
-        Mit Lizenz oder nur mit Erfahrung, beides sehr willkommen!
-      `
-    }, {
-      key: 'aufbau',
-      value: 'Aufbau',
-      description: `
-        Der Aufbau startet schon bereits eine Woche vorher. Du solltest in der Zeit zum Großteil Zeit haben. Es gibt viel zu bauen und aufzubauen.
-      `
-    }, {
-      key: 'abbau',
-      value: 'Abbau',
-      description: `
-        Darauf hat keiner Bock, aber vielleicht ja du! Wir werden vorraussichtlich den Montag und den Dienstag beschäftigt sein.
+        Du bekommst eine Funke in die Hand, bist auf dem Gelände präsent und jederzeit erreichbar. 
+        Idealerweise hast du bereits Erfahrung und oder Qualifiaktionen in dem Bereich. 
+        Wir werden in einem ersten Meeting die nötigen Details klären, inwiefern wir uns eine Zusammenarbeit vorstellen können!
+        Security wird auf dem Festival nicht dazu da sein, die Gäste zu überwachen, sondern ist für uns einfach als eine zusätzliche Maßnahme da,
+        um in Krisensitationen (wie der Diebstahl von Laptops 2023) handlungsfähig zu bleiben und allen Gästen das Gefühl zu geben an einem sicheren Ort zu sein.
       `
     }
   ],
   textCharLimit: 50,
-  textAreaCharLimit: 5000,
+  textAreaCharLimit: 5000
 };

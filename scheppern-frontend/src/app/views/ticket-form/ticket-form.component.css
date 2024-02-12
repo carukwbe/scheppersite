@@ -138,12 +138,12 @@ mat-form-field {
     margin-left: 44px !important;
 }
 
-/* carpass */
-.carpassDisabled {
+/* ausverkauft */
+.ausverkauft {
     position: relative;
     width: fit-content;
 }
-.carpassDisabled::after {
+.ausverkauft::after {
     content: "";
     position: absolute;
     inset: 0;
@@ -156,15 +156,6 @@ mat-form-field {
     background-repeat: no-repeat;
     background-position: center;
     opacity: 0.8;
-}
-.ausverkauft {
-    position: absolute;
-    width: 200px;
-    opacity: 0.4;
-
-    display: grid;
-    justify-self: center;
-    align-self: center;
 }
 
 .schichten {

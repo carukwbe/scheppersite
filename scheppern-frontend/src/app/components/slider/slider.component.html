@@ -1,5 +1,3 @@
-
-
 <div class="drag" cdkDrag [@slideInFromTop]>
     <div class="titlebar">
         <div class="titlebar-stoplight">
@@ -54,10 +52,9 @@
     
         <div class="alphaContainer">
             <mat-slider 
-                vertical
                 class="alpha"
                 min="0" 
-                max="255" 
+                max="100" 
                 (mousedown)="onSliderMouseDown($event)" 
                 (touchstart)="onSliderMouseDown($event)"
                 color="accent"

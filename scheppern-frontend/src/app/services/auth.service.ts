@@ -1,10 +1,15 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { TicketService } from './ticket-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  constructor(
+    private ticketService: TicketService,
+  ) { }
+
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
 
   isAuthenticated(): Observable<boolean> {
@@ -12,8 +17,13 @@ export class AuthService {
   }
 
   login(username: string, password: string): void {
-    const isAuthenticated = username === 'heppa' && password === 'scheppa';
-    
-    this.isAuthenticatedSubject.next(isAuthenticated);
+    this.ticketService.login(username, password).subscribe(
+      (data) => {
+        console.log('Success:', data);
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+    );
   }
 }

@@ -6,6 +6,7 @@
                 {{ questions.question }}
             </mat-panel-title>
         </mat-expansion-panel-header>
-        {{ questions.answer }}
+        <div [innerHTML]="questions.answer"></div>
+        <!-- {{ questions.answer }} -->
     </mat-expansion-panel>
 </mat-accordion>

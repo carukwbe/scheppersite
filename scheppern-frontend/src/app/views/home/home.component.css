@@ -3,13 +3,19 @@
 }
 .parallax {
     position: relative;
-    height: 100vh;
     overflow-x: hidden;
     perspective: 10px;
-}
-app-parallax {
     height: 100vh;
-    /* max-height: 200vw; */
+    width: 100%;
+}
+
+app-parallax {
+    pointer-events: none;
+    /* z-index: -1; */
+
+    position: relative;
+    display: flex;
+    transform-style: preserve-3d;
 }
 
 
@@ -17,26 +23,45 @@ app-parallax {
     position: relative;
     display: flex;
     flex-direction: column;
-
-    isolation: isolate;
-    z-index: 1;
+    margin-top: var(--top-total);
+    /* margin-top: 100px; */
+    width: 100%;
+    bottom: 0;
 
     --height-image: calc(
         min(
             max(150vh, 150vw),
-            2739px                  /* Höhe des eigentlichen Bildes */
+            2739px
         )
     );
     --width-image: 100%;
-    --top-total: 60vw;
-    --top-content: 20vh;
 
+    /* maximales Gefrickel, da die man nicht an die Höhe des Scroll Containers dran kam und daher nicht einfach den Content ans Ende sticken konnte */
+    /* trial and error, funktioniert jetzt halbwegs mit allen Browsergrößen */
+    /* testen notwendig! */
 
-    --content-gap: max(12vh, 15vw);
-    /* --content-gap: 100px; */
+    /* --top-total: min(150vh, 150vw); */
+    /* --top-total: calc(var(--base-margin) + (var(--height-ratio) * 100vh) + (var(--width-ratio) * 100vw)); */
+    --top-total: 35vh;
+    --top-content: -10vh;
+    --content-gap: max(40vh, 20vw);
+    --link-gap: calc(5vw + 40px);
 
-    margin-top: var(--top-total);
+    @media screen and (min-width: 768px) {
+        --top-total: calc(35vh + 250px);
+    }
 
+    @media screen and (min-aspect-ratio: 100/100) {
+        --top-total: calc(60vw);
+    }
+
+    @media screen and (max-width: 450px) {
+        --top-total: 25vh;
+    }
+    @media screen and (max-aspect-ratio: 100/180) {
+        --link-gap: calc(10vh + 40px);
+    }
+   
     @media (max-width: 768px) {
         --width-image: 150%;
     }
@@ -61,9 +86,6 @@ app-parallax {
     bottom: 0;
     width: 100%;
 }
-
-
-
 
 .content {
     position: absolute;
@@ -155,16 +177,14 @@ app-parallax {
 
 .links {
     display: flex;
-    flex-wrap: wrap;
-    gap: 100px;
-    /* padding: 100px; */
+    flex-direction: column;
+    gap: var(--link-gap);
     justify-content: center;
-    /* flex-direction: column; */
 
     
 }
 .link {
-    font-size: calc(3.5vw + 1.5em);
+    font-size: calc(2vw + 25px);
     color: rgba(255, 255, 255, 0.308);
     cursor: default;
     border-radius: 10px;
@@ -198,8 +218,8 @@ app-parallax {
 
 /* ab 550px Breite: */
 @media (min-width: 768px) {
-app-footer {
-        position: absolute;
-        bottom: 0px;
-    }
+    app-footer {
+            position: absolute;
+            bottom: 0px;
+        }
 }

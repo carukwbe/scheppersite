@@ -1,4 +1,5 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { TicketService } from 'src/app/services/ticket-service.service';
 
 
 @Component({
@@ -9,12 +10,14 @@ import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 export class HomeComponent {
   @ViewChild('scrollContainer') scrollContainer: ElementRef | undefined;
 
-  
-  
-  
-  
-  
-  
+  constructor(
+    private ticketService: TicketService,
+  ) { 
+    this.ticketService.sendHeaders('home');
+  }
+
+
+
   // scroll variable stuff
   // constructor(private scrollService: ScrollService ) { }
   // ngAfterViewInit() {

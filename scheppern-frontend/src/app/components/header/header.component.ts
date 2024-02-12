@@ -8,8 +8,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.css'],
   animations: [
     trigger('slideInFromTop', [
-      state('void', style({ height: '0', opacity: '-0.5' })),
-      state('*', style({ height: '*', opacity: '1' })),
+      state('void', style({ height: '0', opacity: '-0.5', paddingTop: '0', paddingBottom: '0'})),
+      state('*', style({ height: '*', opacity: '1', paddingTop: '*', paddingBottom: '*'})),
       transition('void => *', animate('300ms ease-out')),
       transition('* => void', animate('300ms ease-out'))
     ])

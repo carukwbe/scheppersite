@@ -4,7 +4,7 @@ import { connectFunctionsEmulator, HttpsCallableResult, getFunctions, Functions,
 import { connectFirestoreEmulator, getFirestore, Firestore, collection, onSnapshot, DocumentData } from 'firebase/firestore';
 import { Ticket, TicketLevel } from 'src/models';
 import { environment } from '../../environments/environment';
-import { Observable, map, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Observer, from, map, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,12 @@ import { Observable, map, tap } from 'rxjs';
 export class TicketService {
   private firestore: Firestore;
   private functions: Functions;
+
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+  public isAuthenticated = this.isAuthenticatedSubject.asObservable();
+
+  public authTokenSubject = new BehaviorSubject<string | null>(null);
+  public authToken = this.authTokenSubject.asObservable();
 
   constructor() {
     const app = initializeApp(environment["firebase"]);
@@ -143,6 +149,48 @@ export class TicketService {
     });
   }
 
+  // isAuthenticated(): Observable<boolean> {
+  //   return this.isAuthenticatedSubject.asObservable();
+  // }
+
+  login(user: string, password: string): Observable<any> {
+    const loginTrigger = httpsCallable(this.functions, 'admin_login');
+    return new Observable((observer) => {
+      loginTrigger({ 'username': user, 'password': password })
+        .then((result: any) => {
+          const authToken = result.data;
+          this.saveAuthToken(authToken);
+          this.isAuthenticatedSubject.next(true);
+          observer.next(result.data);
+        })
+    });
+  }
+
+  private saveAuthToken(token: string): void {
+    // Save the token to a secure storage (localStorage, sessionStorage, etc.)
+    // You may want to implement additional security measures, like encryption.
+    // For simplicity, I'm using sessionStorage here.
+    sessionStorage.setItem('authToken', token);
+
+    // Update the authTokenSubject
+    this.authTokenSubject.next(token);
+  }
+
+  sendHeaders(route: string): void {
+    const logHeaderTrigger = httpsCallable(this.functions, 'log_headers');
+  
+    const headersData = {
+      'route': route,
+      'width': window.innerWidth,
+      'height': window.innerHeight
+    };
+  
+    from(logHeaderTrigger(headersData)).subscribe({
+      complete: () => {},
+      error: (error) => console.error(error)
+    });
+  }
+  
   // debug
   getAllTickets(): Observable<Ticket[]> {
     const ticketsCollection = collection(this.firestore, 'tickets');

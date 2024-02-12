@@ -26,6 +26,11 @@ export class SliderComponent {
     event.stopPropagation();
   }
 
+  notScrolling(event: MouseEvent | TouchEvent) {
+    event.stopPropagation();
+    event.preventDefault();
+  } 
+
   slide() {
     this.accentColorService.updateAccentColor({
       red: this.color.red,

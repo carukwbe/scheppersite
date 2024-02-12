@@ -59,7 +59,7 @@ export class AccentColorService {
     document.documentElement.style.setProperty('--accent-color1', `rgba(${color.red}, ${color.green}, ${color.blue}, ${alpha})`);
     //calculate the luminance of the background color
     const luminance = (0.299 * color.red + 0.587 * color.green + 0.114 * color.blue) / 255;
-    this.setDarkMode(luminance < 0.5 || alpha < 0.7);
+    this.setDarkMode(luminance < 0.5 || alpha < 0.3);
   }
   
   private updateDarkModeClasses() {

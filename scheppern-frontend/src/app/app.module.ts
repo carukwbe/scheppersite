@@ -34,7 +34,6 @@ import { InfosComponent } from './views/infos/infos.component';
 import { KontaktComponent } from './views/kontakt/kontakt.component';
 import { ImpressumComponent } from './views/impressum/impressum.component';
 import { TicketEditComponent } from './views/ticket-edit/ticket-edit.component';
-import { HelperComponent } from './views/helper/helper.component';
 import { TicketScanComponent } from './views/ticket-scan/ticket-scan.component';
 import { SiteNotFoundComponent } from './views/site-not-found/site-not-found.component';
 import { TicketValidateComponent } from './views/ticket-validate/ticket-validate.component';
@@ -53,6 +52,8 @@ import { FormatEuroPipe } from './format-euro.pipe';
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { DatenschutzComponent } from './views/datenschutz/datenschutz.component';
+import { CountdownComponent } from './components/countdown/countdown.component';
+import { GalerieComponent, ImageModalComponent } from './views/galerie/galerie.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,6 @@ import { DatenschutzComponent } from './views/datenschutz/datenschutz.component'
     InfoCardComponent,
     FooterComponent,
     HeaderComponent,
-    HelperComponent,
     LogoAnimationComponent,
     ScrollModifierDirective,
     TicketValidateComponent,
@@ -80,6 +80,9 @@ import { DatenschutzComponent } from './views/datenschutz/datenschutz.component'
     LoginDialogComponent,
     SliderComponent,
     DatenschutzComponent,
+    CountdownComponent,
+    GalerieComponent,
+    ImageModalComponent
   ],
   imports: [
     BrowserModule,
@@ -102,7 +105,7 @@ import { DatenschutzComponent } from './views/datenschutz/datenschutz.component'
     MatCheckboxModule,
     MatDialogModule,
     MatTableModule,
-    CdkDrag
+    CdkDrag,
   ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }

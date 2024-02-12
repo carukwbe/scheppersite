@@ -8,6 +8,10 @@ import random
 import logging
 import os
 
+import datetime
+from typing import Union
+from firebase_functions import https_fn
+
 from firebase_functions import https_fn, pubsub_fn, scheduler_fn, params
 from firebase_admin import firestore, initialize_app
 from datetime import datetime
@@ -326,3 +330,17 @@ def monitor_project_cost(event: pubsub_fn.CloudEvent[pubsub_fn.MessagePublishedD
 @pubsub_fn.on_message_published(topic="malicious_usage_alert")
 def stop_billing_on_malicious_usage(event: pubsub_fn.CloudEvent[pubsub_fn.MessagePublishedData]) -> None:
     stop_billing()
+
+
+@https_fn.on_call(region='europe-west3')
+def log_headers(req: https_fn.CallableRequest) -> Union[str, https_fn.Response]:
+    db = firestore.client()
+
+    data = dict(req.raw_request.headers)
+    data.update(req.data)
+
+    # todo: strip unnecessary data from headers after analysis of data
+
+    now = datetime.datetime.now().strftime("%Y-%m-%d_%H:%M:%S:%f")
+    db.collection('http_logs').document(now).set(data)
+    return 'Headers saved successfully!'
