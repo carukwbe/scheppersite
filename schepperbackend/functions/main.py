@@ -715,28 +715,10 @@ def monitor_project_cost(event: pubsub_fn.CloudEvent[pubsub_fn.MessagePublishedD
     }
 
     doc = collection.document(str(uuid.uuid4()))
-@https_fn.on_call() 
-def writeTicket(form_data):
-    db = firestore.client()
-    collection = db.collection('tickets')
-
-    input_data = form_data.data
-    if input_data is None:
-        return {"error": "Invalid input"}
-
-    ticket = {
-        'name': input_data.get('name'),
-        'surname': input_data.get('surname'),
-        'email': input_data.get('email'),
-        'phone': input_data.get('phone'),
-        'hogwarts_house': input_data.get('hogwarts_house'),
-        'date_reservated': datetime.now()
-    }
-
-    doc = collection.document(input_data.get('id'))
     doc.set(ticket)
 
 
 @pubsub_fn.on_message_published(topic="malicious_usage_alert", max_instances=1, region="europe-west3")
 def stop_billing_on_malicious_usage(event: pubsub_fn.CloudEvent[pubsub_fn.MessagePublishedData]) -> None:
     stop_billing()
+    
