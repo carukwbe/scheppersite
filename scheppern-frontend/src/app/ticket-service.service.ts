@@ -21,7 +21,7 @@ export class TicketService {
 
   constructor() {
     const app = initializeApp(environment["firebase"]);
-    this.functions = getFunctions(app);
+    this.functions = getFunctions(app, "europe-west3");
     this.firestore = getFirestore(app);
 
     if (environment.useEmulators) {
@@ -37,7 +37,7 @@ export class TicketService {
   // }
 
   getAvailableTickets(): Observable<number> {
-    const ticketCountTrigger = httpsCallable(this.functions, 'tickets_available2');
+    const ticketCountTrigger = httpsCallable(this.functions, 'tickets_available');
 
     return new Observable((observer) => {
       // Trigger the Cloud Function
@@ -104,7 +104,7 @@ export class TicketService {
   }
 
   writeTicket(ticket: Ticket): Observable<string> {
-    const writeTicketTrigger = httpsCallable<Ticket, string>(this.functions, 'writeTicket2');
+    const writeTicketTrigger = httpsCallable<Ticket, string>(this.functions, 'writeTicket');
 
     return new Observable((observer) => {
       writeTicketTrigger(ticket)
