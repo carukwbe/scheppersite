@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bestätigung deiner Ticketbestellung</title>
+        <style>
+            body {
+                background: url('https://firebasestorage.googleapis.com/v0/b/scheppersite.appspot.com/o/background.jpg?alt=media&token=394fcae4-4311-4d60-a5c6-0c49e58ec4d2') no-repeat center center fixed;
+                background-size: cover;
+
+                /* fallback if image does not load */
+                background-color: #8195cc;
+
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 15px;
+                min-height: calc(100vh - 120px);
+                
+                font-family: Arial, sans-serif;
+                color: #ffffff;
+            }
+            h1 {
+                margin: 0;
+                margin-bottom: 40px;
+            }
+            p {
+                margin-bottom: 20px;
+            }
+            strong {
+                font-size: 20px;
+                margin: 0 10px;
+            }
+            a {
+                color: #3396d8;
+                color: #282898;
+                color: #004fca;
+                text-decoration: none;
+            }
+
+            a:hover {
+                color: #2980b9;
+                color: #282898;
+            }
+
+            .container {
+                max-width: 800px;
+                margin: auto;
+                padding: 20px;
+            }
+            .card {
+                padding: 15px;
+
+                background: rgba(0, 0, 0, 0.2);
+                border-radius: 8px;
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
+                border: 1px solid rgba(0, 0, 0, 0.3);
+
+                color: var(--text-color);
+            }
+            .boxAnnotation {
+                position: relative;
+                box-sizing: border-box;
+                padding: 20px 25px 0px 20px;
+                border-radius: 5px;
+                width: fit-content;
+
+                margin: 35px 0;
+                margin-left: 30px;
+
+                @media (max-width: 441px) {
+                    margin-left: 0px;
+                }
+            }
+            .boxAnnotation::after {
+                content: var(--annotatedText);
+                position: absolute;
+                top: -10px;
+                left: 13px;
+                padding: 1px 7px;
+                
+                background: grey;
+                /* color: white; */
+                font-size: 0.8rem;
+                font-weight: 500;
+                border-radius: 4px;
+            }
+
+            .bank-details {
+                --annotatedText: "Bankverbindung";
+                background: rgba(0, 0, 0, 0.05);
+            }
+            .key {
+                padding: 0;
+                margin: 0 0 0 5px;
+                font-size: 13px;
+            }
+            .value {
+                font-size: 20px;
+                padding: 0;
+                margin: 0 0 15px 0;
+            }
+
+            .button {
+                position: relative;
+
+                width: fit-content;
+                margin-left: 30px; 
+                border-radius: 3px;
+
+                font-size: 16px;
+                font-weight: 100;
+                letter-spacing: 1px;
+
+                background-color: rgba(0, 0, 0, 0);
+                border: 1px solid black;
+
+                cursor: pointer;
+                user-select: none;
+                -webkit-user-select: none;
+                touch-action: manipulation;
+                padding: 7px 30px;
+
+                @media screen and (max-width: 441px){
+                    padding: 7px 20px;
+                }
+            }
+            .button:after {
+                position: absolute;
+                content: "";
+                height: 100%;
+                width: 100%;
+                top: 5px;
+                left: 5px;
+                background-color: rgb(199, 131, 179);
+                z-index: -1;
+                transition: 0.2s;
+            }
+            .button:hover:after {
+                top: 0px;
+                left: 0px;
+            }
+
+            .button > a {
+                color: black!important;
+                all: unset;
+            }
+            .button > a:active {
+                color: white!important;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container card">
+            <h3 style="margin: 0;">Bestätigung deiner Ticketbestellung für das</h3>
+            <h1>Scheppern auf Brettern Festival {{ year }}</h1>
+            
+            <p>Hey {{ name }},</p>
+            <p>
+                Es ist bereits 7 Tage her, und wir haben leider noch kein Geld von dir verbuchen können!
+                Zahle bitte bis spätestens dem {{ expired_date }} die <strong>{{ price }}€</strong> an folgendes Konto:
+            </p>
+
+            <div class="card boxAnnotation bank-details">
+                <p class="key">Name</p>
+                <p class="value">Klangkollektiv Braunschweig e.V.</p>
+
+                <p class="key">IBAN</p>
+                <p class="value">todo: iban ersetzen</p>
+
+                <p class="key">BIC</p>
+                <p class="value">todo: bic ersetzen</p>
+                
+                <p class="key">Verwendungszweck</p>
+                <p class="value">{{ verwendungszweck }}</p>
+            </div>
+
+            <p>
+                Beachte, dass es je nach Bank einige Tage dauern kann, bis die Überweisung eingeht. Sollte das Geld bis zum {{ expired_date }}, und oder bis maximal vor Beginn des Festivals nicht eingegangen sein, verfällt das Ticket leider.
+            </p>
+            <p>
+                Hast du bereits gezahlt? Überprüfe bitte nocheinmal deine in der Überweisung angebenen Daten. Auch ein falscher Verwendungszweck führt dazu, dass das System die Zahlung nicht zuordnen kann.
+            </p>
+            <p>
+                Deine im System hinterlegten Ticketdaten kannst du hier einsehen und ändern! 
+            </p>
+            <div class="button">
+                <a href="https://www.scheppernaufbrettern.de/ticket/{{ ticket_ID }}">Ticket Infos</a>
+            </div>
+            <p>
+                Falls du es dir anders überlegt hast, hast du dort auch jetzt noch die Möglichkeit dein Ticket zu stronieren. <br>
+                Wende dich bei Problemen an uns, wir versuchen das Problem zu beheben! Gib uns dazu deine Ticket ID mit!
+            </p>
+            <div class="button">
+                <a href="https://www.scheppernaufbrettern.de/kontakt">Kontaktformular</a>
+            </div>
+            <p>
+                Wir freuen uns auf jeden Fall auf dich, falls es klappt! <br>
+                Dein Scheppern auf Brettern Team
+            </p>
+        </div>
+    </body>
+</html>
