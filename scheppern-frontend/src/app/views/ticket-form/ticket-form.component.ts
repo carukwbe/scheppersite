@@ -29,7 +29,7 @@ export class TicketFormComponent { //todo scret form erstellen!
   error = false;
   errorMessage = '';
   isSecret = false;
-  
+
   submitLoading = false;
   statusMessage = '';
 
@@ -47,9 +47,6 @@ export class TicketFormComponent { //todo scret form erstellen!
 
   // debug
   tickets: Ticket[] = [];
-
-
-
   ticketInfos: TicketForm;
 
   constructor(
@@ -58,7 +55,7 @@ export class TicketFormComponent { //todo scret form erstellen!
     private router: Router,
     public dialog: MatDialog,
     private route: ActivatedRoute
-  ) { 
+  ) {
     this.ticketService.sendHeaders('tickets');
 
     this.ticketInfos = this.fb.group({
@@ -66,12 +63,12 @@ export class TicketFormComponent { //todo scret form erstellen!
       surname: ['', [Validators.required, ...nameValidators]],
       email:   ['', [Validators.required, ...emailValidators]],
       phone:   ['',  phoneValidators],
-  
+
       carpass:      false,
       carpassWish:  false,
       helper:       false,
       helperWish:   false,
-  
+
       helperShifts:           [[] as string[], Validators.maxLength(20)],
       helperInfos:            ['',     textValidators],
       agbsAccepted:           [false,  Validators.requiredTrue],
@@ -98,9 +95,9 @@ export class TicketFormComponent { //todo scret form erstellen!
       tap((ticketLevels) => {
         this.activeTicketLevel = ticketLevels.find((level) => level.active);
         if (!this.activeTicketLevel) this.handleError(`
-          Kein aktives Ticketlevel gefunden. Das heißt wir können dir gerade keinen Preis anzeigen. 
+          Kein aktives Ticketlevel gefunden. Das heißt wir können dir gerade keinen Preis anzeigen.
           Du kannst versuchen dein Ticket abzuschicken, der Preis wird sich irgendwo um die 50€ befinnden.
-          Tritt der selbe Fehler auch im Backend auf wird dein Ticket nicht akzeptiert werden können. 
+          Tritt der selbe Fehler auch im Backend auf wird dein Ticket nicht akzeptiert werden können.
           Kontaktiere uns bitte via Kontaktformular!
         `);
       })
@@ -142,7 +139,7 @@ export class TicketFormComponent { //todo scret form erstellen!
             const getCounterValue = (id: string): number => counters.find((item: any) => item.id === id).value;
             const getQuotaValue = (id: string): number => quotas.find((item: any) => item.id === id).value;
 
-            
+
             this.availableTickets       = getQuotaValue('regulars')  - getCounterValue('regulars') ;
             this.availableCarPasses     = getQuotaValue('carpasses') - getCounterValue('carpasses');
             this.availableHelperTickets = getQuotaValue('helpers')   - getCounterValue('helpers')  ;
@@ -152,7 +149,7 @@ export class TicketFormComponent { //todo scret form erstellen!
               this.availableCarPasses     = 1;
               this.availableHelperTickets = 1;
             }
-            
+
             this.handleTicketAvailableChange('helper',  this.availableHelperTickets);
             this.handleTicketAvailableChange('carpass', this.availableCarPasses    );
 
@@ -162,7 +159,7 @@ export class TicketFormComponent { //todo scret form erstellen!
               ticketControl?.setValue(true);
               ticketControl?.disable();
             }
-            
+
             this.isLoading = false;
           }),
           catchError((error) => {
@@ -176,7 +173,7 @@ export class TicketFormComponent { //todo scret form erstellen!
 
   handleTicketAvailableChange(ticketType: string, availableTickets: number) {
     const ticketControl = this.ticketInfos.get(ticketType);
-  
+
     if (availableTickets < 1) {
       ticketControl?.disable();
       ticketControl?.setValue(false);
@@ -210,7 +207,7 @@ export class TicketFormComponent { //todo scret form erstellen!
       (data) => {
         this.submitLoading = false;
         this.statusMessage = data;
-        
+
         this.ticketInfos.reset({
           name:                   '',
           surname:                '',
@@ -227,7 +224,7 @@ export class TicketFormComponent { //todo scret form erstellen!
           over18:                 false
         });
 
-        // todo: currently not working 
+        // todo: currently not working
         // this.ticketInfos.markAsPristine();
         // this.ticketInfos.markAsUntouched();
         // Object.values(this.ticketInfos.controls).forEach((control) => {
@@ -274,7 +271,7 @@ export class TicketFormComponent { //todo scret form erstellen!
   }
 
 
-  // temporary 
+  // temporary
   routeToTicketEdit(ticket: Ticket) {
     this.router.navigate(['/ticket/', ticket.id]);
   }

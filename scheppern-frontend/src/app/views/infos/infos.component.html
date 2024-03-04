@@ -1,12 +1,20 @@
 <mat-accordion *ngFor="let section of faqSections">
     <h1 style="margin: 0 20px">{{section.title}}</h1>
-    <mat-expansion-panel *ngFor="let questions of section.questions" class="card row" style="padding: 0;">
+    <mat-expansion-panel *ngFor="let question of section.questions" class="card row" style="padding: 0;">
         <mat-expansion-panel-header>
             <mat-panel-title>
-                {{ questions.question }}
+                {{ question.question }}
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <div [innerHTML]="questions.answer"></div>
-        <!-- {{ questions.answer }} -->
+        <div [innerHTML]="question.answer"></div>
+
+        <!-- for the answer that contains an image -->
+        <img *ngIf="question.image" [src]="question.image" alt="">
+        <div *ngIf="question.answer2" [innerHTML]="question.answer2"></div>
+
+        <!-- {{ question.answer }} -->
     </mat-expansion-panel>
 </mat-accordion>
+
+
+<!-- <img src="/assets/ausverkauft.png" alt=""> -->

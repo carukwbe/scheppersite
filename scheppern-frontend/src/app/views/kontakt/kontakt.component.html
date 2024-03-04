@@ -4,7 +4,7 @@
         Feedback, Fragen, Anregungen? Schreib uns eine Nachricht! Wir freuen uns über jede Nachricht.
         Vergiss nicht Kontaktinformation von dir, falls du eine Rückmeldung erwartest. Deine Ticket ID kann auch nicht schaden, falls du Probleme mit deinem Ticket hast. 👍
     </p>
-    
+
     <form [formGroup]="form">
         <mat-form-field>
             <mat-label>E-Mail</mat-label>
@@ -17,15 +17,15 @@
         <mat-form-field>
             <mat-label>Telefonnummer</mat-label>
             <input type="text" matInput formControlName="phone">
-            <mat-error *ngIf="getError('phone', 'minlength')">Dein Telefonnummer ist zu kurz!</mat-error>
-            <mat-error *ngIf="getError('phone', 'maxlength')">Dein Telefonnummer ist zu lang!</mat-error>
+            <mat-error *ngIf="getError('phone', 'minlength')">Deine Telefonnummer ist zu kurz!</mat-error>
+            <mat-error *ngIf="getError('phone', 'maxlength')">Deine Telefonnummer ist zu lang!</mat-error>
             <mat-error *ngIf="getError('phone', 'pattern')">Deine Telefonnummer enthält nicht erlaubte Zeichen!</mat-error>
         </mat-form-field>
         <mat-form-field>
             <mat-label>Ticket ID</mat-label>
             <input type="text" matInput formControlName="ticketID">
-            <mat-error *ngIf="getError('ticketID', 'minlength')">Dein Ticket ID ist zu kurz!</mat-error>
-            <mat-error *ngIf="getError('ticketID', 'maxlength')">Dein Ticket ID ist zu lang!</mat-error>
+            <mat-error *ngIf="getError('ticketID', 'minlength')">Deine Ticket ID ist zu kurz!</mat-error>
+            <mat-error *ngIf="getError('ticketID', 'maxlength')">Deine Ticket ID ist zu lang!</mat-error>
             <mat-error *ngIf="getError('ticketID', 'pattern')">Deine Ticket ID enthält nicht erlaubte Zeichen!</mat-error>
         </mat-form-field>
 
@@ -38,11 +38,11 @@
         </mat-form-field>
 
         <div class="submit">
-            <button mat-raised-button color="primary" (click)="submit()" [disabled]="form.invalid" style="width: fit-content; align-self: center;">
+            <button mat-raised-button color="primary" (click)="submit()" [disabled]="form.invalid || form.disabled" style="width: fit-content; align-self: center;">
                 Nachricht abschicken
             </button>
-        
-            <mat-spinner *ngIf="isLoading" style="width: fit-content; align-self: center;"></mat-spinner>
+
+            <mat-spinner *ngIf="isLoading" style="align-self: center; margin-top: 20px;"></mat-spinner>
             <p style="width: fit-content; align-self: center;" *ngIf="statusMessage" style="white-space: pre-line; margin-top: 20px;">{{ statusMessage }}</p>
         </div>
     </form>

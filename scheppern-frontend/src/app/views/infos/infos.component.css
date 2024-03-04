@@ -41,37 +41,36 @@ mat-accordion {
 .row:first-child {
     border-top: var(--border-width) var(--border-style) var(--border-color);
 }
-
 .row:last-child {
     border-bottom: var(--border-width) var(--border-style) var(--border-color);
 }
 
+
+img {
+  /* align in center */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+
+
+/* fix UI Bugs in Accordeon */
 .row:active {
     background-color: rgba(255,255,255,0.2);
 }
-
-.cdk-focuced {
-    /* background-color: rgba(255,255,255,0)!important; */
-    /* background-color: none!important; */
-
-}
-
 .cdk-mouse-focused {
     background-color: rgba(255,255,255,0)!important;
-    /* background-color: none!important; */
-
 }
-.cdk-touch-focused {
-    /* background-color: rgba(255,255,255,0)!important; */
-    /* background-color: none!important; */
-
-}
-
 .mat-expansion-panel-header.mat-expanded:focus, .mat-expansion-panel-header.mat-expanded:hover {
     background-color: rgba(255,255,255,0)!important;
     /* background-color: none!important; */
 }
-
+.mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled=true]):hover {
+    background-color: rgba(255,255,255,0)!important;
+    /* background-color: none!important; */
+}
 .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled=true]):hover {
     background-color: rgba(255,255,255,0)!important;
     /* background-color: none!important; */
@@ -79,13 +78,3 @@ mat-accordion {
 
 
 
-.mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled=true]):hover {
-    background-color: rgba(255,255,255,0)!important;
-    /* background-color: none!important; */
-}
-
-
-
-
-/* mat-expansion-panel-header mat-focus-indicator ng-tns-c2690051721-8 ng-tns-c1859850774-7 mat-expansion-toggle-indicator-after ng-star-inserted
-mat-expansion-panel-header mat-focus-indicator ng-tns-c2690051721-6 ng-tns-c1859850774-5 mat-expansion-toggle-indicator-after ng-star-inserted mat-expanded */

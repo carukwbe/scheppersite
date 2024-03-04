@@ -2,42 +2,41 @@
 
 /* @import '~@angular/material/theming'; */
 
-body { 
+body {
 
     /* background: url('/assets/hintergrund.jpg') no-repeat center center fixed;
     background-size: cover;  */
 
     background-color: rgb(0, 55, 109);
 
-
-    
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
     color: rgb(255, 255, 255);
+    /* cursor: none!important; */
 }
 
 
 
 p, h1, h2, h3, h4, h5, h6 {
     /* margin: 0!important; */
-}   
+}
 
 :root {
     --bg-color: #323232;
     --bg-color: rgb(80, 55, 53);
     --bg-color: rgb(0, 55, 109);
-    
+
     --accent-color1: rgba(89, 166, 166, 0.5);
     --accent-color1: rgb(13, 70, 160, 0.44);
-    
-    
+
+
     --accent-color2: #3c17179b;
     --accent-color2: #003c9d;
     --accent-color2: #004fca;
     --accent-color2: rgb(13, 70, 160);
     --accent-color2-hover: rgb(247, 117, 117);
     --text-color: white;
-    
+
     --scroll: 0;
 }
 
@@ -58,7 +57,7 @@ p, h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
     border: 1px solid rgba(0, 0, 0, 0.3);
-    
+
     color: var(--text-color);
     padding: 20px;
     box-sizing: border-box;
@@ -77,7 +76,7 @@ p, h1, h2, h3, h4, h5, h6 {
     top: -10px;
     left: 13px;
     padding: 1px 7px;
-    
+
     background: grey;
     color: white;
     font-size: 0.8rem;
@@ -103,27 +102,27 @@ a:hover {
 
 button[mat-raised-button] {
     position: relative;
-    
+
     /* disable default styling */
     border: none;
     background: none;
     outline: none;
-  
+
     width: fit-content;
     border-radius: 3px;
-  
+
     font-size: 16px;
     /* font-weight: 200; */
     letter-spacing: 1px;
-  
+
     background-color: rgba(0, 0, 0, 0);
-  
+
     cursor: pointer;
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
     padding: 7px 30px;
-  
+
     @media screen and (max-width: 441px){
         padding: 7px 20px;
     }

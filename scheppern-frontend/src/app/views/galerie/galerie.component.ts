@@ -11,7 +11,7 @@ import { Component, EventEmitter, HostListener, Input, Output } from '@angular/c
       <div class="button prev" (click)="prevImage()">
         <mat-icon style="transform: scale(1.5);">navigate_before</mat-icon>
       </div>
-      
+
       <img [src]="'/assets/galerie/' + images[index].name" alt="Expanded Image">
 
       <div class="button next" (click)="nextImage()">
@@ -74,99 +74,94 @@ export class GalerieComponent {
       name: '1.jpg',
       description: '',
       expanded: false
-    }, 
+    },
     {
       name: '2.jpg',
       description: '',
       expanded: false
-    }, 
+    },
     {
       name: '3.jpg',
       description: '',
       expanded: false
-    }, 
+    },
     {
       name: '4.jpg',
       description: '',
       expanded: false
-    }, 
+    },
     {
       name: '5.jpg',
       description: '',
       expanded: false
-    }, 
+    },
     {
       name: '6.jpg',
       description: '',
       expanded: false
-    }, 
+    },
     {
       name: '7.jpg',
       description: '',
       expanded: false
-    }, 
+    },
     {
       name: '8.jpg',
       description: '',
       expanded: false
-    }, 
+    },
     {
       name: '9.jpg',
       description: '',
       expanded: false
-    }, 
+    },
     {
       name: '10.jpg',
       description: '',
       expanded: false
-    }, 
+    },
     {
       name: '11.jpg',
       description: '',
       expanded: false
-    }, 
+    },
     {
       name: '12.jpg',
       description: '',
       expanded: false
-    }, 
+    },
     {
       name: '13.jpg',
       description: '',
       expanded: false
-    }, 
+    },
     {
       name: '14.jpg',
       description: '',
       expanded: false
-    }, 
+    },
     {
       name: '15.jpg',
       description: '',
       expanded: false
-    }, 
+    },
     {
       name: '16.jpg',
       description: '',
       expanded: false
-    }, 
+    },
     {
       name: '17.jpg',
       description: '',
       expanded: false
-    }, 
+    },
     {
       name: '18.jpg',
       description: '',
       expanded: false
-    }, 
-    {
-      name: '19.jpg',
-      description: '',
-      expanded: false
     }
   ];
-  
+
   selectedImage: number | null = null;
   openModal(image: any) {
     this.selectedImage = this.imageData.indexOf(image);
