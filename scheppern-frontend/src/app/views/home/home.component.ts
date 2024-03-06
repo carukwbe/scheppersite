@@ -1,4 +1,5 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { HomePageService } from 'src/app/services/homepage.service';
 import { TicketService } from 'src/app/services/ticket-service.service';
 
 
@@ -12,8 +13,13 @@ export class HomeComponent {
 
   constructor(
     private ticketService: TicketService,
-  ) { 
+    private homePageService: HomePageService
+  ) {
     this.ticketService.sendHeaders('home');
+  }
+
+  ngOnInit() {
+    this.homePageService.isHomePage = true;
   }
 
 

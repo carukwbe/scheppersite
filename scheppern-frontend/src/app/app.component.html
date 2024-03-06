@@ -2,12 +2,23 @@
   <img class="windradCursor" src="./../../../assets/windrad.png" alt="">
 </div> -->
 
-<div *ngIf="!isHomePage" class="background"></div>
+<!-- <div *ngIf="!isHomePage" class="background"></div>
 
 <div class="content" [ngClass]="{'backgroundImage': !isHomePage}">
   <app-header *ngIf="!isHomePage"></app-header>
-  <!-- todo: margin of header -> not consistent with height change on mobile -->
-  <router-outlet [ngStyle]="!isHomePage ? {'margin-top': '60px'} : {}" ></router-outlet> <!-- header height -->
+  <router-outlet [ngStyle]="!isHomePage ? {'margin-top': '60px'} : {}" ></router-outlet>
   <app-footer *ngIf="!isHomePage" style="z-index: 2;"></app-footer>
 
+</div> -->
+
+
+
+
+<div *ngIf="!homePageService.isHomePage" class="background"></div>
+
+<div class="content" [ngClass]="{'backgroundImage': !homePageService.isHomePage}">
+  <app-header *ngIf="!homePageService.isHomePage"></app-header>
+  <!-- todo: margin of header -> not consistent with height change on mobile -->
+  <router-outlet [ngStyle]="!homePageService.isHomePage ? {'margin-top': '60px'} : {}" ></router-outlet> <!-- header height -->
+  <app-footer *ngIf="!homePageService.isHomePage" style="z-index: 2;"></app-footer>
 </div>

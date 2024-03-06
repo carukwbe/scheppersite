@@ -23,17 +23,16 @@ export class InfosComponent {
           answer: 'Das Scheppern auf Brettern ist 2022 aus einer Geburtstagsfeier von drei Freunden entstanden, die für ein Wochenende den Windpark Druiberg gemietet haben und eine kleine Bühne in einen LKW gebaut haben. Im Jahr 2023 haben wir die Idee eines eigenen Festivals weiter verfolgt und das Scheppern im privaten Rahmen auf zwei Stages, mehr DJs und eine Vielzahl an Workshops ausgeweitet. Da sich immer mehr Leute für das Scheppern begeistert haben, ist unsere Crew mittlerweile auf etwa 30 aktive Mitglieder gewachsen. Wir haben schließlich den Klangkollektiv Braunschweig e.V. gegründet, um das Scheppern 2024 erstmals als offizielles Festival zu veranstalten und darüber hinaus langfristig einen Beitrag zur Kunst und Kultur in Braunschweig zu leisten.'
         }, {
           question: 'Unsere Werte',
-          answer: 'Toleranz, Vielfalt, Offenheit, Nachhaltigkeit, Feminismus und Demokratie sind die grundlegende Werte unseres Klangkollektivs. Wir betrachten sie nicht nur als leere Worte, sondern wollen sie in allem was wir tun zu berücksichtigen. Wir sind immer offen für neue Leute, die unsere Werte teilen!'
+          answer: 'Toleranz, Vielfalt, Offenheit, Nachhaltigkeit, Feminismus und Demokratie sind die grundlegende Werte unseres Klangkollektivs. Wir betrachten sie nicht nur als leere Worte, sondern wollen sie in allem was wir tun berücksichtigen. Wir sind immer offen für neue Leute, die unsere Werte teilen!'
         }, {
           question: 'Was kann ich erwarten?',
           answer: 'Das Motto ist, die Sommer- und Festivalsaison einzuläuten. Wir setzen dabei auf eine gute Mischung aus DJ Sets (hauptsächlich Techno und Drum and Bass), Live-Bands, Workshops und Turniere wie das legendäre Flunkyball Championat! Abgerundet wird das ganze durch verschiedene Bau- und Dekoprojekte, die den ohnehin schon epischen Windpark Druiberg verschönern, gewisse Chillbereiche schaffen und zu einer angenehm verschepperten Atmosphäre beitragen.'
         }, {
           question: 'Wie setzt sich der Ticketpreis zusammen?',
           answer: `
-            Da wir das Scheppern 2024 erstmals offiziell mit unserem gemeinnützigen Verein veranstalten und unsere Teilnehmendenzahl deutlich gestiegen ist, entstehen höhere und neue Kosten in fast allen Bereichen. Wir handeln in keinem Fall wirtschaftlich als Verein. Die Ticketeinnahmen dienen ausschließlich dazu, unsere Kosten für die Veranstaltung des Festivals zu decken. Freut euch auf einen zusätzlichen Festivaltag, Duschmöglichkeiten, mehr Toiletten, neue Bauprojekte, Workshops, Live Bands und vieles mehr (wir wollen ja nicht alles verraten!). Um euch möglichst transparent unsere Budgetaufteilung darzulegen, haben wir ein wunderschönes Tortendiagramm vorbereitet:
+            Da wir das Scheppern 2024 erstmals offiziell mit unserem gemeinnützigen Verein veranstalten und unsere Teilnehmendenzahl deutlich gestiegen ist, entstehen höhere und neue Kosten in fast allen Bereichen. Wir handeln in keinem Fall wirtschaftlich als Verein. Die Ticketeinnahmen dienen ausschließlich dazu, unsere Kosten für die Veranstaltung des Festivals zu decken. Freut euch auf einen zusätzlichen Festivaltag, Duschmöglichkeiten, mehr Toiletten, neue Bauprojekte, Workshops, Live-Bands und vieles mehr. (wir wollen ja nicht alles verraten!)
           `,
-          image: '/assets/ausgaben.svg',
-          answer2: `test`
+          isDiagram: true
         }
       ]
     }, {
@@ -70,7 +69,7 @@ export class InfosComponent {
           answer: 'Ja, es ist geplant zu bestimmten Zeiten Essen auszugeben. Eine komplette Versorgung wird das aber nicht ersetzen können. Bringt daher ausreichend Verpflegung für das Wochenende mit! '
         }, {
           question: 'Mülltrennung',
-          answer: 'Wir haben uns trotz voraussichtlich doppelten Kosten uns für eine konsquente Mülltrennung entschieden. Daher gibt es bei jeder Müllstation 3 Müllarten. Zusätzlich haben wir noch zentrale Orte für Glas und Pfand. Schaut auf den Plan, wo ihr diese findet. Wir geben euch am Eingang bereits verschiedene Müllsäcke, dass ihr auch im Camp direkt trennen könnt!'
+          answer: 'Wir haben uns trotz voraussichtlich doppelten Kosten für eine konsequente Mülltrennung entschieden. Daher gibt es bei jeder Müllstation 3 Müllarten. Zusätzlich haben wir noch zentrale Orte für Glas und Pfand. Schaut auf den Plan, wo ihr diese findet. Wir geben euch am Eingang bereits verschiedene Müllsäcke, dass ihr auch im Camp direkt trennen könnt!'
         }, {
           question: 'Gibt es auf dem Gelände Strom?',
           answer: 'Nein, auf dem Campinggelände wird es keinen Strom geben. Wir werden aber wie letztes Jahr eine offen zugängliche Ladestation bereitstellen, behaltet hier aber eure Geräte auf jeden Fall im Auge!'
@@ -110,7 +109,7 @@ export class InfosComponent {
       questions: [
         {
           question: 'Auf was für Musik kann ich mich einstellen?',
-          answer: 'Der Fokus des Festivals liegt auf elektronischer Musik. Dieses Jahr wird es im Vergleich zum letzten jedoch auch einige Bands geben, die euch wegscheppern werden!'
+          answer: 'Der Fokus des Festivals liegt auf elektronischer Musik. Dieses Jahr wird es im Vergleich zum letzten jedoch auch ein paar Bands geben, die euch wegscheppern werden!'
         }, {
           question: 'Wo finde ich Informationen zu Workshops und dem Timetable?',
           answer: 'Hier auf der Website, Insta, WhatsApp, per Aushang! Wir lassen nichts unversucht um euch mit den allerfeinsten Informationen zu versorgen!'
@@ -121,7 +120,7 @@ export class InfosComponent {
       questions: [
         {
           question: 'Wie funktioniert das Ticketsystem?',
-          answer: 'Um Kosten zu sparen, haben wir uns dazu entschieden das Ticketsystem selber in die Hand zu nehmen. Da Online Zahlungsdienstleister*innen auch für jede Transaktion Geld verlangen, bieten wir bei uns ausschließlich Zahlung per Überweisung an. Unser System checkt täglich die Kontobewegungen und ordnet so anhand des Verwendungszwecks die Einzahlung einem ausstehendem Ticket zu. Sollte irgendetwas schief gehen, kontaktiert uns, wir haben Zugriff auf die Daten und können dann schauen woran es lag.'
+          answer: 'Um Kosten zu sparen, haben wir uns dazu entschieden das Ticketsystem selber in die Hand zu nehmen. Da Online Zahlungsdienstleister*innen auch für jede Transaktion Geld verlangen, bieten wir bei uns ausschließlich Zahlung per Überweisung an. Unser System checkt täglich die Kontobewegungen und ordnet so anhand des Verwendungszwecks die Einzahlung einem ausstehenden Ticket zu. Sollte irgendetwas schiefgehen, kontaktiert uns, wir haben Zugriff auf die Daten und können dann schauen woran es lag.'
         }, {
           question: 'Ich habe keine Bestätigungsmail bekommen!',
           answer: 'Eine eingehende Bestellung triggert direkt einen Mailausgang. Es sollte also innerhalb weniger Sekunden/Minuten da sein. Du hast dich vermutlich verschrieben. Kontaktiere uns und wir lösen das Problem!'
@@ -135,11 +134,11 @@ export class InfosComponent {
           question: 'Kann ich mein Ticket an jemand anders übertragen?',
           answer: 'Ja! Unter dem Link in deiner Ticket E-Mail, kannst du das machen. Dazu gibst du die Daten der Tauschperson inklusive E-Mail ein. Die Tauschperson bekommt nun eine E-Mail in der sie die Möglichkeit hat das Ticket zu bestätigen. Anschließend bekommt sie dann ein eigenes neues Ticket. Das alte Ticket verliert ab Bestätigung der neuen Person seine Gültigkeit. Solltest du keine/n Tauschpartner*in finden, kontaktiere uns. Es wird nach Verkauf des letzten Tickets eine Warteliste/WhatsApp-Gruppe, für die Vermittlung der Tickets, geben.'
         }, {
-          question: 'Umpersonailsierung von Helfer*in Ticket und Carpass Ticket',
-          answer: 'Helfer*innen Tickets können nicht über das System übertragen werden, solltest du dein Helfer*in Ticket loswerden wollen gib uns auf jeden Fall Bescheid, wir finden dann eine Lösung! Carpass Tickets sind übetragbar, das Carpass Ticket wird zwar mitübertragen, ist dann am Eingang bei uns aber erstattungsfähig. Meldet euch trotzdem im Vorhinein bei uns in dem Fall, damit wir das Kontingent erhöhen können!'
-        }, {
-          question: 'Wie funktionieren Helfer:innen-Tickets?',
+          question: 'Wie funktionieren Helfer*innen-Tickets?',
           answer: 'Du gibst beim Ticketkauf an, dass du Helfer*in werden möchtest und erhältst erstmal einen direkten Rabatt von 50%. Vorraussetzung sind dann auch geleistete Schichten von mindestens 6 Stunden. Solltest du mehr arbeiten wollen, wird es auch dafür entsprechende Vergütungen geben. Z.B. in Form von Essens und Getränkemarken!'
+        }, {
+          question: 'Umpersonailsierung von Helfer*in Ticket und Carpass Ticket',
+          answer: 'Helfer*innen Tickets können nicht über das System übertragen werden, solltest du dein Helfer*in Ticket loswerden wollen gib uns auf jeden Fall Bescheid, wir finden dann eine Lösung! Carpass Tickets sind übertragbar, das Carpass Ticket wird zwar mitübertragen, ist aber dann am Eingang bei uns erstattungsfähig. Meldet euch in dem Fall trotzdem bei uns im Vorhinein, damit wir das Kontingent erhöhen können!'
         }
       ]
     }];

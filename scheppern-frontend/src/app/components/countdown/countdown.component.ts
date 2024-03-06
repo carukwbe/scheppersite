@@ -12,7 +12,6 @@ export class CountdownComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    // Calculate the initial time remaining
     this.calculateTimeRemaining();
 
     // Update the time remaining every second

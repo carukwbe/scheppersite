@@ -8,11 +8,61 @@
         </mat-expansion-panel-header>
         <div [innerHTML]="question.answer"></div>
 
-        <!-- for the answer that contains an image -->
-        <img *ngIf="question.image" [src]="question.image" alt="">
-        <div *ngIf="question.answer2" [innerHTML]="question.answer2"></div>
+        <div class="diagram" *ngIf="question.isDiagram">
+          <img src="/assets/ausgaben.svg" alt="">
+          <div class="diagramDescription">
 
-        <!-- {{ question.answer }} -->
+            <p class="desc">
+              <span class="title">Allgemeine Ausgaben</span><br>
+              GEMA
+              | Geländemiete
+              | Security
+              | Workshops
+              | Versicherung
+              | Strom
+            </p>
+            <p class="desc">
+              <span class="title">Bauprojekte</span><br>
+              Verschiedene Bauprojekte
+            </p>
+            <p class="desc">
+              <span class="title">Logistik</span><br>
+              Trinkwasser
+              | Fahrzeugmiete
+              | Kraftstoff
+              | Sanitär
+              | Müll
+            </p>
+            <p class="desc">
+              <span class="title">Technik</span><br>
+              Miete Licht-/Soundtechnik
+              | Aufwandsentschädigung
+            </p>
+            <p class="desc">
+              <span class="title">Gestaltung</span><br>
+              Bändchen
+              | Sitzecken
+              | Allgemeine Verschönerung des Festivalgeländes
+            </p>
+            <p class="desc">
+              <span class="title">Sonstige</span><br>
+              Bearbeitungssoftware
+            </p>
+            <p class="desc">
+              <span class="title">Awareness</span><br>
+              Workshop
+              | Material
+            </p>
+            <p class="desc">
+              <span class="title">Jungle</span><br>
+              Regenwaldige Sachen
+            </p>
+            <p class="desc">
+              <span class="title">Mainstage</span><br>
+              Krasse Elemente
+            </p>
+          </div>
+        </div>
     </mat-expansion-panel>
 </mat-accordion>
 

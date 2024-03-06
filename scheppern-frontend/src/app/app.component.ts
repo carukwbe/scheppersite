@@ -1,5 +1,6 @@
 import { Component, Host, HostListener } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { HomePageService } from './services/homepage.service';
 
 
 @Component({
@@ -8,19 +9,24 @@ import { NavigationEnd, Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  isHomePage: boolean = false;
+  isHomePage: boolean = true;
 
   top: string = "";
   left: string = "";
   expand: boolean = false;
   tilt = false;
 
-  constructor(private router: Router) {
+
+
+  constructor(private router: Router, public homePageService: HomePageService) {
+    this.homePageService.isHomePage = false;
+
     // document.documentElement.style.cursor = "none";
 
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.isHomePage = event.urlAfterRedirects === '/';
+        // this.isHomePage = event.urlAfterRedirects.startsWith('/');
       }
     });
   }
@@ -41,7 +47,7 @@ export class AppComponent {
   onClick($event:any) {
     this.expand = true;
     setTimeout(() => {
-      this.expand = false; 
+      this.expand = false;
     }, 500)
   }
 
@@ -60,5 +66,5 @@ export class AppComponent {
     }
   }
 
-  // cursor stuff end 
+  // cursor stuff end
 }
