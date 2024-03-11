@@ -54,6 +54,7 @@ import { SliderComponent } from './components/slider/slider.component';
 import { DatenschutzComponent } from './views/datenschutz/datenschutz.component';
 import { CountdownComponent } from './components/countdown/countdown.component';
 import { GalerieComponent, ImageModalComponent } from './views/galerie/galerie.component';
+import { PlaygroundComponent } from './views/playground/playground.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { GalerieComponent, ImageModalComponent } from './views/galerie/galerie.c
     DatenschutzComponent,
     CountdownComponent,
     GalerieComponent,
-    ImageModalComponent
+    ImageModalComponent,
+    PlaygroundComponent
   ],
   imports: [
     BrowserModule,

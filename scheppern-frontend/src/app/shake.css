@@ -1,4 +1,4 @@
-/*! * * * * * * * * * * * * * * * * * * * *\  
+/*! * * * * * * * * * * * * * * * * * * * *\
   CSShake :: Package
   v1.5.0
   CSS classes to move your DOM
@@ -9,12 +9,12 @@
 .shake, .shake-little, .shake-slow, .shake-hard, .shake-horizontal, .shake-vertical, .shake-rotate, .shake-opacity, .shake-crazy, .shake-chunk {
     display: inherit;
     transform-origin: center center; }
-  
+
   .shake-freeze,
   .shake-constant.shake-constant--hover:hover,
   .shake-trigger:hover .shake-constant.shake-constant--hover {
     animation-play-state: paused; }
-  
+
   .shake-freeze:hover,
   .shake-trigger:hover .shake-freeze, .shake:hover,
   .shake-trigger:hover .shake, .shake-little:hover,
@@ -28,7 +28,7 @@
   .shake-trigger:hover .shake-crazy, .shake-chunk:hover,
   .shake-trigger:hover .shake-chunk {
     animation-play-state: running; }
-  
+
   @keyframes shake {
     2% {
       transform: translate(0.5px, -0.5px) rotate(0.5deg); }
@@ -130,14 +130,14 @@
       transform: translate(-0.5px, -0.5px) rotate(0.5deg); }
     0%, 100% {
       transform: translate(0, 0) rotate(0); } }
-  
+
   .shake:hover,
   .shake-trigger:hover .shake, .shake.shake-freeze, .shake.shake-constant {
     animation-name: shake;
     animation-duration: 100ms;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite; }
-  
+
   @keyframes shake-little {
     2% {
       transform: translate(1px, 0px) rotate(0.5deg); }
@@ -239,14 +239,14 @@
       transform: translate(1px, 1px) rotate(0.5deg); }
     0%, 100% {
       transform: translate(0, 0) rotate(0); } }
-  
+
   .shake-little:hover,
   .shake-trigger:hover .shake-little, .shake-little.shake-freeze, .shake-little.shake-constant {
     animation-name: shake-little;
     animation-duration: 100ms;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite; }
-  
+
   @keyframes shake-slow {
     2% {
       transform: translate(6px, -2px) rotate(3.5deg); }
@@ -348,14 +348,14 @@
       transform: translate(4px, 8px) rotate(0.5deg); }
     0%, 100% {
       transform: translate(0, 0) rotate(0); } }
-  
+
   .shake-slow:hover,
   .shake-trigger:hover .shake-slow, .shake-slow.shake-freeze, .shake-slow.shake-constant {
     animation-name: shake-slow;
     animation-duration: 5s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite; }
-  
+
   @keyframes shake-hard {
     2% {
       transform: translate(-9px, 9px) rotate(2.5deg); }
@@ -457,14 +457,14 @@
       transform: translate(-8px, 2px) rotate(-1.5deg); }
     0%, 100% {
       transform: translate(0, 0) rotate(0); } }
-  
+
   .shake-hard:hover,
   .shake-trigger:hover .shake-hard, .shake-hard.shake-freeze, .shake-hard.shake-constant {
     animation-name: shake-hard;
     animation-duration: 100ms;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite; }
-  
+
   @keyframes shake-horizontal {
     2% {
       transform: translate(1px, 0) rotate(0); }
@@ -566,14 +566,14 @@
       transform: translate(9px, 0) rotate(0); }
     0%, 100% {
       transform: translate(0, 0) rotate(0); } }
-  
+
   .shake-horizontal:hover,
   .shake-trigger:hover .shake-horizontal, .shake-horizontal.shake-freeze, .shake-horizontal.shake-constant {
     animation-name: shake-horizontal;
     animation-duration: 100ms;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite; }
-  
+
   @keyframes shake-vertical {
     2% {
       transform: translate(0, 1px) rotate(0); }
@@ -675,14 +675,14 @@
       transform: translate(0, -5px) rotate(0); }
     0%, 100% {
       transform: translate(0, 0) rotate(0); } }
-  
+
   .shake-vertical:hover,
   .shake-trigger:hover .shake-vertical, .shake-vertical.shake-freeze, .shake-vertical.shake-constant {
     animation-name: shake-vertical;
     animation-duration: 100ms;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite; }
-  
+
   @keyframes shake-rotate {
     2% {
       transform: translate(0, 0) rotate(-3.5deg); }
@@ -784,14 +784,14 @@
       transform: translate(0, 0) rotate(-0.5deg); }
     0%, 100% {
       transform: translate(0, 0) rotate(0); } }
-  
+
   .shake-rotate:hover,
   .shake-trigger:hover .shake-rotate, .shake-rotate.shake-freeze, .shake-rotate.shake-constant {
     animation-name: shake-rotate;
     animation-duration: 100ms;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite; }
-  
+
   @keyframes shake-opacity {
     10% {
       transform: translate(1px, -1px) rotate(1.5deg);
@@ -822,14 +822,14 @@
       opacity: 0.17; }
     0%, 100% {
       transform: translate(0, 0) rotate(0); } }
-  
+
   .shake-opacity:hover,
   .shake-trigger:hover .shake-opacity, .shake-opacity.shake-freeze, .shake-opacity.shake-constant {
     animation-name: shake-opacity;
     animation-duration: 0.5s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite; }
-  
+
   @keyframes shake-crazy {
     10% {
       transform: translate(-11px, 16px) rotate(-1deg);
@@ -860,14 +860,14 @@
       opacity: 0.3; }
     0%, 100% {
       transform: translate(0, 0) rotate(0); } }
-  
+
   .shake-crazy:hover,
   .shake-trigger:hover .shake-crazy, .shake-crazy.shake-freeze, .shake-crazy.shake-constant {
     animation-name: shake-crazy;
     animation-duration: 100ms;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite; }
-  
+
   @keyframes shake-chunk {
     2% {
       transform: translate(2px, 15px) rotate(9deg); }
@@ -909,7 +909,7 @@
       transform: translate(9px, 12px) rotate(-13deg); }
     0%, 40%, 100% {
       transform: translate(0, 0) rotate(0); } }
-  
+
   .shake-chunk:hover,
   .shake-trigger:hover .shake-chunk, .shake-chunk.shake-freeze, .shake-chunk.shake-constant {
     animation-name: shake-chunk;
@@ -925,9 +925,24 @@
       95% { opacity: 1; }
       100% { opacity: 0; }
   }
-  
+
   @keyframes hide {
       0% { opacity: 0; }
       20% { opacity: 0; }
       100% { opacity: 1; }
+  }
+
+  @keyframes myGlitch {
+    0%{
+      transform: rotateX(0deg) skewX(0deg);
+    }
+    1.3%{
+      transform: rotateX(10deg) skewX(90deg);
+    }
+    2.1%{
+      opacity: 1;
+    }
+    2.2%{
+      opacity: 0;
+    }
   }

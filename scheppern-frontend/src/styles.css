@@ -35,6 +35,7 @@ select {
 }
 
 .mat-expansion-panel-header,
+.mat-expansion-panel-body,
 h1{
   font-family: "urbane", sans-serif!important;
   font-weight: 300;
