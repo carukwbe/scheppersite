@@ -14,7 +14,7 @@ function elimWhitespaces(control: AbstractControl): { [key: string]: boolean } |
 
 export const nameValidators: ValidatorFn[] = [
   Validators.pattern(/^[ A-Za-z\u00C0-\u017F-']+$/u),
-  Validators.maxLength(Global.textCharLimit)
+  Validators.maxLength(Global.nameCharLimit)
 ];
 
 export const phoneValidators: ValidatorFn[] = [
@@ -31,7 +31,7 @@ export const emailValidators: ValidatorFn[] = [
 ];
 
 export const textValidators: ValidatorFn[] = [
-  Validators.pattern(/^[ A-Za-z\u00C0-\u017F\d,:().?!]+$/), 
+  Validators.pattern(/^[ A-Za-z\u00C0-\u017F\d,:().?!]+$/),
   Validators.maxLength(Global.textAreaCharLimit)
 ];
 

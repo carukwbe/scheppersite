@@ -56,7 +56,7 @@ export class TicketService {
     });
   }
 
-  // gets ticket levels from collection, processes date format 
+  // gets ticket levels from collection, processes date format
   getTicketLevels(): Observable<any> {
     const levelsCollection = collection(this.firestore, 'price_levels');
 
@@ -72,11 +72,11 @@ export class TicketService {
 
             levelData.active = dateFrom <= now && dateUntil >= now;
             levelData.future = dateFrom > now;
-            
+
             // prepare date strings from firebase timestamp
             levelData.active_from_string  =  dateFrom.toLocaleDateString('de-DE', { year: 'numeric', month: '2-digit', day: '2-digit' });
             levelData.active_until_string = dateUntil.toLocaleDateString('de-DE', { year: 'numeric', month: '2-digit', day: '2-digit' });
-            
+
             return levelData;
           });
           observer.next(levels);
@@ -177,20 +177,21 @@ export class TicketService {
   }
 
   sendHeaders(route: string): void {
+    return;
     const logHeaderTrigger = httpsCallable(this.functions, 'log_headers');
-  
+
     const headersData = {
       'route': route,
       'width': window.innerWidth,
       'height': window.innerHeight
     };
-  
+
     from(logHeaderTrigger(headersData)).subscribe({
       complete: () => {},
       error: (error) => console.error(error)
     });
   }
-  
+
   // debug
   getAllTickets(): Observable<Ticket[]> {
     const ticketsCollection = collection(this.firestore, 'tickets');

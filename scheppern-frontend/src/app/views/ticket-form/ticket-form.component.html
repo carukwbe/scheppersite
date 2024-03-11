@@ -1,12 +1,5 @@
 <mat-spinner *ngIf="isLoading" style="justify-self: center;"></mat-spinner>
 
-<div class="card" style="margin-top: 100px;">
-    <p>Huch, wie bist du denn hier hergekommen?</p>
-    <p>
-        Jetzt wirst du gespoilert wie das Formular aussieht, na Toll! <br>
-        Die Seite hier ist für uns zum Testen! Hier was zu bestellen bringt dir nichts, die DB wird vor Launch nochmal zurückgesetzt.
-    </p>
-</div>
 
 <!-- error -->
 <div *ngIf="error" style="justify-self: center; margin-top: 100px;">
@@ -126,11 +119,10 @@
                 Mindesteinsatz sind dafür 2 Schichten a 3 Stunden!
             </p>
 
+            <!-- Helfer Beschreibungen -->
             <mat-tab-group dynamicHeight class="card boxAnnotation schichten">
                 <mat-tab [label]="cat.value" *ngFor="let cat of Global.helperShifts">
-                    <div class="tabContent">
-                        {{cat.description}}
-                    </div>
+                    <div class="tabContent" [innerHTML]="cat.description"></div>
                 </mat-tab>
             </mat-tab-group>
 
@@ -163,11 +155,12 @@
         </div>
 
         <div *ngIf="availableHelperTickets! < 1" class="indented">
-            <mat-checkbox formControlName="carpassWish">Ich wäre gerne noch Helfer*in geworden!</mat-checkbox>
+            <mat-checkbox formControlName="helperWish">Ich wäre gerne noch Helfer*in geworden!</mat-checkbox>
             <div class="indented">
                 <p>Als Notiz für uns. Falls wir doch mehr Helfer*innen brauchen, als ursprünglich einkalkuliert kommen wir evtl. auf dich zurück.</p>
             </div>
         </div>
+
 
         <!-- Checkboxes -->
         <mat-checkbox class="checkboxMargin" formControlName="agbsAccepted" style="margin-top: 30px;">Bei den AGBs bin ich sowas von dabei*</mat-checkbox>
@@ -209,19 +202,6 @@
         <mat-spinner *ngIf="submitLoading" style="align-self: center;"></mat-spinner>
         <p *ngIf="statusMessage" style="white-space: pre-line;">{{ statusMessage }}</p>
     </form>
-</div>
-
-<!-- debug -->
-<div class="ticketContainer">
-    <div *ngFor="let ticket of tickets" class="ticket-card" (click)="routeToTicketEdit(ticket)">
-        <h2>{{ ticket.name }} {{ ticket.surname }}</h2>
-        <p>TicketID: {{ ticket.id }}</p>
-        <p>Email: {{ ticket.email }}</p>
-        <p>Phone: {{ ticket.phone }}</p>
-        <p>Price: {{ ticket.price }}</p>
-        <p>Status: {{ ticket.status }}</p>
-        <p>Old TicketID: {{ ticket.old_ticketID }}</p>
-    </div>
 </div>
 
 

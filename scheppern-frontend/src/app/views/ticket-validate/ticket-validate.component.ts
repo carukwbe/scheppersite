@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TicketService } from 'src/app/services/ticket-service.service'; 
+import { TicketService } from 'src/app/services/ticket-service.service';
 
 
 @Component({
@@ -13,13 +13,13 @@ export class TicketValidateComponent {
   success = false;
   statusMessage = "";
 
-  
+
   id: string | null = null;
   surname: string | null = null;
   name: string | null = null;
 
   constructor(
-    private ticketService: TicketService, 
+    private ticketService: TicketService,
     private route: ActivatedRoute
   ) {
     this.route.params.subscribe((params) => {
@@ -39,8 +39,6 @@ export class TicketValidateComponent {
           this.isLoading = false;
           this.success = true;
 
-          console.log(result);
-
           this.statusMessage = `
             ${result.name} ${result.surname}
             Order ID: ${result.order_id}
@@ -52,7 +50,7 @@ export class TicketValidateComponent {
         (error) => {
           this.isLoading = false;
           this.success = false;
-          
+
           this.statusMessage = error;
         }
       )

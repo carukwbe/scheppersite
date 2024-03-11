@@ -17,8 +17,7 @@ import { GalerieComponent } from './views/galerie/galerie.component';
 
 const routes: Routes = [
   { path: '',                    component: HomeComponent },
-  { path: 'tickets',             component: TicketsClosedComponent },
-  { path: 'secrettickets',       component: TicketFormComponent },
+  { path: 'tickets',             component: TicketFormComponent },
   { path: 'supersecrettickets',  component: TicketFormComponent, canActivate: [AuthGuard], data: { roles: 'admin' }}, //todo: proper auth over backend with lazy loading
   { path: 'ticket/:id',          component: TicketEditComponent },
   { path: 'validate_ticket/:id', component: TicketValidateComponent },

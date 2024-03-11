@@ -69,8 +69,8 @@ export class TicketEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.ticketService.sendHeaders('ticket_edit');
-    
-    this.route.params.subscribe((params) => { 
+
+    this.route.params.subscribe((params) => {
       if (/^[a-zA-Z0-9]{20}$/.test(params['id'])) {
         this.id = params['id'];
         this.getTicket(this.id);
@@ -84,7 +84,6 @@ export class TicketEditComponent implements OnInit {
   getTicket(id: string): void {
     this.ticketService.getSingleTicket(id).subscribe(
       (ticket) => {
-        console.log(ticket);
         this.isLoading = false;
 
         this.ticket = ticket;
@@ -116,7 +115,7 @@ export class TicketEditComponent implements OnInit {
       helperInfos:  [ticket.helper_infos,   textValidators]
     });
 
-    if (ticket.status !== 'payed') {
+    if (ticket.status !== 'payed' || ticket.helper) {
       this.form.get('email')?.disable();
     }
     if (!ticket.helper) {
@@ -139,8 +138,6 @@ export class TicketEditComponent implements OnInit {
     this.statusMessage = '';
 
     const inputData = { ...this.form.value, id: this.id };
-
-    console.log(inputData);
 
     this.ticketService.writeTicket(inputData, true).subscribe(
       status => this.handleSubmit(status),

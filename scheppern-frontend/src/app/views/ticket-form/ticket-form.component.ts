@@ -22,7 +22,7 @@ import { emailValidators, nameValidators, phoneValidators, textValidators } from
     ])
   ]
 })
-export class TicketFormComponent { //todo scret form erstellen!
+export class TicketFormComponent {
   Global = Global;
 
   isLoading = true;
@@ -45,8 +45,6 @@ export class TicketFormComponent { //todo scret form erstellen!
   ticketLevels$: Observable<TicketLevel[]> = of([]);
   activeTicketLevel: TicketLevel | undefined;
 
-  // debug
-  tickets: Ticket[] = [];
   ticketInfos: TicketForm;
 
   constructor(
@@ -96,7 +94,7 @@ export class TicketFormComponent { //todo scret form erstellen!
         this.activeTicketLevel = ticketLevels.find((level) => level.active);
         if (!this.activeTicketLevel) this.handleError(`
           Kein aktives Ticketlevel gefunden. Das heißt wir können dir gerade keinen Preis anzeigen.
-          Du kannst versuchen dein Ticket abzuschicken, der Preis wird sich irgendwo um die 50€ befinnden.
+          Du kannst versuchen dein Ticket abzuschicken, der Preis wird sich irgendwo um die 50€ befinden.
           Tritt der selbe Fehler auch im Backend auf wird dein Ticket nicht akzeptiert werden können.
           Kontaktiere uns bitte via Kontaktformular!
         `);
@@ -104,22 +102,6 @@ export class TicketFormComponent { //todo scret form erstellen!
     );
 
     this.loadTicketData();
-
-    // debug
-    this.ticketService.getAllTickets().subscribe(
-      (tickets) => {
-        this.tickets = tickets;
-      },
-      (error) => {
-        console.error('Error getting tickets:', error);
-      }
-    );
-
-    // DEBUG
-    this.ticketInfos.valueChanges.subscribe((formValues) => {
-      console.log(formValues);
-    });
-
   }
 
   loadTicketData(): void {
@@ -268,11 +250,5 @@ export class TicketFormComponent { //todo scret form erstellen!
   getError(controlName: string, errorType: string): boolean {
     const control = this.ticketInfos.get(controlName);
     return !!control?.hasError(errorType) && !!control?.touched;
-  }
-
-
-  // temporary
-  routeToTicketEdit(ticket: Ticket) {
-    this.router.navigate(['/ticket/', ticket.id]);
   }
 }
