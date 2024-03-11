@@ -27,7 +27,7 @@
     font-size: calc(20px + 1vw);
     margin: 80px 30px 80px 30px;
     line-height: 25px;
-    text-align: center; 
+    text-align: center;
 }
 .noTickets .infos {
     display: flex;
@@ -44,10 +44,10 @@
     height: 30px;
     width: fit-content;
     padding: 12px 15px;
-    
+
     margin: 20px 0 20px 0;
     cursor: pointer;
-    
+
 }
 .link:hover {
     --icon-color: #25d366;
@@ -83,12 +83,12 @@ b {
 .ticketCount {
     display: flex;
     gap: 12px;
-    margin-top: 100px;
+    /* margin-top: 100px; */
 }
 strong {
     font-size: 28px;
     margin: 0 10px 0 12px;
-}   
+}
 
 /* Price Boxes */
 .priceBoxes {
@@ -123,10 +123,10 @@ strong {
 form {
     max-width: 1000px;
     padding: 30px;
-    
+
     display: flex;
     flex-direction: column;
-       
+
     color: var(--text-color);
 }
 mat-form-field {
@@ -148,7 +148,7 @@ mat-form-field {
     position: absolute;
     inset: 0;
     height: max(90px, 100%);
-    
+
     width: 100%;
     /* margin-top: -10px; */
     background-image: url("../../../assets/ausverkauft.png");
@@ -162,7 +162,7 @@ mat-form-field {
     --annotatedText: "Schichten";
     background-color: rgba(0, 0, 0, 0);
     width: calc(100% - 44px);
-    
+
     padding-bottom: 20px;
     margin: 20px 0;
     margin-left: 44px;

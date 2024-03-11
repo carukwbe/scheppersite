@@ -38,7 +38,7 @@
 
 <!-- Tickets Available -->
 <div class="ticketsAvailable" *ngIf="availableTickets! > 0 || availableHelperTickets! > 0">
-    <div class="ticketCount" *ngIf="0 < availableTickets! && availableTickets! < 100 && !isSecret">
+    <div class="ticketCount" *ngIf="0 < availableTickets! && availableTickets! < 200 && !isSecret">
         Noch <strong>{{ availableTickets! }}</strong> Ticket{{ availableTickets! > 1 ? 's' : '' }} verfügbar!
     </div>
     <div class="priceBoxes">
